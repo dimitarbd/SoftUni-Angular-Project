@@ -1,4 +1,4 @@
-import { Subscriber } from "./subscriber.model";
+import { Subscriber } from ".";
 
 export interface Theme {
     name: string;
