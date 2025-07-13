@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Theme } from "../../models";
+import { Offer } from "../../models";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -11,8 +11,8 @@ export class ThemeService {
 
     constructor(private httpClient: HttpClient) {}
 
-    getThemes(): Observable<Theme[]> {
-        return this.httpClient.get<Theme[]>(this.apiUrl);
+    getOffers(): Observable<Offer[]> {
+        return this.httpClient.get<Offer[]>(this.apiUrl);
     }
 
 }
