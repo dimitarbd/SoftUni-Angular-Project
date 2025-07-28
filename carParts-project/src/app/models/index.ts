@@ -1,3 +1,3 @@
-export * from './offer.model';
+export * from './comment.model';
 export * from './part.model';
 export * from './user.model';

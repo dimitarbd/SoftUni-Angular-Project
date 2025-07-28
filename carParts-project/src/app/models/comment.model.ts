@@ -1,7 +1,7 @@
-export interface Offer {
+export interface Comment {
     id: string;
     partId: string;
     userId: string;
-    price: number;
+    content: string;
     createdOn: Date;
 }
