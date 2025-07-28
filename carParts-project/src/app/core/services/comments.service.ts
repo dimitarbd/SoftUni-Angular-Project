@@ -6,13 +6,13 @@ import { Observable } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class ThemeService {
-    private apiUrl = 'http://localhost:3000/api/themes';
+export class CommentsService {
+    private apiUrl = 'http://localhost:3000/api/comments';
 
     constructor(private httpClient: HttpClient) {}
 
-    getOffers(): Observable<Offer[]> {
-        return this.httpClient.get<Offer[]>(this.apiUrl);
+    getComments(): Observable<Comment[]> {
+        return this.httpClient.get<Comment[]>(this.apiUrl);
     }
 
 }

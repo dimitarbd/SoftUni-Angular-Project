@@ -1,2 +1,2 @@
 export * from './part.service';
-export * from './offer.service';
+export * from './comments.service';
