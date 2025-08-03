@@ -1,5 +1,5 @@
 export interface Part {
-    id: number;
+    _id: string;
     title: string;
     category: string;
     brand: string;
@@ -8,6 +8,5 @@ export interface Part {
     quantity: number;
     imageUrl: string;
     rating: number;
-    createdOn: Date;
     description: string;
 }
