@@ -9,4 +9,5 @@ export interface Part {
     imageUrl: string;
     rating: number;
     description: string;
+    _createdOn: number;
 }
