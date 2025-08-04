@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-product-board',
-    imports: [ProductItem],
+    imports: [],
     templateUrl: './product-board.html',
     styleUrl: './product-board.css'
 })
