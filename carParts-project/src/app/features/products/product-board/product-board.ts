@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { PartService } from '../../../core/services/part.service';
 import { Part } from '../../../models/part.model';
-import { ProductItem } from '../product-item/product-item';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -19,7 +18,7 @@ export class ProductBoard {
     constructor(private partService: PartService) { }
 
     ngOnInit(): void {
-        this.partService.getParts().pipe(takeUntilDestroyed()).subscribe(parts => this.parts = parts);
+        this.partService.getRecentParts().pipe(takeUntilDestroyed()).subscribe(parts => this.parts = parts);
     }
 
 }

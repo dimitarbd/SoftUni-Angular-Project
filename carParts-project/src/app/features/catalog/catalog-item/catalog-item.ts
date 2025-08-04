@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Part } from '../../../models/part.model';
 
 @Component({
   selector: 'app-catalog-item',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './catalog-item.html',
   styleUrl: './catalog-item.css'
 })
-export class CatalogItem {
 
+export class CatalogItem {
+    @Input() part!: Part;
 }

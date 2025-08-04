@@ -12,5 +12,5 @@ import { ProductBoard } from './features/products/product-board/product-board';
   styleUrl: './app.css'
 })
 export class AppComponent {
-  private title = 'carParts-project';
+ 
 }
