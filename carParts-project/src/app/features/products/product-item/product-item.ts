@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Part } from '../../../models/part.model';
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-product-item',
   imports: [],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+  templateUrl: './product-item.html',
+  styleUrl: './product-item.css'
 })
 export class ProductItem{
 
