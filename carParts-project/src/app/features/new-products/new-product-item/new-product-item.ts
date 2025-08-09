@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Part } from '../../../models/part.model';
 
 @Component({
-  selector: 'app-product-item',
+  standalone: true,
+  selector: 'app-new-product-item',
   imports: [],
   templateUrl: './new-product-item.html',
   styleUrl: './new-product-item.css'
