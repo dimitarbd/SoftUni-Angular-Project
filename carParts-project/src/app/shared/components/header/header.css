@@ -1,0 +1,20 @@
+/* Hide categories list when closed */
+.category-menu.category-menu-hidden .category-menu-list {
+  display: none;
+}
+
+/* Better affordance */
+.category-heading {
+  cursor: pointer;
+}
+
+/* ensure open state shows it (in case global CSS sets display) */
+.category-menu.category-menu-open .category-menu-list {
+  display: block;
+}
+
+/* Right align header right list */
+.header-right_area > ul.align-right {
+  justify-content: flex-end;
+}
+
