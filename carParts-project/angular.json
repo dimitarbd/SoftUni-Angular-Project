@@ -28,6 +28,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "../Resources/uren/assets",
+                "output": "assets"
               }
             ],
             "styles": [

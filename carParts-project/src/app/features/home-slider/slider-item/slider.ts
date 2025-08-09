@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-slider',
+  standalone: true,
+  selector: 'app-slider-item',
   imports: [],
   templateUrl: './slider.html',
   styleUrl: './slider.css'
 })
-export class SliderComponent {
-
+export class SliderItemComponent {
+    @Input() item: any;
 }

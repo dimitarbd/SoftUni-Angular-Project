@@ -80,4 +80,5 @@ module.exports = {
     createPart,
     getPart,
     updatePart,
+    deletePart,
 }

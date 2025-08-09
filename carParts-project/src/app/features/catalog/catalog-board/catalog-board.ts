@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef } from '@angular/core';
 import { Part } from '../../../models/part.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PartService } from '../../../core/services/part.service';
@@ -13,9 +13,9 @@ export class CatalogBoard {
 
     parts: Part[] = [];
 
-    constructor(private partService: PartService) { }
+    constructor(private partService: PartService, private destroyRef: DestroyRef) { }
 
     ngOnInit(): void {
-        this.partService.getParts().pipe(takeUntilDestroyed()).subscribe(parts => this.parts = parts);
+        this.partService.getParts().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(parts => this.parts = parts);
     }
 }
