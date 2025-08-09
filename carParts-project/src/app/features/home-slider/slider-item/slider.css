@@ -1,0 +1,8 @@
+.single-slide {
+  display: none;
+}
+
+.single-slide.active {
+  display: block;
+}
+

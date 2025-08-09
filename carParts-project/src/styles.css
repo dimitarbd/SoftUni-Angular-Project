@@ -1743,6 +1743,85 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .price-filter 
   animation: 2000ms ease-in-out 0s normal none 1 running zoomInRight;
 }
 
+/* Map animations for manual slider activation (without Slick) */
+.main-slider .single-slide.active.animation-style-01 .slider-content > span {
+  display: block;
+  -webkit-animation: 1200ms ease-in-out 0s normal none 1 running zoomInUp;
+  animation: 1200ms ease-in-out 0s normal none 1 running zoomInUp;
+}
+
+.main-slider .single-slide.active.animation-style-01 .slider-content > h2 {
+  -webkit-animation: 1400ms ease-in-out 0s normal none 1 running zoomInUp;
+  animation: 1400ms ease-in-out 0s normal none 1 running zoomInUp;
+}
+
+.main-slider .single-slide.active.animation-style-01 .slider-content > h3 {
+  -webkit-animation: 1600ms ease-in-out 0s normal none 1 running zoomInUp;
+  animation: 1600ms ease-in-out 0s normal none 1 running zoomInUp;
+}
+
+.main-slider .single-slide.active.animation-style-01 .slider-content > h4 {
+  -webkit-animation: 1600ms ease-in-out 0s normal none 1 running zoomInUp;
+  animation: 1600ms ease-in-out 0s normal none 1 running zoomInUp;
+}
+
+.main-slider .single-slide.active.animation-style-01 .slider-content > h5 {
+  -webkit-animation: 1800ms ease-in-out 0s normal none 1 running zoomInUp;
+  animation: 1800ms ease-in-out 0s normal none 1 running zoomInUp;
+}
+
+.main-slider .single-slide.active.animation-style-01 .slider-content > p {
+  -webkit-animation: 1800ms ease-in-out 0s normal none 1 running zoomInUp;
+  animation: 1800ms ease-in-out 0s normal none 1 running zoomInUp;
+}
+
+.main-slider .single-slide.active.animation-style-01 .slider-content > .slide-btn {
+  -webkit-animation: 2000ms ease-in-out 0s normal none 1 running zoomInUp;
+  animation: 2000ms ease-in-out 0s normal none 1 running zoomInUp;
+}
+
+.main-slider .single-slide.active.animation-style-02 .slider-content > span {
+  display: block;
+  -webkit-animation: 1200ms ease-in-out 0s normal none 1 running zoomInRight;
+  animation: 1200ms ease-in-out 0s normal none 1 running zoomInRight;
+}
+
+.main-slider .single-slide.active.animation-style-02 .slider-content > h2 {
+  -webkit-animation: 1400ms ease-in-out 0s normal none 1 running zoomInRight;
+  animation: 1400ms ease-in-out 0s normal none 1 running zoomInRight;
+}
+
+.main-slider .single-slide.active.animation-style-02 .slider-content > h3 {
+  -webkit-animation: 1600ms ease-in-out 0s normal none 1 running zoomInRight;
+  animation: 1600ms ease-in-out 0s normal none 1 running zoomInRight;
+}
+
+.main-slider .single-slide.active.animation-style-02 .slider-content > h4 {
+  -webkit-animation: 1600ms ease-in-out 0s normal none 1 running zoomInRight;
+  animation: 1600ms ease-in-out 0s normal none 1 running zoomInRight;
+}
+
+.main-slider .single-slide.active.animation-style-02 .slider-content > h5 {
+  -webkit-animation: 1800ms ease-in-out 0s normal none 1 running zoomInRight;
+  animation: 1800ms ease-in-out 0s normal none 1 running zoomInRight;
+}
+
+.main-slider .single-slide.active.animation-style-02 .slider-content > p {
+  -webkit-animation: 1800ms ease-in-out 0s normal none 1 running zoomInUp;
+  animation: 1800ms ease-in-out 0s normal none 1 running zoomInUp;
+}
+
+.main-slider .single-slide.active.animation-style-02 .slider-content > .slide-btn {
+  -webkit-animation: 2000ms ease-in-out 0s normal none 1 running zoomInRight;
+  animation: 2000ms ease-in-out 0s normal none 1 running zoomInRight;
+}
+
+/* Optional: fade-in the slide background/image when activated */
+.main-slider .single-slide.active {
+  -webkit-animation: 800ms ease-in-out 0s normal none 1 running fadeIn;
+  animation: 800ms ease-in-out 0s normal none 1 running fadeIn;
+}
+
 /*Top Up Keyframes*/
 @-webkit-keyframes alisSlideInUp {
   0% {

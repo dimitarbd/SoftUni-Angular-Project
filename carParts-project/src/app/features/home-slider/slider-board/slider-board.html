@@ -2,8 +2,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-9 col-lg-8">
-                <div class="main-slider slider-navigation_style-2">
-                    <app-slider-item *ngFor="let item of items" [item]="item" />
+                <div class="main-slider slider-navigation_style-2" style="position: relative;">
+                    <span class="slick-arrow slick-prev" (click)="prevSlide()"><i class="ion-ios-arrow-left"></i></span>
+                    <app-slider-item *ngFor="let item of items; let i = index"
+                        [item]="item" [active]="i === activeIndex"></app-slider-item>
+                    <span class="slick-arrow slick-next" (click)="nextSlide()"><i class="ion-ios-arrow-right"></i></span>
+                    <ul class="slick-dots">
+                        <li *ngFor="let item of items; let i = index" (click)="goToSlide(i)" [class.slick-active]="i === activeIndex">
+                            <button type="button">{{ i + 1 }}</button>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4">
