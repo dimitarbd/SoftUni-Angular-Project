@@ -1,8 +1,7 @@
-const { themeModel } = require('../models');
-const { newPost } = require('./postController')
+const { themeModel, postModel, userModel } = require('../models');
 
 function getParts(req, res, next) {
-    partModel.find()
+    themeModel.find()
         .populate('userId')
         .then(parts => res.json(parts))
         .catch(next);
@@ -11,20 +10,18 @@ function getParts(req, res, next) {
 function getPart(req, res, next) {
     const { partId } = req.params;
 
-    partModel.findById(partId)
+    themeModel.findById(partId)
         .populate({
-            path : 'parts',
-            populate : {
-              path : 'userId'
-            }
-          })
+            path: 'posts',
+            populate: { path: 'userId' }
+        })
         .then(part => res.json(part))
         .catch(next);
 }
 
 function getLatestParts(req, res, next) {
     const limit = Number(req.query.limit) || 0;
-    partModel.find()
+    themeModel.find()
         .sort({ created_at: -1 })
         .limit(limit)
         .populate('userId')
@@ -36,10 +33,24 @@ function createPart(req, res, next) {
     const { partName, partText } = req.body;
     const { _id: userId } = req.user;
 
-    partModel.create({ partName, userId, subscribers: [userId] })
-        .then(part => {
-            newPost(partText, userId, part._id)
-                .then(([_, updatedPart]) => res.status(200).json(updatedPart))
+    themeModel.create({ themeName: partName, userId, subscribers: [userId] })
+        .then(async (part) => {
+            if (!partText) {
+                const populated = await themeModel.findById(part._id)
+                    .populate({ path: 'posts', populate: { path: 'userId' } });
+                return res.status(200).json(populated);
+            }
+
+            const post = await postModel.create({ text: partText, userId, themeId: part._id });
+            await Promise.all([
+                userModel.updateOne({ _id: userId }, { $push: { posts: post._id } }),
+                themeModel.findByIdAndUpdate(part._id, { $push: { posts: post._id }, $addToSet: { subscribers: userId } })
+            ]);
+
+            const updatedPart = await themeModel.findById(part._id)
+                .populate({ path: 'posts', populate: { path: 'userId' } });
+
+            return res.status(200).json(updatedPart);
         })
         .catch(next);
 }
@@ -47,7 +58,7 @@ function createPart(req, res, next) {
 function updatePart(req, res, next) {
     const partId = req.params.partId;
     const { _id: userId } = req.user;
-    partModel.findByIdAndUpdate({ _id: partId }, { $addToSet: { subscribers: userId } }, { new: true })
+    themeModel.findByIdAndUpdate({ _id: partId }, { $addToSet: { subscribers: userId } }, { new: true })
         .then(updatedPart => {
             res.status(200).json(updatedPart)
         })
@@ -58,7 +69,7 @@ function deletePart(req, res, next) {
     const { partId } = req.params;
     const { _id: userId } = req.user;
 
-    partModel.findByIdAndDelete({ _id: partId, userId })
+    themeModel.findOneAndDelete({ _id: partId, userId })
         .then(deletedPart => res.status(200).json(deletedPart))
         .catch(next);
 }
