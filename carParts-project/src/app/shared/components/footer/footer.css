@@ -1,0 +1,70 @@
+.uren-social_link {
+  padding-top: 25px;
+}
+
+.uren-social_link ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.uren-social_link > ul > li {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.uren-social_link > ul > li:last-child {
+  padding-right: 0;
+}
+
+.uren-social_link > ul > li > a {
+  color: #ffffff;
+  border-radius: 100%;
+  font-size: 16px;
+  display: block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.uren-social_link > ul > li.facebook > a {
+  background-color: #3b579d;
+}
+
+.uren-social_link > ul > li.twitter > a {
+  background-color: #3acaff;
+}
+
+.uren-social_link > ul > li.instagram > a {
+  background-color: #833ab4;
+}
+
+.uren-social_link > ul > li:hover > a {
+  background-color: #ffc400 !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 479px) {
+  .uren-social_link > ul > li > a {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+  }
+}
+
+/* Phone and Email styling */
+.footer-widgets_info .widgets-essential_stuff .uren-phone a,
+.footer-widgets_info .widgets-essential_stuff .uren-email a {
+  color: #1976d2; /* blue */
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-widgets_info .widgets-essential_stuff .uren-phone a:hover,
+.footer-widgets_info .widgets-essential_stuff .uren-email a:hover {
+  color: #125ea4;
+  text-decoration: underline;
+}
+

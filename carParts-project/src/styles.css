@@ -4068,6 +4068,62 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .price-filter 
 .uren-social_link > ul > li.youtube > a {
   background-color: #d72525;
 }
+.uren-social_link {
+  padding-top: 25px;
+}
+
+.uren-social_link > ul > li {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.uren-social_link > ul > li:last-child {
+  padding-right: 0;
+}
+
+.uren-social_link > ul > li > a {
+  color: #ffffff;
+  border-radius: 100%;
+  font-size: 16px;
+  display: block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+
+@media (max-width: 479px) {
+  .uren-social_link > ul > li > a {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+  }
+}
+
+.uren-social_link > ul > li:hover > a {
+  background-color: #ffc400 !important;
+  color: #ffffff !important;
+}
+
+.uren-social_link > ul > li.facebook > a {
+  background-color: #3b579d;
+}
+
+.uren-social_link > ul > li.twitter > a {
+  background-color: #3acaff;
+}
+
+.uren-social_link > ul > li.google-plus > a {
+  background-color: #dd4b39;
+}
+
+.uren-social_link > ul > li.instagram > a {
+  background-color: #833ab4;
+}
+
+.uren-social_link > ul > li.youtube > a {
+  background-color: #d72525;
+}
 
 /*----------------------------------------*/
 /*  17 - Components - Product Tab
