@@ -4,10 +4,10 @@ import { Part } from '../../../models/part.model';
 @Component({
   selector: 'app-product-item',
   imports: [],
-  templateUrl: './product-item.html',
-  styleUrl: './product-item.css'
+  templateUrl: './new-product-item.html',
+  styleUrl: './new-product-item.css'
 })
-export class ProductItem{
+export class NewProductItem{
 
     @Input() part!: Part;
 

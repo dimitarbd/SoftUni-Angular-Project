@@ -4,14 +4,14 @@ import { Part } from '../../../models/part.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'app-product-board',
+    selector: 'app-new-product-board',
     imports: [],
-    templateUrl: './product-board.html',
-    styleUrl: './product-board.css'
+    templateUrl: './new-product-board.html',
+    styleUrl: './new-product-board.css'
 })
 
 
-export class ProductBoard {
+export class NewProductBoard {
 
     parts: Part[] = [];
 

@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header';
 import { FooterComponent } from './shared/components/footer/footer';
 import { SliderBoardComponent } from './features/home-slider/slider-board/slider-board';
-import { ProductBoard } from './features/products/product-board/product-board';
+import { ProductBoard } from './features/new-products/new-product-board/new-product-board';
 
 @Component({
   selector: 'app-root',
