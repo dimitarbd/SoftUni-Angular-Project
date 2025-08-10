@@ -3,22 +3,17 @@
         <div class="single-product">
             <div class="product-img">
                 <a href="single-product.html">
-                    <img class="primary-img" [src]="part.imageUrl || 'assets/images/product/medium-size/1-1.jpg'"
-                        [alt]="part.title">
-                    <img class="secondary-img" [src]="part.imageUrl || 'assets/images/product/medium-size/1-2.jpg'"
-                        [alt]="part.title">
+                    <img class="primary-img" 
+                         [src]="part.imageUrl || 'assets/images/product/medium-size/1-1.jpg'" 
+                         [alt]="part.title"
+                         loading="lazy"
+                         width="300"
+                         height="250"
+                         decoding="async">                   
                 </a>
                 <div class="sticker">
                     <span class="sticker">New</span>
-                </div>
-                <div class="add-actions">
-                    <ul>
-                        <li><a class="uren-add_cart" href="cart.html" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ion-bag"></i></a></li>
-                        <li><a class="uren-wishlist" href="wishlist.html" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ion-android-favorite-outline"></i></a></li>
-                        <li><a class="uren-add_compare" href="compare.html" data-toggle="tooltip" data-placement="top" title="Compare This Product"><i class="ion-android-options"></i></a></li>
-                        <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-android-open"></i></a></li>
-                    </ul>
-                </div>
+                </div>                
             </div>
             <div class="product-content">
                 <div class="product-desc_info">
