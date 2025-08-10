@@ -1,0 +1,110 @@
+/* Products wrapper with arrows */
+.products-wrapper {
+    position: relative;
+}
+
+/* Products row container */
+.products-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 0;
+    scroll-behavior: smooth;
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.products-row::-webkit-scrollbar {
+    display: none;
+}
+
+.products-row app-new-product-item {
+    flex: 0 0 auto;
+    min-width: 280px;
+    max-width: 300px;
+}
+
+/* Navigation arrows */
+.slider-arrow-left,
+.slider-arrow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: #e9e9e9;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #333333;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in;
+    outline: none;
+}
+
+.slider-arrow-left {
+    left: 20px;
+}
+
+.slider-arrow-right {
+    right: 20px;
+}
+
+.products-wrapper:hover .slider-arrow-left,
+.products-wrapper:hover .slider-arrow-right {
+    opacity: 1;
+    visibility: visible;
+}
+
+.slider-arrow-left:hover,
+.slider-arrow-right:hover {
+    background-color: #ffffff;
+    border-color: #ffc400;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1501px) {
+    .products-row app-new-product-item {
+        min-width: 300px;
+        max-width: 320px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .products-row app-new-product-item {
+        min-width: 320px;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .products-row app-new-product-item {
+        min-width: 400px;
+        max-width: 450px;
+    }
+}
+
+@media (max-width: 767px) {
+    .products-row app-new-product-item {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    
+    .products-row {
+        flex-wrap: wrap;
+        overflow-x: visible;
+    }
+    
+    .slider-arrow-left,
+    .slider-arrow-right {
+        display: none;
+    }
+}

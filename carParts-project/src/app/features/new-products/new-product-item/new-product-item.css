@@ -1,0 +1,26 @@
+:host {
+    display: block;
+    outline: none;
+}
+
+.product-slide_item {
+    display: block;
+    width: 100%;
+    outline: none;
+}
+
+.single-product {
+    margin-bottom: 30px;
+    border-right: 1px solid #e5e5e5;
+    padding: 30px 15px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
