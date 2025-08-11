@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { User } from '../../models/user.model';
 
 @Injectable({
@@ -12,15 +12,16 @@ export class AuthService {
             _id: '1',
             email: 'test@test.com',
             password: '123456',
-            username: 'Test',
         },
         {
             _id: '2',
             email: 'admin@admin.com',
             password: '123456',
-            username: 'Admin',
         }
     ];
+
+    public isLoggedIn = this._isLoggedIn.asReadonly();
+    public currentUser = this._currentUser.asReadonly();
 
     constructor() {
         const savedUser = localStorage.getItem('currentUser');
@@ -67,6 +68,10 @@ export class AuthService {
         this._currentUser.set(null);
         this._isLoggedIn.set(false);
         localStorage.removeItem('currentUser');
+    }
+
+    getCurrentUserId(): string | null {
+        return this._currentUser()?._id || null;
     }
 
 }
