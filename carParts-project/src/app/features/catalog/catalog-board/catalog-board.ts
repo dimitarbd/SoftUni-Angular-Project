@@ -1,21 +1,23 @@
-import { Component, DestroyRef } from '@angular/core';
+import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { CatalogItem } from '../catalog-item/catalog-item';
 import { Part } from '../../../models/part.model';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PartService } from '../../../core/services/part.service';
+import { Observable } from 'rxjs';
 
 @Component({
+  standalone: true,
   selector: 'app-catalog-board',
-  imports: [],
+  imports: [AsyncPipe, CatalogItem],
   templateUrl: './catalog-board.html',
   styleUrl: './catalog-board.css'
 })
 export class CatalogBoard {
 
-    parts: Part[] = [];
+    parts$: Observable<Part[]>;
 
-    constructor(private partService: PartService, private destroyRef: DestroyRef) { }
-
-    ngOnInit(): void {
-        this.partService.getParts().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(parts => this.parts = parts);
+    constructor(private partService: PartService) { 
+        this.parts$ = this.partService.getParts();
     }
+
 }

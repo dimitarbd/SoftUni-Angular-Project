@@ -37,7 +37,11 @@ export class PartService {
                 }
                 
                 return parts
-                    .sort((a, b) => new Date(b._createdOn).getTime() - new Date(a._createdOn).getTime())
+                    .sort((a, b) => {
+                        const aTime = a.createdAt ? new Date(a.createdAt).getTime() : a._createdOn ?? 0;
+                        const bTime = b.createdAt ? new Date(b.createdAt).getTime() : b._createdOn ?? 0;
+                        return bTime - aTime;
+                    })
                     .slice(0, limit);
             })
         );

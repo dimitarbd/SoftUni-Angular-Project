@@ -6,10 +6,7 @@ export interface Part {
     price: number | string;
     ownerId?: string;
     createdAt?: Date;
-    _createdOn: number;
+    _createdOn?: number;
     rating: number | string;
-    category: string;
-    brand?: string;
-    year?: string;
-    quantity?: number | string;
+    category: string;    
 }
