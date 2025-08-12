@@ -1,0 +1,49 @@
+<div class="breadcrumb-area">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <h2>Other</h2>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li class="active">Login & Register</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="uren-login-register_area">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+        <form (ngSubmit)="onSubmit()">
+          <div class="login-form">
+            <h4 class="login-title">Register</h4>
+            <div class="row">
+              <div class="col-md-12">
+                <label>Email Address*</label>
+                <input type="email" placeholder="Email Address" name="email" [(ngModel)]="email"/>
+              </div>
+              <div class="col-md-6">
+                <label>Password</label>
+                <input type="password" placeholder="Password" name="password" [(ngModel)]="password"/>
+              </div>
+              <div class="col-md-6">
+                <label>Confirm Password</label>
+                <input type="password" placeholder="Confirm Password" name="repassword" [(ngModel)]="repassword"/>
+              </div>
+              @if (error()) {
+              <div class="col-12">
+                <p style=" color: red; ">{{ error() }}</p>
+              </div>
+              }
+              <div class="col-12">
+                <button class="uren-register_btn">Register</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
