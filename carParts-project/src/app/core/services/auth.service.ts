@@ -20,7 +20,7 @@ export class AuthService {
         }
     ];
 
-    public isLoggedIn = this._isLoggedIn.asReadonly();
+    public isLoggedInSignal = this._isLoggedIn.asReadonly();
     public currentUser = this._currentUser.asReadonly();
 
     constructor() {
@@ -32,6 +32,11 @@ export class AuthService {
         } 
     }
 
+
+    /** Compatibility helper for guards/components expecting a boolean method */
+    isLoggedIn(): boolean {
+        return this._isLoggedIn();
+    }
 
     login(email: string, password: string): boolean {
         const user = this._users.find(user => user.email === email && user.password === password);
