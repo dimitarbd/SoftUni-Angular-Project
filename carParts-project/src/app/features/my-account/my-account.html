@@ -1,0 +1,80 @@
+<div class="breadcrumb-area">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <h2>Other</h2>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li class="active">My Account</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<main class="page-content">
+  <div class="account-page-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3">
+          <ul class="nav myaccount-tab-trigger" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" href="#account-dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#account-offers">My Offers</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-9">
+          <div class="tab-content myaccount-tab-content">
+            <div id="account-dashboard" class="tab-pane active show">
+              <div class="myaccount-dashboard">
+                <p>Hello <b>{{ email }}</b></p>
+                <p>From your account dashboard you can view your created offers.</p>
+              </div>
+            </div>
+            <div id="account-offers" class="tab-pane">
+              <div class="myaccount-offers">
+                <h4 class="small-title">MY OFFERS</h4>
+                <p *ngIf="loading">Loading your offers...</p>
+                <p class="text-danger" *ngIf="!loading && error">{{ error }}</p>
+                <p *ngIf="!loading && !error && (!offers || offers.length === 0)">You haven't created any offers yet.</p>
+                <div class="shop-product-wrap grid gridview-3 img-hover-effect_area row" *ngIf="!loading && !error && offers?.length">
+                  <div class="col-lg-4" *ngFor="let offer of offers">
+                    <div class="product-slide_item">
+                      <div class="inner-slide">
+                        <div class="single-product">
+                          <div class="product-img">
+                            <a [routerLink]="['/catalog', offer._id, 'details']">
+                              <img class="primary-img" [src]="offer.imageUrl" alt="Product Image" />
+                            </a>
+                          </div>
+                          <div class="product-content">
+                            <div class="product-desc_info">
+                              <div class="rating-box">
+                                <ul>
+                                  <li *ngFor="let s of stars; let idx = index" [class.silver-color]="isSilver(idx, offer.rating)">
+                                    <i class="ion-android-star"></i>
+                                  </li>
+                                </ul>
+                              </div>
+                              <h6><a class="product-name" [routerLink]="['/catalog', offer._id, 'details']">{{ offer.title }}</a></h6>
+                              <div class="price-box">
+                                <span class="new-price">${{ offer.price }}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+

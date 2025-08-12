@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Comment } from "../../models";
 import { Observable } from "rxjs";
 
@@ -11,8 +11,19 @@ export class CommentsService {
 
     constructor(private httpClient: HttpClient) {}
 
-    getComments(): Observable<Comment[]> {
-        return this.httpClient.get<Comment[]>(this.apiUrl);
+    getAllByPart(partId: string): Observable<any[]> {
+        const params = new HttpParams()
+            .set('where', `partId="${partId}"`)
+            .set('load', 'author=_ownerId:users');
+        return this.httpClient.get<any[]>(this.apiUrl, { params });
+    }
+
+    create(partId: string, text: string, rating: number, currentDate: string): Observable<any> {
+        return this.httpClient.post<any>(this.apiUrl, { partId, text, rating, currentDate });
+    }
+
+    delete(commentId: string): Observable<void> {
+        return this.httpClient.delete<void>(`${this.apiUrl}/${commentId}`);
     }
 
 }
