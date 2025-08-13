@@ -12,7 +12,7 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class LoginComponent {
 
-    private authService = inject(AuthService);
+    protected authService = inject(AuthService);
     private router = inject(Router);
 
   email: string = '';

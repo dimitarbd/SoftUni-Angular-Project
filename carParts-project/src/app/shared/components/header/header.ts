@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -10,19 +10,22 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './header.css'
 })
 export class HeaderComponent {
-  isCategoriesOpen = false;
 
-  constructor(private authService: AuthService) {}
+    protected authService = inject(AuthService);
+    private router = inject(Router);
+
+    readonly isLoggedIn = this.authService.isLoggedIn;
+    readonly currentUser = this.authService.currentUser;
+
+    
+  isCategoriesOpen = false;
 
   toggleCategories(): void {
     this.isCategoriesOpen = !this.isCategoriesOpen;
   }
 
-  isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
-  }
-
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 }
