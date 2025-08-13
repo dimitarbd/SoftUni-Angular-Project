@@ -50,15 +50,22 @@ export class NewProductBoard implements OnInit, AfterViewInit {
                 this.displayParts.push(...this.parts);
             }
             
-            // Set initial scroll position to well into the middle
-            setTimeout(() => {
-                if (this.productsContainer) {
-                    const container = this.productsContainer.nativeElement;
-                    const itemWidth = this.getItemWidth();
-                    // Start from the 10th repetition (well in the middle)
-                    container.scrollLeft = itemWidth * this.parts.length * 10;
-                }
-            }, 100);
+            // Set initial scroll position to well into the middle, but only after styles are loaded
+            const setInitialPosition = () => {
+                if (!this.productsContainer) return;
+                const container = this.productsContainer.nativeElement;
+                const itemWidth = this.getItemWidth();
+                container.scrollLeft = itemWidth * this.parts.length * 10; // Start from the middle
+            };
+
+            if (document.readyState === 'complete') {
+                // Double rAF to ensure layout/styles are fully applied before measuring
+                requestAnimationFrame(() => requestAnimationFrame(setInitialPosition));
+            } else {
+                window.addEventListener('load', () => {
+                    requestAnimationFrame(() => requestAnimationFrame(setInitialPosition));
+                }, { once: true });
+            }
         }
     }
 

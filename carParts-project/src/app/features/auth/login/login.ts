@@ -58,16 +58,23 @@ export class LoginComponent {
     }
   }
 
+  isFormValid(): boolean {
+    return Boolean(this.email) && Boolean(this.password) && !this.emailError && !this.passwordError;
+  }
+
   onSubmit(): void {
-    if (this.emailError || this.passwordError) {
+    this.validateEmail();   
+    this.validatePassword();
+    
+    if (!this.isFormValid()) {
       return;
     }
-    const ok = this.authService.login(this.email, this.password);
-    if (ok) {
-      this.router.navigateByUrl('/');
-    } else {
-      this.error.set('Invalid email or password');
-    }
+
+    const response = this.authService.login(this.email, this.password);
+    if (response) {
+      this.router.navigate(['/']);
+    } 
+    
   }
 }
 
