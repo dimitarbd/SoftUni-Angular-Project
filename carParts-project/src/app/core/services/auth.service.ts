@@ -10,7 +10,7 @@ export class AuthService {
     private _users: User[] = [
         {
             _id: '1',
-            email: 'test@test.com',
+            email: 'test@abv.bg',
             password: '123456',
         },
         {

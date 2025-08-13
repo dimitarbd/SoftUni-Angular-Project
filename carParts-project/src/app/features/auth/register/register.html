@@ -20,23 +20,47 @@
             <div class="row">
               <div class="col-md-12">
                 <label>Email Address*</label>
-                <input type="email" placeholder="Email Address" name="email" [(ngModel)]="email"/>
+                <input type="email" 
+                id="email"
+                placeholder="Email Address" 
+                name="email" 
+                [(ngModel)]="email"
+                (blur)="validateEmail()"/>
+                @if (emailError) {
+                  <p style="color: red">{{ emailErrorMessage }}</p>
+                }
               </div>
               <div class="col-md-6">
                 <label>Password</label>
-                <input type="password" placeholder="Password" name="password" [(ngModel)]="password"/>
-              </div>
+                <input type="password" 
+                id="password"
+                placeholder="Password" 
+                name="password" 
+                [(ngModel)]="password"
+                (blur)="validatePassword()"/>
+            </div>
+            @if (passwordError) {
+              <p style="color: red">{{ passwordErrorMessage }}</p>
+            }
               <div class="col-md-6">
                 <label>Confirm Password</label>
-                <input type="password" placeholder="Confirm Password" name="repassword" [(ngModel)]="repassword"/>
-              </div>
+                <input type="password" 
+                id="repassword"
+                placeholder="Confirm Password" 
+                name="repassword" 
+                [(ngModel)]="repassword"
+                (blur)="validateRePassword()"/>
+            </div>
+            @if (repasswordError) {
+              <p style="color: red">{{ repasswordErrorMessage }}</p>
+            }
               @if (error()) {
               <div class="col-12">
                 <p style=" color: red; ">{{ error() }}</p>
               </div>
               }
               <div class="col-12">
-                <button class="uren-register_btn">Register</button>
+                <button class="uren-register_btn" [disabled]="!isFormValid()">Register</button>
               </div>
             </div>
           </div>
