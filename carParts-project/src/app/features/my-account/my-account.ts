@@ -41,6 +41,10 @@ export class MyAccountComponent {
   currentUser() {
     return this.auth.currentUser();
   }
+
+  logout(): void {
+    this.auth.logout();
+  }
 }
 
 

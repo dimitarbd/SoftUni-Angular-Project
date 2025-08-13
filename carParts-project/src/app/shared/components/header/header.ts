@@ -21,4 +21,8 @@ export class HeaderComponent {
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
+
+  logout(): void {
+    this.authService.logout();
+  }
 }
