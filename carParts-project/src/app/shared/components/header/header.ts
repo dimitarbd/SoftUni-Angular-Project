@@ -14,7 +14,7 @@ export class HeaderComponent {
     protected authService = inject(AuthService);
     private router = inject(Router);
 
-    readonly isLoggedIn = this.authService.isLoggedIn;
+    readonly isLoggedIn = () => this.authService.isLoggedIn();
     readonly currentUser = this.authService.currentUser;
 
     
