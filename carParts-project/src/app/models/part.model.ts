@@ -4,9 +4,12 @@ export interface Part {
     description: string;
     imageUrl: string;
     price: number | string;
+    quantity?: number | string;
     ownerId?: string;
     createdAt?: Date;
     _createdOn?: number;
     rating: number | string;
-    category: string;    
+    category: string;
+    brand?: string;
+    year?: number | string;
 }

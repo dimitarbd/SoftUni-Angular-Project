@@ -37,6 +37,10 @@ export class MyAccountComponent {
     const safe = Number.isFinite(numericRating) ? Math.max(0, Math.min(5, Math.floor(numericRating))) : 0;
     return (index + 1) > safe;
   }
+
+  currentUser() {
+    return this.auth.currentUser();
+  }
 }
 
 

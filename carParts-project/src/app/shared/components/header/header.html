@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-2 col-md-3 col-sm-5">
                     <div class="header-logo_area">
-                        <a href="index.html">
+                        <a href="/">
                             <img src="logo.png" alt="Uren's Logo">
                         </a>
                     </div>
@@ -72,14 +72,20 @@
                     <div class="main-menu_area position-relative">
                         <nav class="main-nav">
                             <ul>
-                                <li class="dropdown-holder active"><a href="index.html">Home</a>
+                                <li class="dropdown-holder active"><a routerLink="/">Home</a>
                                 </li>
-                                <li class="megamenu-holder "><a href="shop-left-sidebar.html">Catalog</a>
+                                <li class="megamenu-holder "><a routerLink="/catalog">Catalog</a>
                                 </li>
-                                <li><a href="javascript:void(0)">Login</a></li>
-                                <li class=""><a href="javascript:void(0)">Register</a></li>
-                                <li class=""><a href="about-us.html">About Us</a></li>
-                                <li class=""><a href="contact.html">Contact</a></li>
+                                @if(isLoggedIn()) {
+                                    <li><a routerLink="/create-offer">Create Offer</a></li>
+                                    <li><a routerLink="/logout">Logout</a></li>
+                                    <li><a routerLink="/my-account">My Account</a></li>
+                                } @else {
+                                    <li><a routerLink="/login">Login</a></li>
+                                    <li class=""><a routerLink="/register">Register</a></li>
+                                }
+                                <li class=""><a routerLink="/about">About Us</a></li>
+                                <li class=""><a routerLink="/contact">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -88,12 +94,9 @@
                     <div class="ht-right_area">
                         <div class="ht-menu">
                             <ul>
-                                <li><a href="my-account.html"><span class="fa fa-user"></span> <span>My Account</span><i class="fa fa-chevron-down"></i></a>
-                                    <ul class="ht-dropdown ht-my_account">
-                                        <li><a href="javascript:void(0)">Register</a></li>
-                                        <li class="active"><a href="javascript:void(0)">Login</a></li>
-                                    </ul>
-                                </li>
+                                @if(isLoggedIn()) {
+                                    <li><a routerLink="/my-account"><span class="fa fa-user"></span> <span>My Account</span><i class="fa fa-chevron-down"></i></a>
+                                } 
                             </ul>
                         </div>
                     </div>
@@ -117,12 +120,18 @@
                     <div class="main-menu_area position-relative">
                         <nav class="main-nav">
                             <ul>
-                                <li class="dropdown-holder active"><a href="index.html">Home</a>
+                                <li class="dropdown-holder active"><a href="/">Home</a>
                                 </li>
-                                <li class="megamenu-holder "><a href="shop-left-sidebar.html">Shop
-                                        <i class="ion-ios-arrow-down"></i></a>
+                                <li class="megamenu-holder "><a href="/catalog">Catalog</a>
                                 </li>
-                                <li><a href="javascript:void(0)">Specials</a></li>
+                                @if(isLoggedIn()) {
+                                    <li><a routerLink="/my-account">My Account</a></li>
+                                    <li><a routerLink="/create-offer">Create Offer</a></li>
+                                    <li><a routerLink="/logout">Logout</a></li>
+                                } @else {
+                                    <li><a routerLink="/login">Login</a></li>
+                                    <li class=""><a routerLink="/register">Register</a></li>
+                                }
                                 <!-- <li class=""><a href="javascript:void(0)">Pages <i
                                         class="ion-ios-arrow-down"></i></a>
                                     <ul class="hm-dropdown">
@@ -136,8 +145,8 @@
                                         <li><a href="404.html">404 Error</a></li>
                                     </ul>
                                 </li> -->
-                                <li class=""><a href="about-us.html">About Us</a></li>
-                                <li class=""><a href="contact.html">Contact</a></li>
+                                <li class=""><a routerLink="/about">About Us</a></li>
+                                <li class=""><a routerLink="/contact">Contact</a></li>
                                 <!-- <li class=""><a href="blog-left-sidebar.html">Blog <i
                                         class="ion-ios-arrow-down"></i></a>
                                     <ul class="hm-dropdown">

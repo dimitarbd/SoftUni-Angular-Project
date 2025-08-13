@@ -28,7 +28,7 @@
           <div class="tab-content myaccount-tab-content">
             <div id="account-dashboard" class="tab-pane active show">
               <div class="myaccount-dashboard">
-                <p>Hello <b>{{ email }}</b></p>
+                <p>Hello <b>{{ currentUser()?.email }}</b></p>
                 <p>From your account dashboard you can view your created offers.</p>
               </div>
             </div>
