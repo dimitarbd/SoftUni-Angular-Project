@@ -17,6 +17,7 @@ export class LoginComponent {
 
   email = '';
   password = '';
+  rememberMe = false;
   error = signal<string>('');
 
   onSubmit(): void {

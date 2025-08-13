@@ -9,7 +9,7 @@ export const routes: Routes = [
   { path: 'import', loadComponent: () => import('./features/import/import').then(m => m.ImportComponent), canActivate: [() => import('./core/guards/auth.guard').then(g => g.authGuard)] },
   { path: 'about', loadComponent: () => import('./features/about/about').then(m => m.AboutComponent) },
   { path: 'contact', loadComponent: () => import('./features/contact/contact').then(m => m.ContactComponent) },
-  { path: 'login', loadComponent: () => import('./features/login/login').then(m => m.LoginComponent) },
+  { path: 'login', loadComponent: () => import('./features/auth/login/login').then(m => m.LoginComponent) },
   { path: 'register', loadComponent: () => import('./features/auth/register/register').then(m => m.RegisterComponent) },
   { path: 'my-account', loadComponent: () => import('./features/my-account/my-account').then(m => m.MyAccountComponent), canActivate: [() => import('./core/guards/auth.guard').then(g => g.authGuard)] },
 ];

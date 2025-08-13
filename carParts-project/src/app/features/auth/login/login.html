@@ -28,13 +28,13 @@
               </div>
               <div class="col-md-8">
                 <div class="check-box">
-                  <input type="checkbox" id="remember_me" />
+                  <input type="checkbox" id="remember_me" [(ngModel)]="rememberMe" />
                   <label for="remember_me">Remember me</label>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="forgotton-password_info">
-                  <a href="#"> Forgotten password?</a>
+                  <a routerLink="/register">Don't have an account?</a>
                 </div>
               </div>
               @if (error()) {
