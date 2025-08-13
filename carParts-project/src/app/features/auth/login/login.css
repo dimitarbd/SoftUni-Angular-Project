@@ -1,3 +1,9 @@
 /* Login page styles placeholder */
 
 
+/* Center the login form column horizontally */
+.uren-login-register_area > .container-fluid > .row {
+	display: flex;
+	justify-content: center;
+}
+

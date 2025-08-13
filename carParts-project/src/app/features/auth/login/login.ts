@@ -42,31 +42,20 @@ export class LoginComponent {
     return emailRegex.test(email);
   }
 
-  validatePassword(): boolean {
-    // reset
-    this.emailError = false;
+  validatePassword(): void {
     this.passwordError = false;
-    this.emailErrorMessage = '';
     this.passwordErrorMessage = '';
-
-    let valid = true;
-
-    
 
     if (!this.password) {
       this.passwordError = true;
       this.passwordErrorMessage = 'Password is required';
-      valid = false;
     } else if (this.password.length < 4) {
       this.passwordError = true;
       this.passwordErrorMessage = 'Password must be at least 4 characters long';
-      valid = false;
     } else {
         this.passwordError = true;
         this.passwordErrorMessage = '';
     }
-
-    return valid;
   }
 
   onSubmit(): void {
