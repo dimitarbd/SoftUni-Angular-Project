@@ -24,6 +24,22 @@ export class PartService {
         );
     }
 
+    getOne(partId: string): Observable<Part> {
+        return this.httpClient.get<Part>(`${this.apiUrl}/${partId}`);
+    }
+
+    createPart(payload: Partial<Part>): Observable<Part> {
+        return this.httpClient.post<Part>(this.apiUrl, payload);
+    }
+
+    updatePart(partId: string, payload: Partial<Part>): Observable<Part> {
+        return this.httpClient.put<Part>(`${this.apiUrl}/${partId}`, payload);
+    }
+
+    deletePart(partId: string): Observable<void> {
+        return this.httpClient.delete<void>(`${this.apiUrl}/${partId}`);
+    }
+
     getRecentParts(limit: number = 10): Observable<Part[]> {
         return this.httpClient.get<any>(this.apiUrl).pipe(
             map(response => {
@@ -44,6 +60,15 @@ export class PartService {
                     })
                     .slice(0, limit);
             })
+        );
+    }
+
+    getByOwner(userId: string): Observable<Part[]> {
+        const params = {
+            where: `_ownerId="${userId}"`
+        } as any;
+        return this.httpClient.get<any>(this.apiUrl, { params }).pipe(
+            map(response => Array.isArray(response) ? response : Object.values(response))
         );
     }
 
