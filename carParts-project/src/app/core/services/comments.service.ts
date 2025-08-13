@@ -12,10 +12,11 @@ export class CommentsService {
     constructor(private httpClient: HttpClient) {}
 
     getAllByPart(partId: string): Observable<any[]> {
-        const params = new HttpParams()
-            .set('where', `partId="${partId}"`)
-            .set('load', 'author=_ownerId:users');
-        return this.httpClient.get<any[]>(this.apiUrl, { params });
+        // Build URL manually to preserve '=' inside 'load' and avoid double-encoding quirks
+        const where = encodeURIComponent(`partId="${partId}"`);
+        const load = encodeURIComponent('author=_ownerId:users');
+        const url = `${this.apiUrl}?where=${where}&load=${load}`;
+        return this.httpClient.get<any[]>(url);
     }
 
     create(partId: string, text: string, rating: number, currentDate: string): Observable<any> {

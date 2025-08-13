@@ -53,7 +53,7 @@ export class LoginComponent {
       this.passwordError = true;
       this.passwordErrorMessage = 'Password must be at least 4 characters long';
     } else {
-        this.passwordError = true;
+        this.passwordError = false;
         this.passwordErrorMessage = '';
     }
   }
@@ -74,7 +74,7 @@ export class LoginComponent {
     if (response) {
       this.router.navigate(['/']);
     } 
-    
+
   }
 }
 

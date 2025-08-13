@@ -46,8 +46,9 @@
   <script src="assets/js/plugins/plugins.min.js"></script>
   -->
 
-    <!-- Main Style CSS (Please use minify version for better website load performance) -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Main Style CSS: preload to reduce FOUC -->
+    <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
     <!--<link rel="stylesheet" href="assets/css/style.min.css">-->
 
 </head>

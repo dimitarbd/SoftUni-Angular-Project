@@ -1,0 +1,121 @@
+<div class="breadcrumb-area">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <h2>Create New Offer</h2>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/catalog">Catalog</a></li>
+        <li class="active">Create New Offer</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="uren-login-register_area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        <form (ngSubmit)="onSubmit()" class="login-form">
+          <div class="login-title">
+            <h3>Part Information</h3>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-box">
+                <label for="title" class="mb-1">Part Name <span class="required">*</span></label>
+                <input id="title" name="title" type="text" [(ngModel)]="formData.title" required placeholder="Enter part name" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-box">
+                <label for="price" class="mb-1">Price <span class="required">*</span></label>
+                <input id="price" name="price" type="number" [(ngModel)]="formData.price" required placeholder="Enter price" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="input-box">
+                <label for="description" class="mb-1">Description <span class="required">*</span></label>
+                <textarea id="description" name="description" [(ngModel)]="formData.description" rows="4" required placeholder="Enter detailed description" style="width:100%"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-box">
+                <label for="imageUrl" class="mb-1">Image URL <span class="required">*</span></label>
+                <input id="imageUrl" name="imageUrl" type="url" [(ngModel)]="formData.imageUrl" required placeholder="http://example.com/image.jpg" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-box">
+                <label for="quantity" class="mb-1">Stock Quantity <span class="required">*</span></label>
+                <input id="quantity" name="quantity" type="number" [(ngModel)]="formData.quantity" required placeholder="Enter quantity in stock" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="input-box">
+                <label for="category" class="mb-1">Category <span class="required">*</span></label>
+                <select id="category" name="category" class="nice-select w-100" [(ngModel)]="formData.category" required>
+                  <option value="">Select a category</option>
+                  <option value="Engine and Drivetrain">Engine and Drivetrain</option>
+                  <option value="Suspension and Steering">Suspension and Steering</option>
+                  <option value="Braking System">Braking System</option>
+                  <option value="Electrical System">Electrical System</option>
+                  <option value="Exhaust System">Exhaust System</option>
+                  <option value="Cooling System">Cooling System</option>
+                  <option value="Body and Exterior">Body and Exterior</option>
+                  <option value="Interior and Comfort">Interior and Comfort</option>
+                  <option value="Wheels and Tires">Wheels and Tires</option>
+                  <option value="Fuel System">Fuel System</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="login-title mt-5">
+            <h6></h6>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-box">
+                <label for="brand" class="mb-1">Brand <span class="required">*</span></label>
+                <input id="brand" name="brand" type="text" [(ngModel)]="formData.brand" required placeholder="Enter brand name" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-box">
+                <label for="year" class="mb-1">Year <span class="required">*</span></label>
+                <input id="year" name="year" type="number" [(ngModel)]="formData.year" required placeholder="Enter year (e.g., 2022)" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-box">
+                <label for="rating" class="mb-1">Rating <span class="required">*</span></label>
+                <input id="rating" name="rating" type="number" [(ngModel)]="formData.rating" required min="1" max="5" placeholder="Enter rating (1-5)" />
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-12">
+              <div class="button-box d-flex justify-content-between">
+                <a routerLink="/catalog" class="uren-btn uren-btn_dark">
+                  <span>Cancel</span>
+                </a>
+                <button type="submit" class="uren-btn">
+                  <span>Import Part</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

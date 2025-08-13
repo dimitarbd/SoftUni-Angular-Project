@@ -20,11 +20,35 @@
             <div class="row">
               <div class="col-md-12 col-12">
                 <label>Email Address*</label>
-                <input type="email" name="email" [(ngModel)]="email" placeholder="Email Address"/>
+
+                <input type="email" 
+                name="email" 
+                id="email"
+                placeholder="Email Address" 
+                [(ngModel)]="email" 
+                (blur)="validateEmail()"/>
+                <br>
+                @if (emailError) {
+                  <p style="color: red">{{ emailErrorMessage }}</p>
+                }
+                <br>
               </div>
+              
               <div class="col-12 mb--20">
                 <label>Password</label>
-                <input type="password" name="password" [(ngModel)]="password" placeholder="Password"/>
+
+                <input type="password" 
+                name="password" 
+                id="password" 
+                [(ngModel)]="password" 
+                placeholder="Password" 
+                (blur)="validatePassword()"/>
+                <br>
+                @if (passwordError) {
+                  <p style="color: red">{{ passwordErrorMessage }}</p>
+                }
+                <br>
+
               </div>
               <div class="col-md-8">
                 <div class="check-box">
@@ -37,13 +61,15 @@
                   <a routerLink="/register">Don't have an account?</a>
                 </div>
               </div>
+
               @if (error()) {
                 <div class="col-12">
                   <p style="color: red">{{ error() }}</p>
                 </div>
               }
+              
               <div class="col-md-12">
-                <button class="uren-login_btn">Login</button>
+                <button class="uren-login_btn" [disabled]="!isFormValid()">Login</button>
               </div>
             </div>
           </div>

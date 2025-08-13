@@ -2,9 +2,9 @@
     <div class="inner-slide">
         <div class="single-product">
             <div class="product-img">
-                <a href="single-product.html">
+                <a [routerLink]="['/catalog', part._id, 'details']">
                     <img class="primary-img" 
-                         [src]="part.imageUrl || 'assets/images/product/medium-size/1-1.jpg'" 
+                         [src]="part.imageUrl" 
                          [alt]="part.title"
                          loading="lazy"
                          width="300"
@@ -24,7 +24,7 @@
                             </li>
                         </ul>
                     </div>
-                    <h6><a class="product-name" href="single-product.html">{{ part.title }}</a></h6>
+                    <h6><a class="product-name" [routerLink]="['/catalog', part._id, 'details']">{{ part.title }}</a></h6>
                     <div class="price-box">
                         <span class="new-price">${{ part.price }}</span>
                     </div>
