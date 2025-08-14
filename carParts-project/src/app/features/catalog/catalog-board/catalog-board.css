@@ -1,0 +1,23 @@
+.category-link {
+	font-size: 16px;
+	color: #0d6efd;
+	display: inline-block;
+	margin: 4px 0;
+}
+
+.category-link.active {
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.category-count {
+	color: #0a58ca;
+	margin-left: 4px;
+}
+
+/* When active, make the whole link yellow, including the parentheses and number */
+.category-link.active,
+.category-link.active .category-count {
+	color: #ffc107; /* bootstrap warning yellow */
+}
+
