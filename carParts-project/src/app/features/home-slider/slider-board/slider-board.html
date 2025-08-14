@@ -5,7 +5,9 @@
                 <div class="main-slider slider-navigation_style-2" style="position: relative;">
                     <span class="slick-arrow slick-prev" (click)="prevSlide()"><i class="ion-ios-arrow-left"></i></span>
                     <app-slider-item *ngFor="let item of items; let i = index"
-                        [item]="item" [active]="i === activeIndex"></app-slider-item>
+                        [item]="item" 
+                        [active]="i === activeIndex"
+                        (categoryNavigate)="navigateToCategory($event)"></app-slider-item>
                     <span class="slick-arrow slick-next" (click)="nextSlide()"><i class="ion-ios-arrow-right"></i></span>
                     <ul class="slick-dots">
                         <li *ngFor="let item of items; let i = index" (click)="goToSlide(i)" [class.slick-active]="i === activeIndex">
@@ -18,14 +20,14 @@
                 <div class="row banner-wrap">
                     <div class="col-lg-12 col-md-6">
                         <div class="slider-banner banner-item img-hover_effect">
-                            <a href="shop-left-sidebar.html">
+                            <a routerLink="/catalog">
                                 <img class="img-full" src="assets/images/banner/2-1.jpg" alt="Uren's Banner">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-6">
                         <div class="slider-banner-2 banner-item img-hover_effect">
-                            <a href="shop-left-sidebar.html">
+                            <a routerLink="/catalog">
                                 <img class="img-full" src="assets/images/banner/2-2.jpg" alt="Uren's Banner">
                             </a>
                         </div>

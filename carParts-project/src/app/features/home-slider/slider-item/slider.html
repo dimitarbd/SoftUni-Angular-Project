@@ -5,7 +5,7 @@
         <h3>{{ item.title }}</h3>
         <h4 *ngIf="item.priceText" [innerHTML]="item.priceText"></h4>
         <div class="uren-btn-ps_left slide-btn" *ngIf="item.buttonText">
-            <a class="uren-btn" [href]="item.buttonHref">{{ item.buttonText }}</a>
+            <button type="button" class="uren-btn" (click)="onButtonClick()">{{ item.buttonText }}</button>
         </div>
     </div>
 </div>

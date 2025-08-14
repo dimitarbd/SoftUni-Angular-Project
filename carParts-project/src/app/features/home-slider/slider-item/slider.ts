@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
+
 
 @Component({
   standalone: true,
@@ -11,4 +12,11 @@ import { NgClass, NgIf } from '@angular/common';
 export class SliderItemComponent {
     @Input() item: any;
     @Input() active = false;
+    @Output() categoryNavigate = new EventEmitter<string>();
+
+    onButtonClick(): void {
+        if (this.item.category) {
+            this.categoryNavigate.emit(this.item.category);
+        }
+    }
 }

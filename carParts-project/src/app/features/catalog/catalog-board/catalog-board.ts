@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { CatalogItem } from '../catalog-item/catalog-item';
 import { Part } from '../../../models/part.model';
 import { PartService } from '../../../core/services/part.service';
+import { CategoryFilterService } from '../../../core/services/category-filter.service';
 
 @Component({
   standalone: true,
@@ -11,7 +13,7 @@ import { PartService } from '../../../core/services/part.service';
   templateUrl: './catalog-board.html',
   styleUrl: './catalog-board.css'
 })
-export class CatalogBoard {
+export class CatalogBoard implements OnInit, OnDestroy {
 
     allParts: Part[] = [];
     filteredParts: Part[] = [];
@@ -20,8 +22,12 @@ export class CatalogBoard {
     selectedCategory: string | null = null;
     itemsPerPage = 6;
     currentPage = 1;
+    private categorySubscription?: Subscription;
 
-    constructor(private partService: PartService) { 
+    constructor(
+        private partService: PartService,
+        private categoryFilterService: CategoryFilterService
+    ) { 
         this.partService.getParts().subscribe(parts => {
             this.allParts = Array.isArray(parts) ? parts : [];
             // build category counts and list
@@ -37,6 +43,21 @@ export class CatalogBoard {
                 .sort((a, b) => a.name.localeCompare(b.name));
             this.applyFilter();
         });
+    }
+
+    ngOnInit(): void {
+        // Subscribe to category changes from the slider
+        this.categorySubscription = this.categoryFilterService.category$.subscribe(category => {
+            this.selectedCategory = category;
+            this.currentPage = 1;
+            this.applyFilter();
+        });
+    }
+
+    ngOnDestroy(): void {
+        if (this.categorySubscription) {
+            this.categorySubscription.unsubscribe();
+        }
     }
 
     get pagedParts(): Part[] {
@@ -57,9 +78,7 @@ export class CatalogBoard {
     }
 
     selectCategory(category: string | null): void {
-        this.selectedCategory = category;
-        this.currentPage = 1;
-        this.applyFilter();
+        this.categoryFilterService.setCategory(category);
     }
 
     isActiveCategory(category: string | null): boolean {
