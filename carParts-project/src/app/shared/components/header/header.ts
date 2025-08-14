@@ -1,24 +1,34 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
+import { SearchService } from '../../../core/services/search.service';
+import { CategoryFilterService } from '../../../core/services/category-filter.service';
+import { PartService } from '../../../core/services/part.service';
 
 @Component({
   selector: 'app-header',
-  imports: [NgClass, RouterLink],
+  imports: [NgClass, RouterLink, FormsModule],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
 
     protected authService = inject(AuthService);
     private router = inject(Router);
+    private searchService = inject(SearchService);
+    private categoryFilterService = inject(CategoryFilterService);
+    private partService = inject(PartService);
 
     readonly isLoggedIn = () => this.authService.isLoggedIn();
     readonly currentUser = this.authService.currentUser;
 
-    
-  isCategoriesOpen = false;
+    searchTerm = '';
+    isCategoriesOpen = false;
+    categories: string[] = [];
+    private categoriesSubscription?: Subscription;
 
   toggleCategories(): void {
     this.isCategoriesOpen = !this.isCategoriesOpen;
@@ -27,5 +37,52 @@ export class HeaderComponent {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  onSearch(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    
+    if (this.searchTerm.trim()) {
+      this.searchService.setSearchTerm(this.searchTerm);
+      this.router.navigate(['/catalog'], { 
+        queryParams: { search: this.searchTerm.trim() } 
+      });
+    }
+  }
+
+  clearSearch(): void {
+    this.searchTerm = '';
+    this.searchService.clearSearchTerm();
+  }
+
+  ngOnInit(): void {
+    // Load categories from the parts data
+    this.categoriesSubscription = this.partService.getParts().subscribe(parts => {
+      const categorySet = new Set<string>();
+      parts.forEach(part => {
+        if (part.category && part.category.trim()) {
+          categorySet.add(part.category.trim());
+        }
+      });
+      this.categories = Array.from(categorySet).sort();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.categoriesSubscription) {
+      this.categoriesSubscription.unsubscribe();
+    }
+  }
+
+  selectCategory(category: string): void {
+    // Navigate to catalog with category filter
+    this.categoryFilterService.setCategory(category);
+    this.router.navigate(['/catalog'], { 
+      queryParams: { category: category } 
+    });
+    // Close the categories menu
+    this.isCategoriesOpen = false;
   }
 }

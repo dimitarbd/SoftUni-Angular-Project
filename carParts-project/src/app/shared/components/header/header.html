@@ -11,8 +11,12 @@
                 </div>
                 <div class="col-xl-5 col-lg-6 d-none d-lg-block">
                     <div class="hm-form_area">
-                        <form action="#" class="hm-searchbox">
-                            <input type="text" placeholder="Enter your search key ...">
+                        <form (ngSubmit)="onSearch($event)" class="hm-searchbox">
+                            <input type="text" 
+                                   [(ngModel)]="searchTerm" 
+                                   name="searchTerm"
+                                   placeholder="Enter your search key ..."
+                                   (keyup.enter)="onSearch()">
                             <button class="header-search_btn" type="submit"><i
                                 class="ion-ios-search-strong"><span>Search</span></i></button>
                         </form>
@@ -48,22 +52,11 @@
                         </div>
                         <div id="cate-toggle" class="category-menu-list" [hidden]="!isCategoriesOpen">
                             <ul>
-                                <li><a href="shop-left-sidebar.html">Engine and Drivetrain</a>
-                                </li>
-                                <li><a href="shop-left-sidebar.html">Suspension and Steering</a>
-                                </li>
-                                <li><a href="shop-left-sidebar.html">Braking System</a>                                    
-                                </li>
-                                <li><a href="shop-left-sidebar.html">Electrical System</a>                                    
-                                </li>
-                                <li><a href="shop-left-sidebar.html">Exhaust System</a>
-                                </li>
-                                <li><a href="shop-left-sidebar.html">Cooling System</a>
-                                </li>
-                                <li><a href="shop-left-sidebar.html">Body and Exterior</a></li>
-                                <li><a href="shop-left-sidebar.html">Interior and Comfort</a></li>
-                                <li><a href="shop-left-sidebar.html">Wheels and Tires</a></li>
-                                <li><a href="shop-left-sidebar.html">Fuel Syste</a></li>                                                   
+                                @for (category of categories; track category) {
+                                    <li>
+                                        <a href="javascript:void(0)" (click)="selectCategory(category)">{{ category }}</a>
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -102,8 +95,12 @@
                 </div>
                 <div class="custom-search_col d-none d-md-block d-lg-none">
                     <div class="hm-form_area">
-                        <form action="#" class="hm-searchbox">
-                            <input type="text" placeholder="Enter your search key ...">
+                        <form (ngSubmit)="onSearch($event)" class="hm-searchbox">
+                            <input type="text" 
+                                   [(ngModel)]="searchTerm" 
+                                   name="searchTerm"
+                                   placeholder="Enter your search key ..."
+                                   (keyup.enter)="onSearch()">
                             <button class="header-search_btn" type="submit"><i
                                 class="ion-ios-search-strong"><span>Search</span></i></button>
                         </form>
@@ -168,8 +165,12 @@
             <div class="container">
                 <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
                 <div class="offcanvas-inner_search">
-                    <form action="#" class="inner-searchbox">
-                        <input type="text" placeholder="Search for item...">
+                    <form (ngSubmit)="onSearch($event)" class="inner-searchbox">
+                        <input type="text" 
+                               [(ngModel)]="searchTerm" 
+                               name="searchTerm"
+                               placeholder="Search for item..."
+                               (keyup.enter)="onSearch()">
                         <button class="search_btn" type="submit"><i class="ion-ios-search-strong"></i></button>
                     </form>
                 </div>

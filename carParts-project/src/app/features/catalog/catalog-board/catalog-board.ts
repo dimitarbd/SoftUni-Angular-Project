@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription, combineLatest } from 'rxjs';
 import { CatalogItem } from '../catalog-item/catalog-item';
 import { Part } from '../../../models/part.model';
 import { PartService } from '../../../core/services/part.service';
 import { CategoryFilterService } from '../../../core/services/category-filter.service';
+import { SearchService } from '../../../core/services/search.service';
 
 @Component({
   standalone: true,
@@ -20,13 +22,19 @@ export class CatalogBoard implements OnInit, OnDestroy {
     categories: { name: string; count: number }[] = [];
     private categoryCounts: Record<string, number> = {};
     selectedCategory: string | null = null;
+    currentSearchTerm: string = '';
     itemsPerPage = 6;
     currentPage = 1;
     private categorySubscription?: Subscription;
+    private searchSubscription?: Subscription;
+    private routeSubscription?: Subscription;
 
     constructor(
         private partService: PartService,
-        private categoryFilterService: CategoryFilterService
+        private categoryFilterService: CategoryFilterService,
+        private searchService: SearchService,
+        private route: ActivatedRoute,
+        private router: Router
     ) { 
         this.partService.getParts().subscribe(parts => {
             this.allParts = Array.isArray(parts) ? parts : [];
@@ -46,17 +54,79 @@ export class CatalogBoard implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        // Subscribe to route query parameters for search and category
+        this.routeSubscription = this.route.queryParams.subscribe(params => {
+            const searchTerm = params['search'] || '';
+            const categoryParam = params['category'] || '';
+            
+            // Handle search parameter
+            if (searchTerm) {
+                this.currentSearchTerm = searchTerm;
+                this.searchService.setSearchTerm(searchTerm);
+                // Clear category filter when searching
+                this.selectedCategory = null;
+                this.categoryFilterService.clearCategory();
+            } else {
+                this.currentSearchTerm = '';
+            }
+            
+            // Handle category parameter
+            if (categoryParam && !searchTerm) {
+                this.selectedCategory = categoryParam;
+                this.categoryFilterService.setCategory(categoryParam);
+                // Clear search when filtering by category
+                this.currentSearchTerm = '';
+                this.searchService.clearSearchTerm();
+            } else if (!categoryParam && !searchTerm) {
+                // Clear both filters if no parameters
+                this.selectedCategory = null;
+                this.currentSearchTerm = '';
+                this.categoryFilterService.clearCategory();
+                this.searchService.clearSearchTerm();
+            }
+            
+            this.currentPage = 1;
+            this.applyFilter();
+        });
+
         // Subscribe to category changes from the slider
         this.categorySubscription = this.categoryFilterService.category$.subscribe(category => {
             this.selectedCategory = category;
+            // Clear search when filtering by category
+            if (category) {
+                this.currentSearchTerm = '';
+                this.searchService.clearSearchTerm();
+            }
             this.currentPage = 1;
             this.applyFilter();
+        });
+
+        // Subscribe to search term changes
+        this.searchSubscription = this.searchService.searchTerm$.subscribe(searchTerm => {
+            if (searchTerm && searchTerm !== this.currentSearchTerm) {
+                this.currentSearchTerm = searchTerm;
+                // Clear category filter when searching
+                this.selectedCategory = null;
+                this.categoryFilterService.clearCategory();
+                this.currentPage = 1;
+                this.applyFilter();
+            } else if (!searchTerm && this.currentSearchTerm) {
+                this.currentSearchTerm = '';
+                this.currentPage = 1;
+                this.applyFilter();
+            }
         });
     }
 
     ngOnDestroy(): void {
         if (this.categorySubscription) {
             this.categorySubscription.unsubscribe();
+        }
+        if (this.searchSubscription) {
+            this.searchSubscription.unsubscribe();
+        }
+        if (this.routeSubscription) {
+            this.routeSubscription.unsubscribe();
         }
     }
 
@@ -79,18 +149,55 @@ export class CatalogBoard implements OnInit, OnDestroy {
 
     selectCategory(category: string | null): void {
         this.categoryFilterService.setCategory(category);
+        // Update URL with category parameter
+        if (category) {
+            this.router.navigate(['/catalog'], { 
+                queryParams: { category: category },
+                queryParamsHandling: 'replace'
+            });
+        } else {
+            this.router.navigate(['/catalog'], {
+                queryParams: {},
+                queryParamsHandling: 'replace'
+            });
+        }
     }
 
     isActiveCategory(category: string | null): boolean {
         return (this.selectedCategory ?? null) === (category ?? null);
     }
 
+    get isSearchMode(): boolean {
+        return this.currentSearchTerm.trim().length > 0;
+    }
+
+    clearSearch(): void {
+        this.currentSearchTerm = '';
+        this.searchService.clearSearchTerm();
+        this.applyFilter();
+    }
+
     applyFilter(): void {
-        if (!this.selectedCategory) {
-            this.filteredParts = this.allParts.slice();
-        } else {
-            this.filteredParts = this.allParts.filter(p => (p.category || '').toString() === this.selectedCategory);
+        let results = this.allParts.slice();
+
+        // Apply search filter first
+        if (this.currentSearchTerm.trim()) {
+            const searchTerm = this.currentSearchTerm.toLowerCase().trim();
+            results = results.filter(part => 
+                part.title.toLowerCase().includes(searchTerm) ||
+                part.description.toLowerCase().includes(searchTerm) ||
+                part.category.toLowerCase().includes(searchTerm) ||
+                (part.brand && part.brand.toLowerCase().includes(searchTerm))
+            );
         }
+
+        // Then apply category filter
+        if (this.selectedCategory) {
+            results = results.filter(p => (p.category || '').toString() === this.selectedCategory);
+        }
+
+        this.filteredParts = results;
+
         // Ensure current page stays within bounds when data changes
         if (this.currentPage > this.totalPages) {
             this.currentPage = this.totalPages;
