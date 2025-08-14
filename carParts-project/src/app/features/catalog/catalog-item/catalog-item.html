@@ -1,25 +1,23 @@
-<div class="col-lg-4 col-md-6 col-sm-6">
-    <div class="product-slide_item">
-        <div class="inner-slide">
-            <div class="single-product">
-                <div class="product-img">
-                    <a href="/catalog/{{part._id}}">
-                        <img class="primary-img" src={{part.imageUrl}} alt="Uren's Product Image">
-                    </a>                    
-                </div>
-                <div class="product-content">
-                    <div class="product-desc_info">
-                        <div class="rating-box">
-                            <ul>
-                                @for (i of ratingArray; track i) {
-                                    <li><i class="ion-android-star"></i></li>
-                                }
-                            </ul>
-                        </div>
-                        <h6><a class="product-name" href="/catalog/{{part._id}}">{{part.title}}</a></h6>
-                        <div class="price-box">
-                            <span class="new-price">${{part.price}}</span>
-                        </div>
+<div class="product-slide_item">
+    <div class="inner-slide">
+        <div class="single-product">
+            <div class="product-img">
+                <a [routerLink]="['/catalog', part._id, 'details']">
+                    <img class="primary-img" src={{part.imageUrl}} alt="Uren's Product Image">
+                </a>                    
+            </div>
+            <div class="product-content">
+                <div class="product-desc_info">
+                    <div class="rating-box">
+                        <ul>
+                            @for (i of ratingArray; track i) {
+                                <li><i class="ion-android-star"></i></li>
+                            }
+                        </ul>
+                    </div>
+                    <h6><a class="product-name" [routerLink]="['/catalog', part._id, 'details']">{{part.title}}</a></h6>
+                    <div class="price-box">
+                        <span class="new-price">${{part.price}}</span>
                     </div>
                 </div>
             </div>
