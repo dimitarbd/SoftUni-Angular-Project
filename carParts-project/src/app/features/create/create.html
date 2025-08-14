@@ -24,12 +24,18 @@
               <div class="input-box">
                 <label for="title" class="mb-1">Part Name <span class="required">*</span></label>
                 <input id="title" name="title" type="text" [(ngModel)]="formData.title" required placeholder="Enter part name" />
+                @if (titleError) {
+                  <p style="color: red">{{ titleErrorMessage }}</p>
+                }
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-box">
                 <label for="price" class="mb-1">Price <span class="required">*</span></label>
                 <input id="price" name="price" type="number" [(ngModel)]="formData.price" required placeholder="Enter price" />
+                @if (priceError) {
+                  <p style="color: red">{{ priceErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -38,6 +44,9 @@
               <div class="input-box">
                 <label for="description" class="mb-1">Description <span class="required">*</span></label>
                 <textarea id="description" name="description" [(ngModel)]="formData.description" rows="4" required placeholder="Enter detailed description" style="width:100%"></textarea>
+                @if (descriptionError) {
+                  <p style="color: red">{{ descriptionErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -46,12 +55,18 @@
               <div class="input-box">
                 <label for="imageUrl" class="mb-1">Image URL <span class="required">*</span></label>
                 <input id="imageUrl" name="imageUrl" type="url" [(ngModel)]="formData.imageUrl" required placeholder="http://example.com/image.jpg" />
+                @if (imageUrlError) {
+                  <p style="color: red">{{ imageUrlErrorMessage }}</p>
+                }
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-box">
                 <label for="quantity" class="mb-1">Stock Quantity <span class="required">*</span></label>
                 <input id="quantity" name="quantity" type="number" [(ngModel)]="formData.quantity" required placeholder="Enter quantity in stock" />
+                @if (quantityError) {
+                  <p style="color: red">{{ quantityErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -72,6 +87,9 @@
                   <option value="Wheels and Tires">Wheels and Tires</option>
                   <option value="Fuel System">Fuel System</option>
                 </select>
+                @if (categoryError) {
+                  <p style="color: red">{{ categoryErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -83,12 +101,18 @@
               <div class="input-box">
                 <label for="brand" class="mb-1">Brand <span class="required">*</span></label>
                 <input id="brand" name="brand" type="text" [(ngModel)]="formData.brand" required placeholder="Enter brand name" />
+                @if (brandError) {
+                  <p style="color: red">{{ brandErrorMessage }}</p>
+                }
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-box">
                 <label for="year" class="mb-1">Year <span class="required">*</span></label>
                 <input id="year" name="year" type="number" [(ngModel)]="formData.year" required placeholder="Enter year (e.g., 2022)" />
+                @if (yearError) {
+                  <p style="color: red">{{ yearErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -97,6 +121,9 @@
               <div class="input-box">
                 <label for="rating" class="mb-1">Rating <span class="required">*</span></label>
                 <input id="rating" name="rating" type="number" [(ngModel)]="formData.rating" required min="1" max="5" placeholder="Enter rating (1-5)" />
+                @if (ratingError) {
+                  <p style="color: red">{{ ratingErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -106,7 +133,7 @@
                 <a routerLink="/catalog" class="uren-btn uren-btn_dark">
                   <span>Cancel</span>
                 </a>
-                <button type="submit" class="uren-btn">
+                <button type="submit" class="uren-btn" [disabled]="!isFormValid()">
                   <span>Import Part</span>
                 </button>
               </div>

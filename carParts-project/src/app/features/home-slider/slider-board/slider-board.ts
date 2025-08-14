@@ -18,10 +18,10 @@ export class SliderBoardComponent {
       contentClass: '',
       primary: false,
       subtitle: 'New thinking new possibilities',
-      title: 'Car interior',
+      title: 'Body & Exterior',
       priceText: 'Starting at <span>$99.00</span>',
       buttonText: 'Read More',
-      buttonHref: 'shop-left-sidebar.html'
+      buttonHref: '/catalog'
     },
     {
       id: 2,
@@ -30,10 +30,10 @@ export class SliderBoardComponent {
       contentClass: 'slider-content-2',
       primary: true,
       subtitle: 'Car, Truck, CUV & SUV Tires',
-      title: 'Wheels & Tires',
+      title: 'Exhaust System',
       priceText: 'Sale up to 20% off',
       buttonText: 'Read More',
-      buttonHref: 'shop-left-sidebar.html'
+      buttonHref: '/catalog'
     }
   ];
 
