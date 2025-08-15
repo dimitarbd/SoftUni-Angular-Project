@@ -70,7 +70,7 @@
                                 <li class="megamenu-holder "><a routerLink="/catalog">Catalog</a>
                                 </li>
                                 @if(isLoggedIn()) {
-                                    <li><a routerLink="/create-offer">Create Offer</a></li>
+                                    <li><a routerLink="/create">Create Offer</a></li>
                                     <li><a routerLink="/logout" (click)="logout()">Logout</a></li>
                                 } @else {
                                     <li><a routerLink="/login">Login</a></li>
@@ -121,7 +121,7 @@
                                 <li class="megamenu-holder "><a href="/catalog">Catalog</a>
                                 </li>
                                 @if(isLoggedIn()) {
-                                    <li><a routerLink="/create-offer">Create Offer</a></li>
+                                    <li><a routerLink="/create">Create Offer</a></li>
                                     <li><a routerLink="/logout" (click)="logout()">Logout</a></li>
                                 } @else {
                                     <li><a routerLink="/login">Login</a></li>
