@@ -6,20 +6,28 @@
                     <span>Last 10 Ads Added</span>
                     <h3>New Arrivals Products</h3>
                 </div>
-                <div class="product-slider uren-slick-slider slider-navigation_style-1 img-hover-effect_area products-wrapper">
-                    <!-- Navigation arrows -->
-                    <button type="button" class="slick-prev slider-arrow-left" (click)="scrollLeft()">
-                        <i class="ion-chevron-left"></i>
-                    </button>
-                    <button type="button" class="slick-next slider-arrow-right" (click)="scrollRight()">
-                        <i class="ion-chevron-right"></i>
-                    </button>
-                    
-                    <!-- Products container -->
-                    <div #productsContainer class="products-row">
-                        <app-new-product-item *ngFor="let part of displayParts; trackBy: trackByPartId" [part]="part"></app-new-product-item>
+                @if (isLoading) {
+                    <app-ring-spinner 
+                        message="Loading new arrivals..." 
+                        size="medium"
+                        color="#c0c0c0">
+                    </app-ring-spinner>
+                } @else {
+                    <div class="product-slider uren-slick-slider slider-navigation_style-1 img-hover-effect_area products-wrapper">
+                        <!-- Navigation arrows -->
+                        <button type="button" class="slick-prev slider-arrow-left" (click)="scrollLeft()">
+                            <i class="ion-chevron-left"></i>
+                        </button>
+                        <button type="button" class="slick-next slider-arrow-right" (click)="scrollRight()">
+                            <i class="ion-chevron-right"></i>
+                        </button>
+                        
+                        <!-- Products container -->
+                        <div #productsContainer class="products-row">
+                            <app-new-product-item *ngFor="let part of displayParts; trackBy: trackByPartId" [part]="part"></app-new-product-item>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>

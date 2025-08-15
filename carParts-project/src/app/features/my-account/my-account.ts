@@ -4,11 +4,12 @@ import { RouterLink } from '@angular/router';
 import { PartService } from '../../core/services/part.service';
 import { AuthService } from '../../core/services/auth.service';
 import { Part } from '../../models/part.model';
+import { RingSpinnerComponent } from '../../shared/components/loading-spinner/spinner-variants';
 
 @Component({
   selector: 'app-my-account',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RingSpinnerComponent],
   templateUrl: './my-account.html',
   styleUrl: './my-account.css'
 })

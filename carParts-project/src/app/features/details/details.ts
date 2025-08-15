@@ -6,11 +6,12 @@ import { Part } from '../../models/part.model';
 import { AuthService } from '../../core/services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommentsService } from '../../core/services/comments.service';
+import { RingSpinnerComponent } from '../../shared/components/loading-spinner/spinner-variants';
 
 @Component({
     selector: 'app-details',
     standalone: true,
-    imports: [CommonModule, RouterLink, FormsModule],
+    imports: [CommonModule, RouterLink, FormsModule, RingSpinnerComponent],
     templateUrl: './details.html',
     styleUrl: './details.css'
 })
@@ -21,6 +22,7 @@ export class DetailsComponent {
     partId = '';
     comments: any[] = [];
     isLoadingComments = true;
+    isLoadingPart = true;
     text = '';
     rating: number = 1;
     stars: number[] = [0, 1, 2, 3, 4];
@@ -35,7 +37,17 @@ export class DetailsComponent {
             this.router.navigateByUrl('/catalog');
             return;
         }
-        this.partService.getOne(this.partId).subscribe(part => this.part = part);
+        this.partService.getOne(this.partId).subscribe({
+            next: (part) => {
+                this.part = part;
+                this.isLoadingPart = false;
+            },
+            error: (error) => {
+                console.error('Error loading part:', error);
+                this.isLoadingPart = false;
+                this.router.navigateByUrl('/catalog');
+            }
+        });
         this.loadComments();
     }
 

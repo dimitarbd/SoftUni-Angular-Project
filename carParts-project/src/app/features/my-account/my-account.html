@@ -35,10 +35,18 @@
             <div id="account-offers" class="tab-pane">
               <div class="myaccount-offers">
                 <h4 class="small-title">MY OFFERS</h4>
-                <p *ngIf="loading">Loading your offers...</p>
-                <p class="text-danger" *ngIf="!loading && error">{{ error }}</p>
-                <p *ngIf="!loading && !error && (!offers || offers.length === 0)">You haven't created any offers yet.</p>
-                <div class="shop-product-wrap grid gridview-3 img-hover-effect_area row" *ngIf="!loading && !error && offers?.length">
+                @if (loading) {
+                  <app-ring-spinner 
+                    message="Loading your offers..." 
+                    size="medium"
+                    color="#c0c0c0">
+                  </app-ring-spinner>
+                } @else if (error) {
+                  <p class="text-danger">{{ error }}</p>
+                } @else if (!offers || offers.length === 0) {
+                  <p>You haven't created any offers yet.</p>
+                } @else {
+                  <div class="shop-product-wrap grid gridview-3 img-hover-effect_area row">
                   <div class="col-lg-4" *ngFor="let offer of offers">
                     <div class="product-slide_item">
                       <div class="inner-slide">
@@ -68,6 +76,7 @@
                     </div>
                   </div>
                 </div>
+                }
               </div>
             </div>
           </div>

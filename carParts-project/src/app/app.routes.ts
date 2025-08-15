@@ -13,5 +13,6 @@ export const routes: Routes = [
   { path: 'login', loadComponent: () => import('./features/auth/login/login').then(m => m.LoginComponent) },
   { path: 'register', loadComponent: () => import('./features/auth/register/register').then(m => m.RegisterComponent) },
   { path: 'my-account', loadComponent: () => import('./features/my-account/my-account').then(m => m.MyAccountComponent), canActivate: [() => import('./core/guards/auth.guard').then(g => g.authGuard)] },
+  { path: 'spinner-demo', loadComponent: () => import('./shared/components/loading-spinner/spinner-demo').then(m => m.SpinnerDemoComponent) },
   { path: '**', component: NotFound }  
 ];

@@ -7,11 +7,12 @@ import { Part } from '../../../models/part.model';
 import { PartService } from '../../../core/services/part.service';
 import { CategoryFilterService } from '../../../core/services/category-filter.service';
 import { SearchService } from '../../../core/services/search.service';
+import { RingSpinnerComponent } from '../../../shared/components/loading-spinner/spinner-variants';
 
 @Component({
   standalone: true,
   selector: 'app-catalog-board',
-  imports: [NgClass, CatalogItem],
+  imports: [NgClass, CatalogItem, RingSpinnerComponent],
   templateUrl: './catalog-board.html',
   styleUrl: './catalog-board.css'
 })
@@ -25,6 +26,7 @@ export class CatalogBoard implements OnInit, OnDestroy {
     currentSearchTerm: string = '';
     itemsPerPage = 6;
     currentPage = 1;
+    isLoading = true;
     private categorySubscription?: Subscription;
     private searchSubscription?: Subscription;
     private routeSubscription?: Subscription;
@@ -36,20 +38,27 @@ export class CatalogBoard implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router
     ) { 
-        this.partService.getParts().subscribe(parts => {
-            this.allParts = Array.isArray(parts) ? parts : [];
-            // build category counts and list
-            const counts: Record<string, number> = {};
-            for (const part of this.allParts) {
-                const key = (part.category || '').toString().trim();
-                if (!key) continue;
-                counts[key] = (counts[key] || 0) + 1;
+        this.partService.getParts().subscribe({
+            next: (parts) => {
+                this.allParts = Array.isArray(parts) ? parts : [];
+                // build category counts and list
+                const counts: Record<string, number> = {};
+                for (const part of this.allParts) {
+                    const key = (part.category || '').toString().trim();
+                    if (!key) continue;
+                    counts[key] = (counts[key] || 0) + 1;
+                }
+                this.categoryCounts = counts;
+                this.categories = Object.entries(counts)
+                    .map(([name, count]) => ({ name, count }))
+                    .sort((a, b) => a.name.localeCompare(b.name));
+                this.applyFilter();
+                this.isLoading = false;
+            },
+            error: (error) => {
+                console.error('Error loading parts:', error);
+                this.isLoading = false;
             }
-            this.categoryCounts = counts;
-            this.categories = Object.entries(counts)
-                .map(([name, count]) => ({ name, count }))
-                .sort((a, b) => a.name.localeCompare(b.name));
-            this.applyFilter();
         });
     }
 

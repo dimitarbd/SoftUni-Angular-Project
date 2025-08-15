@@ -11,7 +11,16 @@
   </div>
 </div>
 
-<div class="uren-login-register_area" *ngIf="!isLoading">
+@if (isLoading) {
+  <div class="container">
+    <app-ring-spinner 
+      message="Loading part data..." 
+      size="large"
+      color="#c0c0c0">
+    </app-ring-spinner>
+  </div>
+} @else {
+<div class="uren-login-register_area">
   <div class="container">
     <div class="row">
       <div class="col-lg-10 offset-lg-1">
@@ -117,5 +126,6 @@
     </div>
   </div>
 </div>
+}
 
 

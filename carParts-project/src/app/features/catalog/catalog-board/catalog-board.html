@@ -50,44 +50,56 @@
                     </div>
                 }
                 
-                <div class="shop-product-wrap img-hover-effect_area row">
-                    @if (pagedParts.length === 0) {
-                        <div class="col-12">
-                            @if (isSearchMode) {
-                                <p>No products found for search term "{{ currentSearchTerm }}". Try a different search term.</p>
-                            } @else {
-                                <p>No products found.</p>
+                @if (isLoading) {
+                    <div class="col-12">
+                        <app-ring-spinner 
+                            message="Loading products..." 
+                            size="large"
+                            color="#c0c0c0">
+                        </app-ring-spinner>
+                    </div>
+                } @else {
+                    <div class="shop-product-wrap img-hover-effect_area row">
+                        @if (pagedParts.length === 0) {
+                            <div class="col-12">
+                                @if (isSearchMode) {
+                                    <p>No products found for search term "{{ currentSearchTerm }}". Try a different search term.</p>
+                                } @else {
+                                    <p>No products found.</p>
+                                }
+                            </div>
+                        } @else {
+                            @for (part of pagedParts; track part._id) {
+                                <app-catalog-item [part]="part"></app-catalog-item>
                             }
-                        </div>
-                    } @else {
-                        @for (part of pagedParts; track part._id) {
-                            <app-catalog-item [part]="part"></app-catalog-item>
                         }
-                    }
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="uren-paginatoin-area">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <ul class="uren-pagination-box primary-color">
-                                        <li>
-                                            <a href="javascript:void(0)" (click)="prevPage()">Prev</a>
-                                        </li>
-                                        @for (page of pageNumbers; track page) {
-                                            <li [class.active]="currentPage === page">
-                                                <a href="javascript:void(0)" (click)="goToPage(page)">{{ page }}</a>
+                    </div>
+                }
+                @if (!isLoading && pagedParts.length > 0) {
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="uren-paginatoin-area">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <ul class="uren-pagination-box primary-color">
+                                            <li>
+                                                <a href="javascript:void(0)" (click)="prevPage()">Prev</a>
                                             </li>
-                                        }
-                                        <li>
-                                            <a class="Next" href="javascript:void(0)" (click)="nextPage()">Next</a>
-                                        </li>
-                                    </ul>
+                                            @for (page of pageNumbers; track page) {
+                                                <li [class.active]="currentPage === page">
+                                                    <a href="javascript:void(0)" (click)="goToPage(page)">{{ page }}</a>
+                                                </li>
+                                            }
+                                            <li>
+                                                <a class="Next" href="javascript:void(0)" (click)="nextPage()">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>

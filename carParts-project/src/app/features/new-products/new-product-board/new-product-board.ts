@@ -4,11 +4,12 @@ import { PartService } from '../../../core/services/part.service';
 import { Part } from '../../../models/part.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NewProductItem } from '../new-product-item/new-product-item';
+import { RingSpinnerComponent } from '../../../shared/components/loading-spinner/spinner-variants';
 
 @Component({
     standalone: true,
     selector: 'app-new-product-board',
-    imports: [NgFor, NewProductItem],
+    imports: [NgFor, NewProductItem, RingSpinnerComponent],
     templateUrl: './new-product-board.html',
     styleUrl: './new-product-board.css'
 })
@@ -17,14 +18,22 @@ export class NewProductBoard implements OnInit, AfterViewInit {
     @ViewChild('productsContainer', { static: false }) productsContainer!: ElementRef;
     parts: Part[] = [];
     displayParts: Part[] = [];
+    isLoading = true;
     private scrollTimeout: any;
 
     constructor(private partService: PartService, private destroyRef: DestroyRef) { }
 
     ngOnInit(): void {
-        this.partService.getRecentParts().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(parts => {
-            this.parts = parts;
-            this.createInfiniteLoop();
+        this.partService.getRecentParts().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+            next: (parts) => {
+                this.parts = parts;
+                this.createInfiniteLoop();
+                this.isLoading = false;
+            },
+            error: (error) => {
+                console.error('Error loading recent parts:', error);
+                this.isLoading = false;
+            }
         });
     }
 

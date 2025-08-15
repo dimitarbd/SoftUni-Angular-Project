@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { PartService } from '../../core/services/part.service';
 import { AuthService } from '../../core/services/auth.service';
 import { Part } from '../../models/part.model';
+import { RingSpinnerComponent } from '../../shared/components/loading-spinner/spinner-variants';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+      imports: [CommonModule, FormsModule, RouterLink, RingSpinnerComponent],
   templateUrl: './edit.html',
   styleUrl: './edit.css'
 })
