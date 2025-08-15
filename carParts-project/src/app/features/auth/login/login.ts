@@ -70,11 +70,16 @@ export class LoginComponent {
             return;
         }
 
-        const response = this.authService.login(this.email, this.password);
-        if (response) {
-            this.router.navigate(['/']);
-        }
-
+        this.authService.login(this.email, this.password).subscribe({
+            next: (user) => {
+                this.authService.loginSuccess(user);
+                this.router.navigate(['/']);
+            },
+            error: (error) => {
+                console.error('Login failed:', error);
+                this.error.set('Invalid email or password');
+            }
+        });
     }
 }
 

@@ -94,15 +94,18 @@ export class RegisterComponent {
         this.validateRePassword();
 
         if (this.isFormValid()) {
-            
-            const response = this.authService.register(this.email, this.password, this.repassword);
-            if (response) {
-                this.router.navigate(['/']);
-            } else {
-                this.error.set('Registration failed');
-            }
+            this.authService.register(this.email, this.password).subscribe({
+                next: (user) => {
+                    this.authService.registerSuccess(user);
+                    this.router.navigate(['/']);
+                },
+                error: (error) => {
+                    console.error('Registration failed:', error);
+                    this.error.set('Registration failed. Please try again.');
+                }
+            });
         } else {
-            this.error.set('Registration failed');
+            this.error.set('Please fix the validation errors');
         }
     }
 }

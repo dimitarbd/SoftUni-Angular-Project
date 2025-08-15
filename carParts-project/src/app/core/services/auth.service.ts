@@ -1,4 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
 
 @Injectable({
@@ -7,23 +9,12 @@ import { User } from '../../models/user.model';
 export class AuthService {
     private _isLoggedIn = signal<boolean>(false);
     private _currentUser = signal<User | null>(null);
-    private _users: User[] = [
-        {
-            _id: '1',
-            email: 'test@abv.bg',
-            password: '123456',
-        },
-        {
-            _id: '2',
-            email: 'admin@admin.com',
-            password: '123456',
-        }
-    ];
+    private apiUrl = 'http://localhost:3030/users';
 
     public isLoggedInSignal = this._isLoggedIn.asReadonly();
     public currentUser = this._currentUser.asReadonly();
 
-    constructor() {
+    constructor(private httpClient: HttpClient) {
         const savedUser = localStorage.getItem('currentUser');
         if (savedUser) {
             const user = JSON.parse(savedUser);
@@ -39,41 +30,37 @@ export class AuthService {
         return this._currentUser() != null;
     }
 
-    login(email: string, password: string): boolean {
-        const user = this._users.find(user => user.email === email && user.password === password);
-        if (user) {
-            this._currentUser.set(user);
-            this._isLoggedIn.set(true);
-
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            return true;
-        }
-        return false;
+    login(email: string, password: string): Observable<User> {
+        return this.httpClient.post<User>(`${this.apiUrl}/login`, { email, password });
     }
 
-    register(email: string, password: string, rePassword: string): boolean {
-        if (email && password && rePassword && password === rePassword) {
-            const newUser: User = {
-                _id: 'user_${Date.now()}',
-                email: email,
-                password: password,
-            };
+    loginSuccess(user: User): void {
+        this._currentUser.set(user);
+        this._isLoggedIn.set(true);
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('accessToken', user.accessToken || '');
+    }
 
-            this._users.push(newUser);
-            this._currentUser.set(newUser);
-            this._isLoggedIn.set(true);
+    register(email: string, password: string): Observable<User> {
+        return this.httpClient.post<User>(`${this.apiUrl}/register`, { email, password });
+    }
 
-            localStorage.setItem('currentUser', JSON.stringify(newUser));
-
-            return true;
-        }
-        return false;
+    registerSuccess(user: User): void {
+        this._currentUser.set(user);
+        this._isLoggedIn.set(true);
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('accessToken', user.accessToken || '');
     }
 
     logout(): void {
         this._currentUser.set(null);
         this._isLoggedIn.set(false);
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('accessToken');
+    }
+
+    getAccessToken(): string | null {
+        return localStorage.getItem('accessToken');
     }
 
     getCurrentUserId(): string | null {
