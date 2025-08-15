@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Part } from "../../models";
 import { Observable, map } from "rxjs";
+import { AuthService } from "./auth.service";
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,15 @@ import { Observable, map } from "rxjs";
 export class PartService {
     private apiUrl = 'http://localhost:3030/data/parts';
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient, private authService: AuthService) { }
+
+    private getHeaders(): HttpHeaders {
+        const token = this.authService.getAccessToken();
+        return new HttpHeaders({
+            'Content-Type': 'application/json',
+            ...(token && { 'X-Authorization': token })
+        });
+    }
 
     getParts(): Observable<Part[]> {
         return this.httpClient.get<any>(this.apiUrl).pipe(
@@ -29,15 +38,15 @@ export class PartService {
     }
 
     createPart(payload: Partial<Part>): Observable<Part> {
-        return this.httpClient.post<Part>(this.apiUrl, payload);
+        return this.httpClient.post<Part>(this.apiUrl, payload, { headers: this.getHeaders() });
     }
 
     updatePart(partId: string, payload: Partial<Part>): Observable<Part> {
-        return this.httpClient.put<Part>(`${this.apiUrl}/${partId}`, payload);
+        return this.httpClient.put<Part>(`${this.apiUrl}/${partId}`, payload, { headers: this.getHeaders() });
     }
 
     deletePart(partId: string): Observable<void> {
-        return this.httpClient.delete<void>(`${this.apiUrl}/${partId}`);
+        return this.httpClient.delete<void>(`${this.apiUrl}/${partId}`, { headers: this.getHeaders() });
     }
 
     getRecentParts(limit: number = 10): Observable<Part[]> {

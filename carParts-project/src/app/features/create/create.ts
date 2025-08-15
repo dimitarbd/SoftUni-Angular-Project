@@ -31,14 +31,15 @@ export class CreateComponent {
     quantityErrorMessage: string = '';
     brandError: boolean = false;
     brandErrorMessage: string = '';
-    modelError: boolean = false;
-    modelErrorMessage: string = '';
+
     yearError: boolean = false;
     yearErrorMessage: string = '';
     ratingError: boolean = false;
     ratingErrorMessage: string = '';
 
     validateTitle(): void {
+        this.titleError = false;
+        this.titleErrorMessage = '';
         if (!this.formData.title) {
             this.titleError = true;
             this.titleErrorMessage = 'Title is required';
@@ -46,6 +47,8 @@ export class CreateComponent {
     }
 
     validatePrice(): void {
+        this.priceError = false;
+        this.priceErrorMessage = '';
         if (!this.formData.price) {
             this.priceError = true;
             this.priceErrorMessage = 'Price is required';
@@ -59,6 +62,8 @@ export class CreateComponent {
     }
 
     validateDescription(): void {
+        this.descriptionError = false;
+        this.descriptionErrorMessage = '';
         if (!this.formData.description) {
             this.descriptionError = true;
             this.descriptionErrorMessage = 'Description is required';
@@ -66,6 +71,8 @@ export class CreateComponent {
     }
 
     validateImageUrl(): void {
+        this.imageUrlError = false;
+        this.imageUrlErrorMessage = '';
         if (!this.formData.imageUrl) {
             this.imageUrlError = true;
             this.imageUrlErrorMessage = 'Image URL is required';
@@ -73,6 +80,8 @@ export class CreateComponent {
     }
 
     validateCategory(): void {
+        this.categoryError = false;
+        this.categoryErrorMessage = '';
         if (!this.formData.category) {
             this.categoryError = true;
             this.categoryErrorMessage = 'Category is required';
@@ -80,6 +89,8 @@ export class CreateComponent {
     }
 
     validateQuantity(): void {
+        this.quantityError = false;
+        this.quantityErrorMessage = '';
         if (!this.formData.quantity) {
             this.quantityError = true;
             this.quantityErrorMessage = 'Quantity is required';
@@ -93,20 +104,19 @@ export class CreateComponent {
     }
 
     validateBrand(): void {
+        this.brandError = false;
+        this.brandErrorMessage = '';
         if (!this.formData.brand) {
             this.brandError = true;
             this.brandErrorMessage = 'Brand is required';
         }
     }
 
-    validateModel(): void {
-        if (!this.formData.model) {
-            this.modelError = true;
-            this.modelErrorMessage = 'Model is required';
-        }
-    }
+
 
     validateYear(): void {
+        this.yearError = false;
+        this.yearErrorMessage = '';
         if (!this.formData.year) {
             this.yearError = true;
             this.yearErrorMessage = 'Year is required';
@@ -120,6 +130,8 @@ export class CreateComponent {
     }
 
     validateRating(): void {
+        this.ratingError = false;
+        this.ratingErrorMessage = '';
         if (!this.formData.rating) {
             this.ratingError = true;
             this.ratingErrorMessage = 'Rating is required';
@@ -133,7 +145,7 @@ export class CreateComponent {
     }
 
     isFormValid(): boolean {
-        return !this.titleError && !this.priceError && !this.descriptionError && !this.imageUrlError && !this.categoryError && !this.quantityError && !this.brandError && !this.modelError && !this.yearError && !this.ratingError;
+        return !this.titleError && !this.priceError && !this.descriptionError && !this.imageUrlError && !this.categoryError && !this.quantityError && !this.brandError && !this.yearError && !this.ratingError;
     }
 
     error = '';
@@ -145,7 +157,7 @@ export class CreateComponent {
         category: '',
         quantity: '',
         brand: '',
-        model: '',
+
         year: '',
         rating: ''
     };
@@ -168,7 +180,7 @@ export class CreateComponent {
         this.validateCategory();
         this.validateQuantity();
         this.validateBrand();
-        this.validateModel();
+
         this.validateYear();
         this.validateRating();
 
@@ -177,8 +189,14 @@ export class CreateComponent {
         }
 
         this.parts.createPart(this.formData).subscribe({
-            next: (created: any) => this.router.navigate(['/catalog', created._id, 'details']),
-            error: () => { }
+            next: (created: any) => {
+                console.log('Part created successfully:', created);
+                this.router.navigate(['/catalog', created._id, 'details']);
+            },
+            error: (error) => {
+                console.error('Error creating part:', error);
+                this.error = 'Failed to create part. Please try again.';
+            }
         });
     }
 }
