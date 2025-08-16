@@ -21,7 +21,7 @@ export class LoginComponent {
     constructor() {
         this.loginForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
+            password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern(/^[a-zA-Z0-9]+$/)]],
             rememberMe: [false]
         });
     }
@@ -65,6 +65,9 @@ export class LoginComponent {
         }
         if (this.password?.errors?.['maxlength'] && (this.password?.touched || this.password?.dirty)) {
             return `Password must be no more than ${this.password?.errors?.['maxlength'].requiredLength} characters long`;
+        }
+        if (this.password?.errors?.['pattern'] && (this.password?.touched || this.password?.dirty)) {
+            return 'Password must contain only English letters and numbers';
         }
         return '';
     }
