@@ -65,4 +65,35 @@ export class AuthService {
         return this._currentUser()?._id || null;
     }
 
+    updateAccount(userId: string, updateData: any): Observable<User> {
+        const token = this.getAccessToken();
+        const headers: any = {};
+        
+        if (token) {
+            headers['X-Authorization'] = token;
+        }
+        
+        console.log('UPDATE: Using users/update endpoint');
+        return this.httpClient.post<User>(`${this.apiUrl}/update`, updateData, { headers });
+    }
+
+    updateAccountSuccess(updatedUser: User): void {
+        const currentUser = this._currentUser();
+        if (currentUser && updatedUser) {
+            // Merge updated data with existing user data to preserve important fields like accessToken
+            const mergedUser: User = {
+                ...currentUser,
+                ...updatedUser,
+                // Ensure critical fields are preserved from current user if not in response
+                accessToken: updatedUser.accessToken || currentUser.accessToken
+            };
+            this._currentUser.set(mergedUser);
+            localStorage.setItem('currentUser', JSON.stringify(mergedUser));
+        } else if (updatedUser) {
+            this._currentUser.set(updatedUser);
+            localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+        }
+        // If updatedUser is null, do nothing to preserve current state
+    }
+
 }

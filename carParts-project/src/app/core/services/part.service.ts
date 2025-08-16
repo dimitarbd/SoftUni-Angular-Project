@@ -73,10 +73,9 @@ export class PartService {
     }
 
     getByOwner(userId: string): Observable<Part[]> {
-        const params = {
-            where: `_ownerId="${userId}"`
-        } as any;
-        return this.httpClient.get<any>(this.apiUrl, { params }).pipe(
+        const whereClause = `_ownerId="${userId}"`;
+        const encodedWhere = encodeURIComponent(whereClause);
+        return this.httpClient.get<any>(`${this.apiUrl}?where=${encodedWhere}`).pipe(
             map(response => Array.isArray(response) ? response : Object.values(response))
         );
     }
