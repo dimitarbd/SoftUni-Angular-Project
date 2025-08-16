@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SliderItemComponent } from '../slider-item/slider';
 import { CategoryFilterService } from '../../../core/services/category-filter.service';
 
 @Component({
     selector: 'app-slider-board',
     standalone: true,
-    imports: [NgFor, SliderItemComponent],
+    imports: [NgFor, SliderItemComponent, RouterLink],
     templateUrl: './slider-board.html',
     styleUrl: './slider-board.css'
 })
