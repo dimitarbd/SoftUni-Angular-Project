@@ -34,11 +34,11 @@ export class LoginComponent {
         return this.loginForm.get('password');
     }
 
-    get emailError(): boolean {
+    get isEmailValid(): boolean {
         return this.email?.invalid && (this.email?.touched || this.email?.dirty) || false;
     }
 
-    get passwordError(): boolean {
+    get isPasswordValid(): boolean {
         return this.password?.invalid && this.password?.touched || false;
     }
 
@@ -68,11 +68,6 @@ export class LoginComponent {
 
     error = signal<string | null>(null);
 
-
-
-    isFormValid(): boolean {
-        return this.loginForm.valid;
-    }
 
     onSubmit(): void {
         if (this.loginForm.valid) {
