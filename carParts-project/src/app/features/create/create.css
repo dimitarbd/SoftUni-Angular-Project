@@ -1,3 +1,23 @@
-/* Import page styles placeholder */
+/* Import page styles */
+
+/* Error input styling */
+.input-error {
+    border-color: red !important;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3) !important;
+}
+
+/* Disable hover effect when button is disabled */
+.uren-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #ccc !important;
+    border-color: #ccc !important;
+}
+
+.uren-btn:disabled:hover {
+    background-color: #ccc !important;
+    border-color: #ccc !important;
+    transform: none !important;
+}
 
 
