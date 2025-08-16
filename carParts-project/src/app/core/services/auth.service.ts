@@ -39,8 +39,8 @@ export class AuthService {
         localStorage.setItem('accessToken', user.accessToken || '');
     }
 
-    register(email: string, password: string): Observable<User> {
-        return this.httpClient.post<User>(`${this.apiUrl}/register`, { email, password });
+    register(firstName: string, lastName: string, email: string, password: string): Observable<User> {
+        return this.httpClient.post<User>(`${this.apiUrl}/register`, { firstName, lastName, email, password });
     }
 
     registerSuccess(user: User): void {

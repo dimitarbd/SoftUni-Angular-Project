@@ -1,18 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
-// Custom validator for password confirmation
-function passwordMatchValidator(control: AbstractControl): {[key: string]: any} | null {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-    
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-        return { 'passwordMismatch': true };
-    }
-    return null;
-}
+
 
 @Component({
     selector: 'app-register',
@@ -22,7 +13,7 @@ function passwordMatchValidator(control: AbstractControl): {[key: string]: any} 
     styleUrl: './register.css'
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements AfterViewInit {
 
     protected authService = inject(AuthService);
     private router = inject(Router);
@@ -33,22 +24,36 @@ export class RegisterComponent {
 
     constructor() {
         this.registerForm = this.formBuilder.group({
+            firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZаА-яЯ]+$/)]],
+            lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZаА-яЯ]+$/)]],
             email: ['', [Validators.required, Validators.email]],
             passwords: this.formBuilder.group({
                 password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern(/^[a-zA-Z0-9]+$/)]],
                 confirmPassword: ['', [Validators.required]]
-            }, { validators: passwordMatchValidator })
+            }, { validators: this.passwordMatchValidator.bind(this) })
         });
     }
 
-    private passwordMatchValidator(control: AbstractControl): {[key: string]: any} | null {
-        const password = control.get('password');
-        const confirmPassword = control.get('confirmPassword');
+    ngAfterViewInit(): void {
+        this.registerForm.updateValueAndValidity();
+    }
+
+    private passwordMatchValidator(passwordsControl: AbstractControl): {[key: string]: any} | null {
+        const password = passwordsControl.get('password');
+        const confirmPassword = passwordsControl.get('confirmPassword');
         
         if (password && confirmPassword && password.value !== confirmPassword.value) {
             return { 'passwordMismatch': true };
         }
         return null;
+    }
+
+    get firstName(): AbstractControl | null {
+        return this.registerForm.get('firstName');
+    }
+
+    get lastName(): AbstractControl | null {
+        return this.registerForm.get('lastName');
     }
 
     get email(): AbstractControl | null {
@@ -67,21 +72,61 @@ export class RegisterComponent {
         return this.registerForm.get('passwords') as FormGroup;
     }
 
-    get isEmailValid(): boolean {
+    get firstNameError(): boolean {
+        return this.firstName?.invalid && (this.firstName?.touched || this.firstName?.dirty) || false;
+    }
+
+    get lastNameError(): boolean {
+        return this.lastName?.invalid && (this.lastName?.touched || this.lastName?.dirty) || false;
+    }
+
+    get emailError(): boolean {
         return this.email?.invalid && (this.email?.touched || this.email?.dirty) || false;
     }
 
-    get isPasswordValid(): boolean {
+    get passwordError(): boolean {
         return this.password?.invalid && (this.password?.touched || this.password?.dirty) || false;
     }
 
-    get isConfirmPasswordValid(): boolean {
+    get confirmPasswordError(): boolean {
         const confirmPassword = this.confirmPassword;
         const passwordsGroup = this.passwordsGroup;
         const formError = passwordsGroup?.hasError('passwordMismatch') && 
                          (confirmPassword?.touched || confirmPassword?.dirty);
         const fieldError = confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty);
         return formError || fieldError || false;
+    }
+
+    get firstNameErrorMessage(): string | null {
+        if (this.firstName?.errors?.['required'] && (this.firstName?.touched || this.firstName?.dirty)) {
+            return 'First name is required';
+        }
+        if (this.firstName?.errors?.['minlength'] && (this.firstName?.touched || this.firstName?.dirty)) {
+            return `First name must be at least ${this.firstName?.errors?.['minlength'].requiredLength} characters long`;
+        }
+        if (this.firstName?.errors?.['maxlength'] && (this.firstName?.touched || this.firstName?.dirty)) {
+            return `First name must be no more than ${this.firstName?.errors?.['maxlength'].requiredLength} characters long`;
+        }
+        if (this.firstName?.errors?.['pattern'] && (this.firstName?.touched || this.firstName?.dirty)) {
+            return 'First name must contain only letters';
+        }
+        return '';
+    }
+
+    get lastNameErrorMessage(): string | null {
+        if (this.lastName?.errors?.['required'] && (this.lastName?.touched || this.lastName?.dirty)) {
+            return 'Last name is required';
+        }
+        if (this.lastName?.errors?.['minlength'] && (this.lastName?.touched || this.lastName?.dirty)) {
+            return `Last name must be at least ${this.lastName?.errors?.['minlength'].requiredLength} characters long`;
+        }
+        if (this.lastName?.errors?.['maxlength'] && (this.lastName?.touched || this.lastName?.dirty)) {
+            return `Last name must be no more than ${this.lastName?.errors?.['maxlength'].requiredLength} characters long`;
+        }
+        if (this.lastName?.errors?.['pattern'] && (this.lastName?.touched || this.lastName?.dirty)) {
+            return 'Last name must contain only letters';
+        }
+        return '';
     }
 
     get emailErrorMessage(): string | null {
@@ -128,16 +173,18 @@ export class RegisterComponent {
 
     onSubmit(): void {
         if (this.registerForm.valid) {
-            const { email, passwords } = this.registerForm.value;
+            const { firstName, lastName, email, passwords } = this.registerForm.value;
             const { password } = passwords;
 
-            this.authService.register(email, password).subscribe({
+            this.authService.register(firstName, lastName, email, password).subscribe({
                 next: (user) => {
                     this.authService.registerSuccess(user);
                     this.router.navigate(['/']);
                 },
                 error: (error) => {
-                    this.error.set('Registration failed. Please try again.');
+                    console.error('Registration error:', error);
+                    const errorMessage = error?.error?.message || error?.message || 'Registration failed. Please try again.';
+                    this.error.set(errorMessage);
                     this.markFormGroupTouched(this.registerForm);
                 }
             });

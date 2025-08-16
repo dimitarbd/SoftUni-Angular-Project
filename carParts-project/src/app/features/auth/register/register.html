@@ -1,88 +1,126 @@
 <div class="breadcrumb-area">
-  <div class="container">
-    <div class="breadcrumb-content">
-      <h2>Other</h2>
-      <ul>
-        <li><a routerLink="/">Home</a></li>
-        <li class="active">Login & Register</li>
-      </ul>
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2>Other</h2>
+            <ul>
+                <li><a routerLink="/">Home</a></li>
+                <li class="active">Login & Register</li>
+            </ul>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="uren-login-register_area">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-          <div class="login-form">
-            <h4 class="login-title">Register</h4>
-            <div class="row">
-              <div class="col-md-12 col-12">
-                <label>Email Address*</label>
-                <input  
-                  [class.input-error]="!isEmailValid"
-                  type="email" 
-                  id="email"
-                  name="email"
-                  placeholder="Email Address" 
-                  formControlName="email"/>
-                </div>
-                @if (!isEmailValid) {
-                  <p class="col-12" style="color: red">{{ emailErrorMessage }}</p>
-                }
-              
-              <div formGroupName="passwords">
-                <div class="col-12 mb--20">
-                  <label>Password</label>
-                  <input 
-                    [class.input-error]="!isPasswordValid"
-                    type="password" 
-                    id="password"
-                    name="password"
-                    placeholder="Password" 
-                    formControlName="password"/>
-                </div>
-                @if (!isPasswordValid) {
-                  <p class="col-12" style="color: red">{{ passwordErrorMessage }}</p>
-                }
-                
-                <div class="col-12 mb--20">
-                  <label>Confirm Password</label>
-                  <input 
-                    [class.input-error]="isConfirmPasswordValid"
-                    type="password" 
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    placeholder="Confirm Password" 
-                    formControlName="confirmPassword"/>
-                </div>
-              </div>
-              @if (!isConfirmPasswordValid) {
-                <p class="col-12" style="color: red">{{ confirmPasswordErrorMessage }}</p>
-              }
-              
-              @if (error()) {
-                <div class="col-12">
-                  <p style="color: red">{{ error() }}</p>
-                </div>
-              }
-              
-              <div class="col-md-4 mt-3">
-                <div class="forgotton-password_info">
-                  <a routerLink="/login">Already have an account?</a>
-                </div>
-              </div>
-              
-              <div class="col-md-12">
-                <button class="uren-register_btn" [disabled]="!isFormReady">Register</button>
-              </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="login-form">
+                        <h4 class="login-title">Register</h4>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <label>First Name*</label>
+                                <input 
+                                [class.input-error]="firstNameError"
+                                type="text" 
+                                id="firstName"
+                                name="firstName"
+                                placeholder="First Name" 
+                                formControlName="firstName"/>
+                                @if (firstNameError) {
+                                <p class="col-12" style="color: red; margin-top: -15px;">{{ firstNameErrorMessage }}</p>
+                                }
+                            </div>
+                            
+                            <div class="col-md-6 col-12">
+                                <label>Last Name*</label>
+                                <input 
+                                [class.input-error]="lastNameError"
+                                type="text" 
+                                id="lastName"
+                                name="lastName"
+                                placeholder="Last Name" 
+                                formControlName="lastName"/>
+                                @if (lastNameError) {
+                                <p class="col-12" style="color: red; margin-top: -15px;">{{ lastNameErrorMessage }}</p>
+                                }
+                            </div>
+                            
+                            <div class="col-md-12 col-12 mt-3">
+                                <label>Email Address*</label>
+                                <input 
+                                [class.input-error]="emailError" 
+                                type="email" 
+                                id="email" 
+                                name="email"                                    
+                                placeholder="Email Address" 
+                                formControlName="email" />
+                                @if (emailError) {
+                                <p class="col-12" style="color: red">{{ emailErrorMessage }}</p>
+                                }
+                            </div>
+
+                            <div formGroupName="passwords" class="col-12">
+                                <div class="row">
+                                    <div class="col-md-6 mb--20">
+                                        <label>Password</label>
+                                        <input 
+                                        [class.input-error]="passwordError" 
+                                        type="password" 
+                                        id="password"                                            
+                                        name="password" 
+                                        placeholder="Password" 
+                                        formControlName="password" />
+                                    </div>
+
+                                    <div class="col-md-6 mb--20">
+                                        <label>Confirm Password</label>
+                                        <input 
+                                        [class.input-error]="confirmPasswordError" 
+                                        type="password"                                            
+                                        id="confirmPassword" 
+                                        name="confirmPassword" 
+                                        placeholder="Confirm Password"                                            
+                                        formControlName="confirmPassword" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    @if (passwordError) {
+                                    <div class="col-md-6">
+                                        <p style="color: red; margin-top: -15px;">{{ passwordErrorMessage }}</p>
+                                    </div>
+                                    }
+
+                                    @if (confirmPasswordError) {
+                                    <div class="col-md-6">
+                                        <p style="color: red; margin-top: -15px;">{{ confirmPasswordErrorMessage }}</p>
+                                    </div>
+                                    }
+                                    
+                                </div>
+                            </div>
+
+                            @if (error()) {
+                            <div class="col-12">
+                                <p style="color: red">{{ error() }}</p>
+                            </div>
+                            }
+
+                            <div class="col-md-4 mt-3">
+                                <div class="forgotton-password_info">
+                                    <a routerLink="/login">Already have an account?</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <button class="uren-register_btn" [disabled]="!isFormReady">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
-
-

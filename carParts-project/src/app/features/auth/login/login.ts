@@ -89,7 +89,9 @@ export class LoginComponent {
                     this.router.navigate(['/']);
                 },
                 error: (error) => {
-                    this.error.set('Invalid email or password');
+                    console.error('Login error:', error);
+                    const errorMessage = error?.error?.message || error?.message || 'Invalid email or password';
+                    this.error.set(errorMessage);
                     this.markFormGroupTouched(this.loginForm);
                 }
             });
