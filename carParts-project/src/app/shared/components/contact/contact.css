@@ -1,0 +1,71 @@
+/* Contact page styles */
+.contact-page-title { 
+  margin-bottom: 10px; 
+}
+
+/* Add spacing between header and map */
+.contact-main-page {
+  padding-top: 60px; /* Space from header */
+}
+
+/* Map container styling with custom margins */
+.map-container {
+  margin-bottom: 30px;
+  margin-left: 75px;   /* 75px space from left */
+  margin-right: 75px;  /* 75px space from right */
+  padding: 0;
+}
+
+/* Container fluid spacing */
+.contact-main-page .container-fluid {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Contact info section spacing */
+.contact-page-side-content {
+  padding: 40px 20px;
+}
+
+/* Responsive map styling */
+@media (max-width: 768px) {
+  .contact-main-page {
+    padding-top: 40px; /* Less spacing on mobile */
+  }
+  
+  .map-container {
+    margin-bottom: 20px;
+    margin-left: 40px;   /* Reduced margins for tablets */
+    margin-right: 40px;
+  }
+  
+  .contact-page-side-content {
+    padding: 20px 15px;
+  }
+  
+  .contact-main-page .container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-main-page {
+    padding-top: 30px; /* Even less spacing on very small screens */
+  }
+  
+  .map-container {
+    margin-left: 20px;   /* Smaller margins for mobile */
+    margin-right: 20px;
+  }
+}
+
+/* Very small screens - minimum margins */
+@media (max-width: 480px) {
+  .map-container {
+    margin-left: 10px;   /* Minimal margins for very small screens */
+    margin-right: 10px;
+  }
+}
+
+

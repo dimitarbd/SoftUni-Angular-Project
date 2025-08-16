@@ -1,0 +1,23 @@
+<div class="google-maps-container" 
+     [style.width]="width" 
+     [style.height]="height">
+  
+  <google-map
+    #mapContainer
+    [height]="height"
+    [width]="width"
+    [zoom]="zoom"
+    [center]="center"
+    [options]="mapOptions"
+    (mapClick)="onMapClick($event)">
+    
+    <map-marker 
+      [position]="center"
+      [title]="markerTitle"
+      [options]="markerOptions"
+      (mapClick)="onMarkerClick($event)">
+    </map-marker>
+    
+  </google-map>
+  
+</div>
