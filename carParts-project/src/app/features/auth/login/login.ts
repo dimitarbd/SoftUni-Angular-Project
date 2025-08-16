@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
@@ -14,70 +14,92 @@ export class LoginComponent {
 
     protected authService = inject(AuthService);
     private router = inject(Router);
+    private formBuilder = inject(FormBuilder);
 
-    email: string = '';
-    password: string = '';
-    rememberMe: boolean = false;
-    passwordError: boolean = false;
-    emailError: boolean = false;
-    emailErrorMessage: string = '';
-    passwordErrorMessage: string = '';
-    error = signal<string>('');
+    loginForm: FormGroup;
 
-    validateEmail(): void {
-        if (!this.email) {
-            this.emailError = true;
-            this.emailErrorMessage = 'Email is required';
-        } else if (!this.isEmailValid(this.email)) {
-            this.emailError = true;
-            this.emailErrorMessage = 'Invalid email';
-        } else {
-            this.emailError = false;
-            this.emailErrorMessage = '';
+    constructor() {
+        this.loginForm = this.formBuilder.group({
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
+            rememberMe: [false]
+        });
+    }
+
+    get email() {
+        return this.loginForm.get('email');
+    }
+
+    get password() {
+        return this.loginForm.get('password');
+    }
+
+    get emailError(): boolean {
+        return this.email?.invalid && (this.email?.touched || this.email?.dirty) || false;
+    }
+
+    get passwordError(): boolean {
+        return this.password?.invalid && this.password?.touched || false;
+    }
+
+    get rememberMe() {
+        return this.loginForm.get('rememberMe');
+    }
+
+    get emailErrorMessage(): string | null {
+        if (this.email?.errors?.['required'] && this.email?.touched) {
+            return 'Email is required';
         }
-    }
-
-    private isEmailValid(email: string): boolean {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-
-    validatePassword(): void {
-        this.passwordError = false;
-        this.passwordErrorMessage = '';
-
-        if (!this.password) {
-            this.passwordError = true;
-            this.passwordErrorMessage = 'Password is required';
-        } else if (this.password.length < 4) {
-            this.passwordError = true;
-            this.passwordErrorMessage = 'Password must be at least 4 characters long';
-        } else {
-            this.passwordError = false;
-            this.passwordErrorMessage = '';
+        if (this.email?.errors?.['email'] && this.email?.touched) {
+            return 'Invalid email';
         }
+        return '';
     }
+
+    get passwordErrorMessage(): string | null {
+        if (this.password?.errors?.['required'] && this.password?.touched) {
+            return 'Password is required';
+        }
+        if (this.password?.errors?.['minlength'] && this.password?.touched) {
+            return `Password must be at least ${this.password?.errors?.['minlength'].requiredLength} characters long`;
+        }
+        return '';
+    }
+
+    error = signal<string | null>(null);
+
+
 
     isFormValid(): boolean {
-        return Boolean(this.email) && Boolean(this.password) && !this.emailError && !this.passwordError;
+        return this.loginForm.valid;
     }
 
     onSubmit(): void {
-        this.validateEmail();
-        this.validatePassword();
+        if (this.loginForm.valid) {
 
-        if (!this.isFormValid()) {
-            return;
+            const { email, password } = this.loginForm.value;
+
+            this.authService.login(email, password).subscribe({
+                next: (user) => {
+                    this.authService.loginSuccess(user);
+                    this.router.navigate(['/']);
+                },
+                error: (error) => {
+                    this.error.set('Invalid email or password');
+                    this.markFormGroupTouched(this.loginForm);
+                }
+            });
+
         }
+    }
 
-        this.authService.login(this.email, this.password).subscribe({
-            next: (user) => {
-                this.authService.loginSuccess(user);
-                this.router.navigate(['/']);
-            },
-            error: (error) => {
-                console.error('Login failed:', error);
-                this.error.set('Invalid email or password');
+    private markFormGroupTouched(formGroup: FormGroup) {
+        Object.keys(this.loginForm.controls).forEach(key => {
+            const control = this.loginForm.get(key);
+            if (control instanceof FormGroup) {
+                this.markFormGroupTouched(control);
+            } else {
+                control?.markAsTouched();
             }
         });
     }

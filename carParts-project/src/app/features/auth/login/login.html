@@ -14,27 +14,37 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6">
-                <form (ngSubmit)="onSubmit()">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="login-form">
                         <h4 class="login-title">Login</h4>
                         <div class="row">
                             <div class="col-md-12 col-12">
                                 <label>Email Address*</label>
 
-                                <input type="email" name="email" id="email" placeholder="Email Address"
-                                    [(ngModel)]="email" (blur)="validateEmail()" />
+                                <input 
+                                [class.input-error]="emailError"
+                                type="email" 
+                                name="email" 
+                                id="email" 
+                                placeholder="Email Address"
+                                formControlName="email"/>
                             </div>
-                            @if (emailError) {
+                            @if (emailErrorMessage) {
                             <p style="color: red">{{ emailErrorMessage }}</p>
                             }
 
                             <div class="col-12 mb--20">
                                 <label>Password</label>
 
-                                <input type="password" name="password" id="password" [(ngModel)]="password"
-                                    placeholder="Password" (blur)="validatePassword()" />
+                                <input 
+                                [class.input-error]="passwordErrorMessage"
+                                type="password" 
+                                name="password" 
+                                id="password" 
+                                placeholder="Password"
+                                    formControlName="password"/>
                             </div>
-                            @if (passwordError) {
+                            @if (passwordErrorMessage) {
                             <p style="color: red">{{ passwordErrorMessage }}</p>
                             }
                             <div class="col-md-8">

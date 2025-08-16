@@ -24,9 +24,7 @@ export class AuthService {
     }
 
 
-    /** Compatibility helper for guards/components expecting a boolean method */
     isLoggedIn(): boolean {
-        // Use current user presence to avoid calling a potentially shadowed signal function
         return this._currentUser() != null;
     }
 
