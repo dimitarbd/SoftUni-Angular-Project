@@ -204,12 +204,11 @@ export class CreateComponent {
             const formData = this.createForm.value;
 
             this.parts.createPart(formData).subscribe({
-                next: (created: any) => {
-                    console.log('Part created successfully:', created);
-                    this.router.navigate(['/catalog', created._id, 'details']);
-                },
-                error: (error) => {
-                    console.error('Error creating part:', error);
+            next: (created: any) => {
+                this.router.navigate(['/catalog', created._id, 'details']);
+            },
+            error: (error) => {
+                console.error('Error creating part:', error);
                     const errorMessage = error?.error?.message || error?.message || 'Failed to create part. Please try again.';
                     this.error.set(errorMessage);
                     this.markFormGroupTouched(this.createForm);

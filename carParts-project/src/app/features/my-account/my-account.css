@@ -1,3 +1,102 @@
-/* My Account styles placeholder */
+/* My Account styles */
+
+/* Error input styling */
+.input-error {
+    border-color: red !important;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3) !important;
+}
+
+/* Disable hover effect when button is disabled */
+.uren-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #ccc !important;
+    border-color: #ccc !important;
+}
+
+.uren-btn:disabled:hover {
+    background-color: #ccc !important;
+    border-color: #ccc !important;
+    transform: none !important;
+}
+
+/* Alert styles */
+.alert {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+/* Work with original theme classes */
+/* Name fields row container */
+.name-fields-row {
+    display: flex !important;
+    gap: 15px !important;
+    margin-bottom: 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* single-input-half elements should be 50% width and side by side */
+.uren-form .name-fields-row .single-input.single-input-half {
+    flex: 1 1 50% !important;
+    width: 50% !important;
+    max-width: calc(50% - 7.5px) !important;
+    min-width: calc(50% - 7.5px) !important;
+    display: block !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    vertical-align: top !important;
+    box-sizing: border-box !important;
+}
+
+/* Fallback for other single-input-half elements not in name-fields-row */
+.uren-form .single-input.single-input-half:not(.name-fields-row .single-input) {
+    width: 48% !important;
+    display: inline-block !important;
+    margin-right: 4% !important;
+    vertical-align: top !important;
+}
+
+.uren-form .single-input.single-input-half:nth-child(even):not(.name-fields-row .single-input) {
+    margin-right: 0 !important;
+}
+
+/* Full width inputs within their containers */
+.uren-form .single-input input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Full width for regular single-input (not half) */
+.uren-form .single-input:not(.single-input-half) {
+    width: 100% !important;
+    display: block !important;
+    margin-bottom: 20px !important;
+}
+
+/* Ensure passwords group inputs are full width */
+.uren-form [formGroupName="passwords"] .single-input {
+    width: 100% !important;
+    display: block !important;
+}
+
+.uren-form [formGroupName="passwords"] .single-input input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
 
 

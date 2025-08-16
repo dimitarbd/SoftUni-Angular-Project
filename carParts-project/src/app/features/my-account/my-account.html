@@ -17,23 +17,38 @@
         <div class="col-lg-3">
           <ul class="nav myaccount-tab-trigger" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" href="#account-dashboard">Dashboard</a>
+              <a class="nav-link" 
+                 [class.active]="activeTab() === 'dashboard'"
+                 (click)="setActiveTab('dashboard')" 
+                 href="javascript:void(0)">Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#account-offers">My Offers</a>
+              <a class="nav-link" 
+                 [class.active]="activeTab() === 'offers'"
+                 (click)="setActiveTab('offers')" 
+                 href="javascript:void(0)">My Offers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" 
+                 [class.active]="activeTab() === 'details'"
+                 (click)="setActiveTab('details')" 
+                 href="javascript:void(0)">Account Details</a>
             </li>
           </ul>
         </div>
         <div class="col-lg-9">
           <div class="tab-content myaccount-tab-content">
-            <div id="account-dashboard" class="tab-pane active show">
-              <div class="myaccount-dashboard">
-                <p>Hello <b>{{ currentUser()?.email }}! (<a routerLink="/login" (click)="logout()">Logout</a>)</b></p>
-                <p>From your account dashboard you can view your created offers.</p>
+            @if (activeTab() === 'dashboard') {
+              <div id="account-dashboard" class="tab-pane active show">
+                <div class="myaccount-dashboard">
+                  <p>Hello <b>{{ currentUser()?.firstName }} {{ currentUser()?.lastName }}! (<a routerLink="/login" (click)="logout()">Logout</a>)</b></p>
+                  <p>From your account dashboard you can view your created offers.</p>
+                </div>
               </div>
-            </div>
-            <div id="account-offers" class="tab-pane">
-              <div class="myaccount-offers">
+            }
+            @if (activeTab() === 'offers') {
+              <div id="account-offers" class="tab-pane active show">
+                <div class="myaccount-offers">
                 <h4 class="small-title">MY OFFERS</h4>
                 @if (loading) {
                   <app-ring-spinner 
@@ -77,8 +92,87 @@
                   </div>
                 </div>
                 }
+                </div>
               </div>
-            </div>
+            }
+            @if (activeTab() === 'details') {
+              <div id="account-details" class="tab-pane active show">
+                <div class="myaccount-details">
+                <h4 class="small-title">ACCOUNT DETAILS</h4>
+                
+                @if (updateSuccess()) {
+                  <div class="alert alert-success" role="alert">
+                    {{ updateSuccess() }}
+                  </div>
+                }
+                
+                @if (updateError()) {
+                  <div class="alert alert-danger" role="alert">
+                    {{ updateError() }}
+                  </div>
+                }
+                
+                <form [formGroup]="accountDetailsForm" (ngSubmit)="onUpdateAccount()" class="uren-form">
+                  <div class="uren-form-inner">
+                    <div class="name-fields-row">
+                      <div class="single-input single-input-half">
+                        <label for="account-details-firstname">First Name*</label>
+                        <input 
+                          [class.input-error]="firstNameError"
+                          type="text" 
+                          id="account-details-firstname"
+                          formControlName="firstName"
+                          placeholder="Enter your first name">
+                        @if (firstNameError) {
+                          <p style="color: red; margin-top: 5px;">{{ firstNameErrorMessage }}</p>
+                        }
+                      </div>
+                      <div class="single-input single-input-half">
+                        <label for="account-details-lastname">Last Name*</label>
+                        <input 
+                          [class.input-error]="lastNameError"
+                          type="text" 
+                          id="account-details-lastname"
+                          formControlName="lastName"
+                          placeholder="Enter your last name">
+                        @if (lastNameError) {
+                          <p style="color: red; margin-top: 5px;">{{ lastNameErrorMessage }}</p>
+                        }
+                      </div>
+                    </div>
+                    
+                    <div class="single-input">
+                      <label for="account-details-email">Email*</label>
+                      <input 
+                        [class.input-error]="emailError"
+                        type="email" 
+                        id="account-details-email"
+                        formControlName="email"
+                        placeholder="Enter your email address">
+                      @if (emailError) {
+                        <p style="color: red; margin-top: 5px;">{{ emailErrorMessage }}</p>
+                      }
+                    </div>
+                    
+                    <div class="single-input">
+                      <button 
+                        class="uren-btn uren-btn_dark" 
+                        type="submit" 
+                        [disabled]="!isFormReady || updating()">
+                        <span>
+                          @if (updating()) {
+                            UPDATING...
+                          } @else {
+                            SAVE CHANGES
+                          }
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+                </div>
+              </div>
+            }
           </div>
         </div>
       </div>
