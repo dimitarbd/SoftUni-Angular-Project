@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -27,11 +27,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     searchTerm = '';
     isCategoriesOpen = false;
+    isMyAccountDropdownOpen = false;
     categories: string[] = [];
     private categoriesSubscription?: Subscription;
 
   toggleCategories(): void {
     this.isCategoriesOpen = !this.isCategoriesOpen;
+  }
+
+  toggleMyAccountDropdown(): void {
+    this.isMyAccountDropdownOpen = !this.isMyAccountDropdownOpen;
   }
 
   logout(): void {
@@ -84,5 +89,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     // Close the categories menu
     this.isCategoriesOpen = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const target = event.target as HTMLElement;
+    
+    // Close my account dropdown if clicked outside
+    if (!target.closest('.dropdown-holder')) {
+      this.isMyAccountDropdownOpen = false;
+    }
+    
+    // Close categories dropdown if clicked outside
+    if (!target.closest('.category-menu')) {
+      this.isCategoriesOpen = false;
+    }
   }
 }

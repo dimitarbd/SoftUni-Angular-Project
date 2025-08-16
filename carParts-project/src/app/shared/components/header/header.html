@@ -87,7 +87,21 @@
                         <div class="ht-menu">
                             <ul>
                                 @if(isLoggedIn()) {
-                                    <li><a routerLink="/my-account"><span class="fa fa-user"></span> <span>My Account</span><i class="fa fa-chevron-down"></i></a>
+                                    <li class="dropdown-holder">
+                                        <a href="javascript:void(0)" 
+                                           (click)="toggleMyAccountDropdown()" 
+                                           [attr.aria-expanded]="isMyAccountDropdownOpen">
+                                            <span class="fa fa-user"></span> 
+                                            <span>My Account</span>
+                                            <i class="fa fa-chevron-down"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" [class.show]="isMyAccountDropdownOpen">
+                                            <li><a routerLink="/my-account" (click)="isMyAccountDropdownOpen = false">Dashboard</a></li>
+                                            <li><a routerLink="/my-account" [queryParams]="{tab: 'offers'}" (click)="isMyAccountDropdownOpen = false">My Offers</a></li>
+                                            <li><a routerLink="/my-account" [queryParams]="{tab: 'details'}" (click)="isMyAccountDropdownOpen = false">Account Details</a></li>
+                                            <li><a routerLink="/logout" (click)="logout(); isMyAccountDropdownOpen = false">Logout</a></li>
+                                        </ul>
+                                    </li>
                                 } 
                             </ul>
                         </div>
@@ -177,24 +191,7 @@
                 <nav class="offcanvas-navigation">
                     <ul class="mobile-menu">
                         <li class="menu-item-has-children active"><a href="index.html"><span
-                                class="mm-text">Home</span></a>
-                            <!-- <ul class="sub-menu">
-                                <li>
-                                    <a href="index.html">
-                                        <span class="mm-text">Home One</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index-2.html">
-                                        <span class="mm-text">Home Two</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="index-3.html">
-                                        <span class="mm-text">Home Three</span>
-                                    </a>
-                                </li>
-                            </ul> -->
+                                class="mm-text">Home</span></a>                           
                         </li>
                         <li class="menu-item-has-children">
                             <a routerLink="/catalog">
@@ -212,67 +209,7 @@
                             </a>
                         </li>     
                     </ul>
-                </nav>
-                <!-- Removed legacy user-setting mobile menu to fix invalid closing tags
-                <ul class="mobile-menu">
-                        <li class="menu-item-has-children active"><a href="javascript:void(0)"><span
-                                class="mm-text">User
-                                Setting</span></a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="my-account.html">
-                                        <span class="mm-text">My Account</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="login-register.html">
-                                        <span class="mm-text">Login | Register</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children"><a href="javascript:void(0)"><span
-                                class="mm-text">Currency</span></a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span class="mm-text">EUR €</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span class="mm-text">USD $</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children"><a href="javascript:void(0)"><span
-                                class="mm-text">Language</span></a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span class="mm-text">English</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span class="mm-text">Français</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span class="mm-text">Romanian</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">
-                                        <span class="mm-text">Japanese</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                </ul>
-                -->
+                </nav>               
             </div>
         </div>
     </div>

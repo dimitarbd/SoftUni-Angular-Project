@@ -74,6 +74,10 @@
         return async function handler(req, res) {
             const method = req.method;
             console.info(`<< ${req.method} ${req.url}`);
+            if (req.method === 'PUT' && req.url.includes('/users/')) {
+                console.log('DEBUG: User update request detected');
+                console.log('DEBUG: Headers:', req.headers);
+            }
 
             // Redirect fix for admin panel relative paths
             if (req.url.slice(-6) == '/admin') {
@@ -356,7 +360,8 @@
         },
         put: (context, tokens, query, body) => {
             tokens = [context.params.collection, ...tokens];
-            console.log('Request body:\n', body);
+            console.log('PUT Request body:\n', body);
+            console.log('PUT Tokens:', tokens);
 
             let responseData = data;
             for (let token of tokens.slice(0, -1)) {
@@ -364,10 +369,29 @@
                     responseData = responseData[token];
                 }
             }
+            
+            console.log('PUT Response data before update:', responseData);
+            console.log('PUT Target token:', tokens.slice(-1));
+            console.log('PUT Existing data:', responseData[tokens.slice(-1)]);
+            
             if (responseData !== undefined && responseData[tokens.slice(-1)] !== undefined) {
-                responseData[tokens.slice(-1)] = body;
+                // Merge new data with existing data to preserve important fields
+                const existingData = responseData[tokens.slice(-1)];
+                const updatedData = Object.assign({}, existingData, body, {
+                    _id: existingData._id, // Preserve ID
+                    _createdOn: existingData._createdOn, // Preserve creation date
+                    _updatedOn: Date.now() // Update modification date
+                });
+                
+                responseData[tokens.slice(-1)] = updatedData;
+                console.log('PUT Updated data:', updatedData);
+                console.log('PUT Data after assignment:', responseData[tokens.slice(-1)]);
+                
+                return updatedData;
+            } else {
+                console.log('PUT ERROR: Target not found');
+                return null;
             }
-            return responseData[tokens.slice(-1)];
         },
         patch: (context, tokens, query, body) => {
             tokens = [context.params.collection, ...tokens];
@@ -427,6 +451,7 @@
     userService.get('me', getSelf);
     userService.post('register', onRegister);
     userService.post('login', onLogin);
+    userService.post('update', onUpdateUser);
     userService.get('logout', onLogout);
 
 
@@ -446,6 +471,54 @@
 
     function onLogin(context, tokens, query, body) {
         return context.auth.login(body);
+    }
+
+    function onUpdateUser(context, tokens, query, body) {
+        try {
+            console.log('onUpdateUser called with body:', body);
+            
+            if (!context.user) {
+                console.log('ERROR: No user in context');
+                throw new AuthorizationError$1();
+            }
+
+            const currentUser = context.user;
+            console.log('Current user:', currentUser._id);
+            
+            // Get current user data from storage
+            const storedUser = context.protectedStorage.get('users', currentUser._id);
+            if (!storedUser) {
+                console.log('ERROR: User not found in storage');
+                throw new RequestError$2('User not found');
+            }
+            
+            console.log('Stored user before update:', storedUser);
+            
+            // Update user data
+            const updatedData = {
+                ...storedUser,
+                firstName: body.firstName,
+                lastName: body.lastName,
+                email: body.email,
+                _updatedOn: Date.now()
+            };
+            
+            console.log('Updated data to save:', updatedData);
+            
+            // Save to storage
+            const result = context.protectedStorage.set('users', currentUser._id, updatedData);
+            console.log('Storage update result:', result);
+            
+            // Remove sensitive data from response
+            const response = Object.assign({}, result);
+            delete response.hashedPassword;
+            
+            console.log('Returning response:', response);
+            return response;
+        } catch (error) {
+            console.error('ERROR in onUpdateUser:', error);
+            throw error;
+        }
     }
 
     function onLogout(context, tokens, query, body) {
@@ -1101,14 +1174,20 @@
             function register(body) {
                 if (body.hasOwnProperty(identity) === false ||
                     body.hasOwnProperty('password') === false ||
+                    body.hasOwnProperty('firstName') === false ||
+                    body.hasOwnProperty('lastName') === false ||
                     body[identity].length == 0 ||
-                    body.password.length == 0) {
+                    body.password.length == 0 ||
+                    body.firstName.length == 0 ||
+                    body.lastName.length == 0) {
                     throw new RequestError$2('Missing fields');
                 } else if (context.protectedStorage.query('users', { [identity]: body[identity] }).length !== 0) {
                     throw new ConflictError$1(`A user with the same ${identity} already exists`);
                 } else {
                     const newUser = Object.assign({}, body, {
                         [identity]: body[identity],
+                        firstName: body.firstName,
+                        lastName: body.lastName,
                         hashedPassword: hash(body.password)
                     });
                     const result = context.protectedStorage.add('users', newUser);
@@ -1330,16 +1409,22 @@
             "35c62d76-8152-4626-8712-eeb96381bea8": {
                 email: "peter@abv.bg",
                 username: "Peter",
+                firstName: "Peter",
+                lastName: "Petrov",
                 hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "847ec027-f659-4086-8032-5173e2f9c93a": {
                 email: "george@abv.bg",
                 username: "George",
+                firstName: "George",
+                lastName: "Georgiev",
                 hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
             },
             "60f0cf0b-34b0-4abd-9769-8c42f830dffc": {
                 email: "admin@abv.bg",
                 username: "Admin",
+                firstName: "Admin",
+                lastName: "Adminov",
                 hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302"
             }
         },
@@ -2024,7 +2109,9 @@
             ".read": [
                 "Owner"
             ],
-            ".update": false,
+            ".update": [
+                "Owner"
+            ],
             ".delete": false
         },
         members: {
