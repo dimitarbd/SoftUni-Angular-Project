@@ -34,12 +34,12 @@ export class LoginComponent {
         return this.loginForm.get('password');
     }
 
-    get isEmailValid(): boolean {
+    get emailError(): boolean {
         return this.email?.invalid && (this.email?.touched || this.email?.dirty) || false;
     }
 
-    get isPasswordValid(): boolean {
-        return this.password?.invalid && this.password?.touched || false;
+    get passwordError(): boolean {
+        return this.password?.invalid && (this.password?.touched || this.password?.dirty) || false;
     }
 
     get rememberMe() {
@@ -47,27 +47,36 @@ export class LoginComponent {
     }
 
     get emailErrorMessage(): string | null {
-        if (this.email?.errors?.['required'] && this.email?.touched) {
+        if (this.email?.errors?.['required'] && (this.email?.touched || this.email?.dirty)) {
             return 'Email is required';
         }
-        if (this.email?.errors?.['email'] && this.email?.touched) {
+        if (this.email?.errors?.['email'] && (this.email?.touched || this.email?.dirty)) {
             return 'Invalid email';
         }
         return '';
     }
 
     get passwordErrorMessage(): string | null {
-        if (this.password?.errors?.['required'] && this.password?.touched) {
+        if (this.password?.errors?.['required'] && (this.password?.touched || this.password?.dirty)) {
             return 'Password is required';
         }
-        if (this.password?.errors?.['minlength'] && this.password?.touched) {
+        if (this.password?.errors?.['minlength'] && (this.password?.touched || this.password?.dirty)) {
             return `Password must be at least ${this.password?.errors?.['minlength'].requiredLength} characters long`;
+        }
+        if (this.password?.errors?.['maxlength'] && (this.password?.touched || this.password?.dirty)) {
+            return `Password must be no more than ${this.password?.errors?.['maxlength'].requiredLength} characters long`;
         }
         return '';
     }
 
     error = signal<string | null>(null);
 
+    get isFormReady(): boolean {
+        const email = this.email?.value;
+        const password = this.password?.value;
+        
+        return !!(email && password && this.loginForm.valid);
+    }
 
     onSubmit(): void {
         if (this.loginForm.valid) {

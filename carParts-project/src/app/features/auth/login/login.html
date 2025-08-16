@@ -22,14 +22,14 @@
                                 <label>Email Address*</label>
 
                                 <input 
-                                [class.input-error]="isEmailValid"
+                                [class.input-error]="emailError"
                                 type="email" 
                                 id="email" 
                                 name="email"
                                 placeholder="Email Address"
                                 formControlName="email"/>
                             </div>
-                            @if (isEmailValid) {
+                            @if (emailError) {
                             <p class="col-12" style="color: red">{{ emailErrorMessage }}</p>
                             }
 
@@ -37,21 +37,21 @@
                                 <label>Password</label>
 
                                 <input 
-                                [class.input-error]="isPasswordValid"
+                                [class.input-error]="passwordError"
                                 type="password" 
                                 id="password" 
                                 name="password"
                                 placeholder="Password"
                                 formControlName="password"/>
                             </div>
-                            @if (isPasswordValid) {
+                            @if (passwordError) {
                             <p class="col-12" style="color: red">{{ passwordErrorMessage }}</p>
                             }
                             <br>
                             <div class="col-md-8">
                                 <div class="check-box">
-                                    <input type="checkbox" id="remember_me" name="rememberMe"
-                                        [(ngModel)]="rememberMe" />
+                                    <input type="checkbox" id="remember_me" 
+                                        formControlName="rememberMe" />
                                     <label for="remember_me">Remember me</label>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                             }
 
                             <div class="col-md-12">
-                                <button class="uren-login_btn" [disabled]="loginForm.invalid">Login</button>
+                                <button class="uren-login_btn" [disabled]="!isFormReady">Login</button>
                             </div>
                         </div>
                     </div>
