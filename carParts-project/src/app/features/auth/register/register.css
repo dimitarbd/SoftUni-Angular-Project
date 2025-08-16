@@ -7,3 +7,17 @@
 	justify-content: center;
 }
 
+/* Disable hover effect when button is disabled */
+.uren-register_btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	background-color: #ccc !important;
+	border-color: #ccc !important;
+}
+
+.uren-register_btn:disabled:hover {
+	background-color: #ccc !important;
+	border-color: #ccc !important;
+	transform: none !important;
+}
+

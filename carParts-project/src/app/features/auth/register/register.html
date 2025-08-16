@@ -14,53 +14,66 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
-        <form (ngSubmit)="onSubmit()">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <div class="login-form">
             <h4 class="login-title">Register</h4>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 col-12">
                 <label>Email Address*</label>
-                <input type="email" 
-                id="email"
-                placeholder="Email Address" 
-                name="email" 
-                [(ngModel)]="email"
-                (blur)="validateEmail()"/>
+                <input 
+                  [class.input-error]="emailError"
+                  type="email" 
+                  id="email"
+                  name="email"
+                  placeholder="Email Address" 
+                  formControlName="email"/>
+                </div>
                 @if (emailError) {
-                  <p style="color: red">{{ emailErrorMessage }}</p>
+                  <p class="col-12" style="color: red">{{ emailErrorMessage }}</p>
                 }
-              </div>
-              <div class="col-md-6">
+              
+              <div class="col-12 mb--20">
                 <label>Password</label>
-                <input type="password" 
-                id="password"
-                placeholder="Password" 
-                name="password" 
-                [(ngModel)]="password"
-                (blur)="validatePassword()"/>
-            </div>
-            @if (passwordError) {
-              <p style="color: red">{{ passwordErrorMessage }}</p>
-            }
-              <div class="col-md-6">
-                <label>Confirm Password</label>
-                <input type="password" 
-                id="repassword"
-                placeholder="Confirm Password" 
-                name="repassword" 
-                [(ngModel)]="repassword"
-                (blur)="validateRePassword()"/>
-            </div>
-            @if (repasswordError) {
-              <p style="color: red">{{ repasswordErrorMessage }}</p>
-            }
-              @if (error()) {
-              <div class="col-12">
-                <p style=" color: red; ">{{ error() }}</p>
+                <input 
+                  [class.input-error]="passwordError"
+                  type="password" 
+                  id="password"
+                  name="password"
+                  placeholder="Password" 
+                  formControlName="password"/>
               </div>
+              @if (passwordError) {
+                <p class="col-12" style="color: red">{{ passwordErrorMessage }}</p>
               }
-              <div class="col-12">
-                <button class="uren-register_btn" [disabled]="!isFormValid()">Register</button>
+              
+              <div class="col-12 mb--20">
+                <label>Confirm Password</label>
+                <input 
+                  [class.input-error]="confirmPasswordError"
+                  type="password" 
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="Confirm Password" 
+                  formControlName="confirmPassword"/>
+              </div>
+              @if (confirmPasswordError) {
+                <p class="col-12" style="color: red">{{ confirmPasswordErrorMessage }}</p>
+              }
+              
+              @if (error()) {
+                <div class="col-12">
+                  <p style="color: red">{{ error() }}</p>
+                </div>
+              }
+              
+              <div class="col-md-4 mt-3">
+                <div class="forgotton-password_info">
+                  <a routerLink="/login">Already have an account?</a>
+                </div>
+              </div>
+              
+              <div class="col-md-12">
+                <button class="uren-register_btn" [disabled]="!isFormReady">Register</button>
               </div>
             </div>
           </div>

@@ -72,10 +72,7 @@ export class LoginComponent {
     error = signal<string | null>(null);
 
     get isFormReady(): boolean {
-        const email = this.email?.value;
-        const password = this.password?.value;
-        
-        return !!(email && password && this.loginForm.valid);
+        return this.loginForm.valid;
     }
 
     onSubmit(): void {

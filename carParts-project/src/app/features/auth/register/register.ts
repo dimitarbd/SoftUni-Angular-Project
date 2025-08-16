@@ -1,112 +1,136 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+
+// Custom validator for password confirmation
+function passwordMatchValidator(control: AbstractControl): {[key: string]: any} | null {
+    const password = control.get('password');
+    const confirmPassword = control.get('confirmPassword');
+    
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+        return { 'passwordMismatch': true };
+    }
+    return null;
+}
 
 @Component({
     selector: 'app-register',
     standalone: true,
-    imports: [FormsModule, RouterLink],
+    imports: [ReactiveFormsModule, FormsModule, RouterLink],
     templateUrl: './register.html',
     styleUrl: './register.css'
 })
-export class RegisterComponent {
 
+export class RegisterComponent {
 
     protected authService = inject(AuthService);
     private router = inject(Router);
+    private formBuilder = inject(FormBuilder);
 
-    email: string = '';
-    password: string = '';
-    repassword: string = '';
-    error = signal<string>('');
+    registerForm: FormGroup;
+    error = signal<string | null>(null);
 
-    usernameError: boolean = false;
-    usernameErrorMessage: string = '';
-    emailError: boolean = false;
-    emailErrorMessage: string = '';
-    passwordError: boolean = false;
-    passwordErrorMessage: string = '';
-    repasswordError: boolean = false;
-    repasswordErrorMessage: string = '';
+    constructor() {
+        this.registerForm = this.formBuilder.group({
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
+            confirmPassword: ['', [Validators.required]]
+        }, { validators: passwordMatchValidator });
+    }
 
-    validateEmail(): void {
-        if (!this.email) {
-            this.emailError = true;
-            this.emailErrorMessage = 'Email is required';
-        } else if (!this.isEmailValid(this.email)) {
-            this.emailError = true;
-            this.emailErrorMessage = 'Invalid email';
-        } else {
-            this.emailError = false;
-            this.emailErrorMessage = '';
+    get email() {
+        return this.registerForm.get('email');
+    }
+
+    get password() {
+        return this.registerForm.get('password');
+    }
+
+    get confirmPassword() {
+        return this.registerForm.get('confirmPassword');
+    }
+
+    get emailError(): boolean {
+        return this.email?.invalid && (this.email?.touched || this.email?.dirty) || false;
+    }
+
+    get passwordError(): boolean {
+        return this.password?.invalid && (this.password?.touched || this.password?.dirty) || false;
+    }
+
+    get confirmPasswordError(): boolean {
+        const confirmPassword = this.confirmPassword;
+        const formError = this.registerForm.hasError('passwordMismatch') && 
+                         (confirmPassword?.touched || confirmPassword?.dirty);
+        const fieldError = confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty);
+        return formError || fieldError || false;
+    }
+
+    get emailErrorMessage(): string | null {
+        if (this.email?.errors?.['required'] && (this.email?.touched || this.email?.dirty)) {
+            return 'Email is required';
         }
-    }
-
-    private isEmailValid(email: string): boolean {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-
-    validatePassword(): void {
-        if (!this.password) {
-            this.passwordError = true;
-            this.passwordErrorMessage = 'Password is required';
-        } else if (!this.isPasswordValid()) {
-            this.passwordError = true;
-            this.passwordErrorMessage = 'Password must be at least 4 characters long';
-        } else {
-            this.passwordError = false;
-            this.passwordErrorMessage = '';
+        if (this.email?.errors?.['email'] && (this.email?.touched || this.email?.dirty)) {
+            return 'Invalid email';
         }
+        return '';
     }
 
-    isPasswordValid(): boolean {
-        return this.password.length >= 4;
-    }
-
-    validateRePassword(): void {
-        if (!this.repassword) {
-            this.repasswordError = true;
-            this.repasswordErrorMessage = 'Confirm password is required';
-        } else if (this.password !== this.repassword) {
-            this.repasswordError = true;
-            this.repasswordErrorMessage = 'Passwords do not match';
-        } else {
-            this.repasswordError = false;
-            this.repasswordErrorMessage = '';
+    get passwordErrorMessage(): string | null {
+        if (this.password?.errors?.['required'] && (this.password?.touched || this.password?.dirty)) {
+            return 'Password is required';
         }
+        if (this.password?.errors?.['minlength'] && (this.password?.touched || this.password?.dirty)) {
+            return `Password must be at least ${this.password?.errors?.['minlength'].requiredLength} characters long`;
+        }
+        if (this.password?.errors?.['maxlength'] && (this.password?.touched || this.password?.dirty)) {
+            return `Password must be no more than ${this.password?.errors?.['maxlength'].requiredLength} characters long`;
+        }
+        return '';
     }
 
-    isFormValid(): boolean {
-        return Boolean(this.email) && 
-        Boolean(this.password) && 
-        Boolean(this.repassword) && 
-        !this.emailError && 
-        !this.passwordError && 
-        !this.repasswordError &&
-        this.password === this.repassword;
+    get confirmPasswordErrorMessage(): string | null {
+        const confirmPassword = this.confirmPassword;
+        if (confirmPassword?.errors?.['required'] && (confirmPassword?.touched || confirmPassword?.dirty)) {
+            return 'Confirm password is required';
+        }
+        if (this.registerForm.hasError('passwordMismatch') && (confirmPassword?.touched || confirmPassword?.dirty)) {
+            return 'Passwords do not match';
+        }
+        return '';
+    }
+
+    get isFormReady(): boolean {
+        return this.registerForm.valid;
     }
 
     onSubmit(): void {
-        this.validateEmail();
-        this.validatePassword();
-        this.validateRePassword();
+        if (this.registerForm.valid) {
+            const { email, password } = this.registerForm.value;
 
-        if (this.isFormValid()) {
-            this.authService.register(this.email, this.password).subscribe({
+            this.authService.register(email, password).subscribe({
                 next: (user) => {
                     this.authService.registerSuccess(user);
                     this.router.navigate(['/']);
                 },
                 error: (error) => {
-                    console.error('Registration failed:', error);
                     this.error.set('Registration failed. Please try again.');
+                    this.markFormGroupTouched(this.registerForm);
                 }
             });
-        } else {
-            this.error.set('Please fix the validation errors');
         }
+    }
+
+    private markFormGroupTouched(formGroup: FormGroup) {
+        Object.keys(this.registerForm.controls).forEach(key => {
+            const control = this.registerForm.get(key);
+            if (control instanceof FormGroup) {
+                this.markFormGroupTouched(control);
+            } else {
+                control?.markAsTouched();
+            }
+        });
     }
 }
 
