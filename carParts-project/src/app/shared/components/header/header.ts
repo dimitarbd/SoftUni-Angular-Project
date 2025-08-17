@@ -7,12 +7,28 @@ import { AuthService } from '../../../core/services/auth.service';
 import { SearchService } from '../../../core/services/search.service';
 import { CategoryFilterService } from '../../../core/services/category-filter.service';
 import { PartService } from '../../../core/services/part.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-header',
   imports: [NgClass, RouterLink, FormsModule],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrl: './header.css',
+  animations: [
+    trigger('categoryMenuAnimation', [
+      state('closed', style({
+        height: '0',
+        opacity: 0
+      })),
+      state('open', style({
+        height: '*',
+        opacity: 1
+      })),
+      transition('closed <=> open', [
+        animate('900ms ease-in-out')
+      ])
+    ])
+  ]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
@@ -32,7 +48,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private categoriesSubscription?: Subscription;
 
   toggleCategories(): void {
+    console.log('Toggling categories. Current state:', this.isCategoriesOpen);
     this.isCategoriesOpen = !this.isCategoriesOpen;
+    console.log('New state:', this.isCategoriesOpen);
   }
 
   toggleMyAccountDropdown(): void {

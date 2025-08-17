@@ -1443,7 +1443,6 @@
             "imageUrl": "/images/product/large-size/1.jpg",
             "rating": "4",
             "description": "The S837 Haze wheels are a stylish and durable option for your vehicle. The wheels are made of high-quality materials, ensuring long-lasting performance and reliability. They are designed to provide a smooth and comfortable ride, while also enhancing the appearance of your vehicle. The wheels are available in a variety of sizes and finishes, allowing you to customize the look of your vehicle to suit your preferences. The S837 Haze wheels are easy to install and maintain, making them a convenient and practical choice for your vehicle. Whether you are looking to upgrade your current wheels or simply want to add a touch of style to your vehicle, the S837 Haze wheels are an excellent choice. They are a great way to enhance the performance and appearance of your vehicle, while also expressing your personal style.",
-            "comments": "",
             "_id": "dded749d-5a91-4c10-8211-a3af649c43c0",
             "_createdOn": 1744224648446
         },
@@ -1457,7 +1456,6 @@
             "imageUrl": "/images/product/large-size/2.jpg",
             "rating": "3",
             "description": "The universal AC vent cupholder is a convenient accessory that allows you to keep your drink within easy reach while driving. The cupholder attaches to the air vent in your vehicle, providing a stable and secure place to hold your cup or bottle. The cupholder is adjustable, allowing it to accommodate different sizes of cups and bottles. It is made of high-quality materials, ensuring durability and long-lasting performance. The cupholder is easy to install and remove, making it a versatile and practical accessory for your vehicle. Whether you are on a long road trip or just running errands around town, the universal AC vent cupholder is a useful addition to your vehicle. It is a great way to stay hydrated and comfortable while on the road.",
-            "comments": "",
             "_id": "dba62041-1269-403c-a717-ea7e14c3a9ec",
             "_createdOn": 1744224648447
         },
@@ -1471,7 +1469,6 @@
             "imageUrl": "/images/product/large-size/3.jpg",
             "rating": "5",
             "description": "The braking system is a critical component of any vehicle, as it is responsible for slowing down and stopping the vehicle. The system consists of several components, including the brake pads, rotors, calipers, and brake lines. When the driver presses the brake pedal, hydraulic pressure is generated, which forces the brake pads against the rotors, slowing down the vehicle. The ABS system helps prevent the wheels from locking up during hard braking, improving control and stability. The braking system is essential for safe driving, as it allows the driver to stop the vehicle quickly and efficiently. It is important to maintain the braking system in good condition to ensure optimal performance and safety. Regular inspections and maintenance are recommended to keep the system functioning properly.",
-            "comments": "",
             "_id": "76ca2307-0459-41ba-a477-056d3726e5b2",
             "_createdOn": 1744224648448
         },
@@ -1485,7 +1482,6 @@
             "imageUrl": "/images/product/large-size/4.jpg",
             "rating": "5",
             "description": "The electromechanical actuator is a device that converts electrical energy into mechanical energy. It is used in various applications, such as robotics, automotive systems, and industrial machinery. The actuator consists of an electric motor, a gearbox, and a control system. The motor generates rotational motion, which is transmitted to the gearbox. The gearbox converts the rotational motion into linear motion, which is used to actuate a mechanism. The control system regulates the speed and position of the actuator, ensuring precise and reliable operation. The actuator is compact, lightweight, and energy-efficient, making it ideal for use in space-constrained applications. It is also durable and reliable, providing long-lasting performance in demanding environments.",
-            "comments": "",
             "_id": "5ed18427-b532-40c3-8f4c-c2c069e64967",
             "_createdOn": 1744224648449
         },
@@ -1499,7 +1495,6 @@
             "imageUrl": "/images/product/large-size/5.jpg",
             "rating": "5",
             "description": "The iBooster can be used with all drivetrain configurations and is particularly suited to hybrid and electric vehicles. The generation 2 of the iBooster is characterized by significantly reduced weight.",
-            "comments": "",
             "_id": "36b52dce-1d28-4031-8e33-4b0e9d246429",
             "_createdOn": 1744224648450
         },
@@ -1513,7 +1508,6 @@
             "imageUrl": "/images/product/large-size/6.jpg",
             "rating": "4",
             "description": "POWERSPORT Series Brake Rotors provide superior braking performance in any driving condition. Perfect for the daily driver or aggressive street driver. Ready to be installed with no modifications required. Upgrade your safety by upgrading your brakes!",
-            "comments": "",
             "_id": "0af8e76f-3e49-4186-a046-48407933b7e9",
             "_createdOn": 1744224648451
         },
@@ -1527,7 +1521,6 @@
             "imageUrl": "/images/product/large-size/7.jpg",
             "rating": "3",
             "description": "This turbo is being discontinued by VSRacing. Please check the Next Gen version which is a newer design of this turbo VSR Billet 7875 Gen1 T4 Turbo. Most popular unit for sub 800 hp Setups;Compresor: 78mm 11 Blade Billet Compressor Wheel extended tip for high flow Turbine: GT42 75mm/82 Exducer/Inducer Downpipe: 3″; Compressor Outlet 2.5″ Turbine Housing : .96ar T4 open",
-            "comments": "",
             "_id": "b75625e4-2a79-4c2b-a2f1-f2c5d9229473",
             "_createdOn": 1744224648452
         },
@@ -1541,7 +1534,6 @@
             "imageUrl": "https://www.compbrake.com/wp-content/uploads/2023/05/CMB-RTSPC-0815CSC-COMPBRAKE-Performance-Clutch-%E2%80%93-Ford-Fiesta-MK8-ST200-1.5L-%E2%80%93-PADDLE-CLUTCH.jpg",
             "rating": "4",
             "description": "High-performance clutch kit designed for sports cars and high-performance vehicles. Features a heavy-duty pressure plate, organic clutch disc, and release bearing. Provides improved engagement and durability for demanding driving conditions.",
-            "comments": "",
             "_id": "1a2b3c4d-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
             "_createdOn": 1744224648453
         },
@@ -1555,7 +1547,6 @@
             "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoXuIjaLSFMGR7eWS-n4cky5PPvdgSnK0OHVF6k2MvPwRzP7d4W6x-GAqtBkg2ICsykKg&usqp=CAU",
             "rating": "4",
             "description": "High-performance electric water pump with variable speed control. Features improved flow rate and reliability. Includes controller and mounting hardware.",
-            "comments": "",
             "_id": "7d8e9f0a-b1c2-4d3e-4f5a-6b7c8d9e0f1a",
             "_createdOn": 1744224648461
         },
@@ -1569,7 +1560,6 @@
             "imageUrl": "https://m.media-amazon.com/images/I/61jvguz8kQL._AC_UF1000,1000_QL80_.jpg",
             "rating": "5",
             "description": "Adjustable coilover suspension kit with height and damping adjustment. Includes front and rear shocks, springs, and all necessary mounting hardware. Perfect for track days and spirited driving while maintaining daily drivability.",
-            "comments": "",
             "_id": "8e9f0a1b-c2d3-4e4f-5a6b-7c8d9e0f1a2b",
             "_createdOn": 1744224648454
         },
@@ -1583,7 +1573,6 @@
             "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZKpo5Krw5Nv0RiE7xdAXAdQlhfJVntp7QDjPxo2UtisSsCOlEnIYss-1z3YXw_cZkCZw&usqp=CAU",
             "rating": "4",
             "description": "OEM-quality power steering pump with improved efficiency and durability. Compatible with most modern vehicles and includes mounting bracket and pulley. Designed for smooth operation and long service life.",
-            "comments": "",
             "_id": "5a6b7c8d-e9f0-4e1f-2a3b-4c5d6e7f8a9b",
             "_createdOn": 1744224648455
         },        
@@ -1597,7 +1586,6 @@
             "imageUrl": "https://www.minispares.com/media/catalog/product/cache/7bfb6bc9cef7d249596faba93ce80729/g/x/gxe1005.jpg",
             "rating": "4",
             "description": "High-torque starter motor with improved cold-start performance. Features heavy-duty construction and enhanced durability. Compatible with most modern vehicles.",
-            "comments": "",
             "_id": "8a9b0c1d-e2f3-4b4c-5d6e-7f8a9b0c1d2e",
             "_createdOn": 1744224648457
         },
@@ -1611,8 +1599,7 @@
             "imageUrl": "https://flat6motorsports.com/cdn/shop/products/Soul-Performance-Products-Porsche-718-GT4-Valved-Exhaust-Product-Combined-510x340.jpg?v=1605110002",
             "rating": "5",
             "description": "Full stainless steel exhaust system with improved flow and sound. Includes headers, catalytic converters, and mufflers. Designed for maximum performance while maintaining emissions compliance.",
-            "comments": "",
-                "_id": "9a0b1c2d-e3f4-4c5d-6e7f-8a9b0c1d2e3f",
+            "_id": "9a0b1c2d-e3f4-4c5d-6e7f-8a9b0c1d2e3f",
             "_createdOn": 1744224648458
         },
         "0a1b2c3d-e4f5-4d6e-7f8a-9b0c1d2e3f4a": {
@@ -1625,7 +1612,6 @@
             "imageUrl": "https://static.summitracing.com/global/images/prod/large/mpe-99005hm.jpg",
             "rating": "4",
             "description": "Performance catalytic converter with improved flow characteristics. Maintains emissions compliance while reducing exhaust backpressure. Includes mounting hardware and gaskets.",
-            "comments": "",
             "_id": "0a1b2c3d-e4f5-4d6e-7f8a-9b0c1d2e3f4a",
             "_createdOn": 1744224648459
         },
@@ -1639,7 +1625,6 @@
             "imageUrl": "https://cdn11.bigcommerce.com/s-9x01qfh1f5/images/stencil/1580x1580/products/4620/6560/1445883389-csf-radiator__47870.1532358823.jpg?c=2",
             "rating": "5",
             "description": "High-capacity aluminum radiator with improved cooling efficiency. Features dual-core design and larger surface area. Includes mounting brackets and hoses.",
-            "comments": "",
             "_id": "2a3b4c5d-e6f7-4f8a-9b0c-1d2e3f4a5b6c",
             "_createdOn": 1744224648460
         },
@@ -1653,7 +1638,6 @@
             "imageUrl": "https://www.vocaracing.com/wp-content/uploads/2018/07/VCR-RD09.PUMP01.jpg",
             "rating": "4",
             "description": "High-performance electric water pump with variable speed control. Features improved flow rate and reliability. Includes controller and mounting hardware.",
-            "comments": "",
             "_id": "9f0a1b2c-d3e4-4f5a-6b7c-8d9e0f1a2b3c",
             "_createdOn": 1744224648461
         },
@@ -1667,7 +1651,6 @@
             "imageUrl": "https://cvrbonized.com/cdn/shop/files/Screenshot2023-06-24200454.png?v=1689165803",
             "rating": "5",
             "description": "Lightweight carbon fiber front bumper with aggressive styling. Features improved aerodynamics and reduced weight. Includes mounting hardware and instructions.",
-            "comments": "",
             "_id": "d1e2f3a4-b5c6-4e5f-8a7b-9c0d1e2f3a4b",
             "_createdOn": 1744224648462
         },
@@ -1681,7 +1664,6 @@
             "imageUrl": "https://www.europaparts.com/media/catalog/product/cache/abf26066ecd46d435ee2486b4a5aee03/5/6/561941773a.jpg",
             "rating": "4",
             "description": "Modern LED headlight assembly with improved visibility and styling. Features adaptive beam control and daytime running lights. Includes mounting hardware and wiring harness.",
-            "comments": "",
             "_id": "e1f2a3b4-c5d6-4f5a-8b7c-9d0e1f2a3b4c",
             "_createdOn": 1744224648463
         },
@@ -1695,7 +1677,6 @@
             "imageUrl": "https://getnrg.com/cdn/shop/products/FRP-304RD-NRG-02-780x700.jpg?v=1679077860",
             "rating": "5",
             "description": "High-performance bucket seats with improved support and comfort. Features adjustable lumbar support and side bolsters. Includes mounting brackets and hardware.",
-            "comments": "",
             "_id": "f1a2b3c4-d5e6-4a5b-8c7d-9e0f1a2b3c4d",
             "_createdOn": 1744224648464
         },
@@ -1709,7 +1690,6 @@
             "imageUrl": "https://trackformula.co.uk/wp-content/uploads/2017/06/RL265E-PErformance-Fuel-Pump-Side-Shot.jpg",
             "rating": "4",
             "description": "High-flow fuel pump with improved pressure and volume. Features improved reliability and durability. Includes mounting hardware and wiring harness.",
-            "comments": "",
             "_id": "a1b2c3d4-e5f6-4b5c-8d7e-9f0a1b2c3d4e",
             "_createdOn": 1744224648465
         },
@@ -1723,7 +1703,6 @@
             "imageUrl": "https://fullthrottlespeed.com/cdn/shop/files/240injector_4_1024x1024_49c269f2-63cc-48c7-b03c-d35cb27ee2aa.jpg?v=1698253093",
             "rating": "5",
             "description": "High-flow fuel injectors with improved spray pattern and flow rate. Features improved atomization and reliability. Includes O-rings and mounting hardware.",
-            "comments": "",
             "_id": "b1c2d3e4-f5a6-4c5d-8e7f-9a0b1c2d3e4f",
             "_createdOn": 1744224648466
         },
@@ -1737,7 +1716,6 @@
             "imageUrl": "/images/product/large-size/9.jpg",
             "rating": "5",
             "description": "The XO brand of wheels is all about silky smooth composition, and the Caracas is no slacker. XO's dazzling design philosophy is easily visible in this double 5 spoke design, featuring a set of graceful spokes which meet in a pleasant concave center. In the interests of high quality, these rims are rotary forged at high pressures for fortitude and low weight to provide increased performance and longevity. The time-tested rotary forged process creates an extremely light wheel, which outperforms cast wheels in every way. Naturally, the XO Caracas are JWL and VIA certified, so you're sure to be safe on the road. XO wheels have made a name for themselves by offering innovative, modern custom finishes with a wide range of options available. They're also offered in a variety of sizes and widths to facilitate staggered fitments. Thanks to their unique appearance, the XO Caracas will definitely be the most striking accessory you purchase for your vehicle.",
-            "comments": "",
             "_createdOn": 1744142583084,
             "_id": "60f0cf0b-34b0-4abd-9769-8c42f830dffc"
         },
@@ -1751,7 +1729,6 @@
             "imageUrl": "/images/product/large-size/10.jpg",
             "rating": "4",
             "description": "As the name implies Sport Japan discs were originally designed for the Japanese market where tough looks and high performance are important factors. Sport Japan discs are now one of the only aftermarket performance discs to still feature fully drilled countersunk holes which are much more affective at venting gasses which cause brake fade than the more common dimples. 6 grooves on the braking surface keep pads from glazing. All Sport Japan discs are based on original equipment specification, TÜV approved castings, heat treated for strength and hand finished to ensure the smoothest possible braking surface. Sport Japan Discs are TÜV approved for most applications.",
-            "comments": "",
             "_createdOn": 1744224648470,
             "_id": "18b06d4a-a516-4400-b9b4-fd43fbfce5a2"
         },
@@ -1765,7 +1742,6 @@
             "imageUrl": "https://ceb8596f236225acd007-8e95328c173a04ed694af83ee4e24c15.ssl.cf5.rackcdn.com/images/product/_zPattern/rb100-high-performance-lifepo4-battery.jpg",
             "rating": "5",
             "description": "High-performance AGM battery with superior starting power and deep cycle capabilities. Features spill-proof design and vibration resistance. Perfect for high-performance vehicles and off-road applications.",
-            "comments": "",
             "_id": "4b5c6d7e-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
             "_createdOn": 1744224648469
         },
@@ -1779,7 +1755,6 @@
             "imageUrl": "https://www.alkydigger.net/mm5/graphics/00000001/6/PS_CompleteKit_800.jpg",
             "rating": "4",
             "description": "Complete wiring harness kit with improved conductivity and durability. Features color-coded wires and comprehensive instructions. Includes all necessary connectors and terminals.",
-            "comments": "",
             "_id": "2b3c4d5e-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
             "_createdOn": 1744224648470
         },
@@ -1793,7 +1768,6 @@
             "imageUrl": "https://pdidiesel.com/cdn/shop/products/8445C-1_forWeb.jpg?v=1700638174&width=1214",
             "rating": "5",
             "description": "Stainless steel exhaust manifold with improved flow characteristics. Features equal-length runners and thermal coating. Designed for maximum power output and heat management.",
-            "comments": "",
             "_id": "4d5e6f7a-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
             "_createdOn": 1744224648471
         },
@@ -1807,7 +1781,6 @@
             "imageUrl": "https://static.summitracing.com/global/images/prod/large/bor-40358.jpg",
             "rating": "4",
             "description": "High-performance muffler with aggressive sound and improved flow. Features straight-through design and stainless steel construction. Includes mounting hardware and instructions.",
-            "comments": "",
             "_id": "6f7a8b9c-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
             "_createdOn": 1744224648472
         },
@@ -1821,7 +1794,6 @@
             "imageUrl": "https://conceptzperformance.com/items/75996/original/769HpZZ.png",
             "rating": "5",
             "description": "High-output alternator designed for vehicles with additional electrical accessories. Features improved cooling and higher amperage output. Includes voltage regulator and mounting hardware.",
-            "comments": "",
             "_id": "6b7c8d9e-0f1a-4b2c-3d4e-5f6a7b8c9d0e",
             "_createdOn": 1744224648456
         }

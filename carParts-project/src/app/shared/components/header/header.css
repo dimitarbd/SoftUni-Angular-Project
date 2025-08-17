@@ -80,3 +80,7 @@
   transform: rotate(180deg);
 }
 
+.category-menu-list {
+  overflow: hidden;
+}
+

@@ -12,3 +12,5 @@ import { FooterComponent } from './shared/components/footer/footer';
 export class AppComponent {
  
 }
+
+

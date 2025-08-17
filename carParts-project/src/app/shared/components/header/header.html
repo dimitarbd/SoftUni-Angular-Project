@@ -5,20 +5,18 @@
                 <div class="col-xl-3 col-lg-2 col-md-3 col-sm-5">
                     <div class="header-logo_area">
                         <a href="/">
-                            <img src="logo.png" alt="Uren's Logo" width="140" height="40" fetchpriority="high" decoding="async">
+                            <img src="logo.png" alt="Uren's Logo" width="140" height="40" fetchpriority="high"
+                                decoding="async">
                         </a>
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-6 d-none d-lg-block">
                     <div class="hm-form_area">
                         <form (ngSubmit)="onSearch($event)" class="hm-searchbox">
-                            <input type="text" 
-                                   [(ngModel)]="searchTerm" 
-                                   name="searchTerm"
-                                   placeholder="Enter your search key ..."
-                                   (keyup.enter)="onSearch()">
+                            <input type="text" [(ngModel)]="searchTerm" name="searchTerm"
+                                placeholder="Enter your search key ..." (keyup.enter)="onSearch()">
                             <button class="header-search_btn" type="submit"><i
-                                class="ion-ios-search-strong"><span>Search</span></i></button>
+                                    class="ion-ios-search-strong"><span>Search</span></i></button>
                         </form>
                     </div>
                 </div>
@@ -43,19 +41,22 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="custom-category_col col-12">
-                    <div class="category-menu" [ngClass]="{ 'category-menu-hidden': !isCategoriesOpen, 'category-menu-open': isCategoriesOpen }">
-                        <div class="category-heading" role="button" tabindex="0" [attr.aria-expanded]="isCategoriesOpen" (click)="toggleCategories()" (keydown.enter)="toggleCategories()" (keydown.space)="toggleCategories()">
+                    <div class="category-menu"
+                        [ngClass]="{ 'category-menu-hidden': !isCategoriesOpen, 'category-menu-open': isCategoriesOpen }">
+                        <div class="category-heading" role="button" tabindex="0" [attr.aria-expanded]="isCategoriesOpen"
+                            (click)="toggleCategories()" (keydown.enter)="toggleCategories()"
+                            (keydown.space)="toggleCategories()">
                             <h2 class="categories-toggle">
                                 <span>Shop By</span>
                                 <span>Categories</span>
                             </h2>
                         </div>
-                        <div id="cate-toggle" class="category-menu-list" [hidden]="!isCategoriesOpen">
+                        <div id="cate-toggle" class="category-menu-list" [@categoryMenuAnimation]="isCategoriesOpen ? 'open' : 'closed'">
                             <ul>
                                 @for (category of categories; track category) {
-                                    <li>
-                                        <a href="javascript:void(0)" (click)="selectCategory(category)">{{ category }}</a>
-                                    </li>
+                                <li>
+                                    <a href="javascript:void(0)" (click)="selectCategory(category)">{{ category }}</a>
+                                </li>
                                 }
                             </ul>
                         </div>
@@ -70,11 +71,11 @@
                                 <li class="megamenu-holder "><a routerLink="/catalog">Catalog</a>
                                 </li>
                                 @if(isLoggedIn()) {
-                                    <li><a routerLink="/create">Create Offer</a></li>
-                                    <li><a routerLink="/logout" (click)="logout()">Logout</a></li>
+                                <li><a routerLink="/create">Create Offer</a></li>
+                                <li><a routerLink="/logout" (click)="logout()">Logout</a></li>
                                 } @else {
-                                    <li><a routerLink="/login">Login</a></li>
-                                    <li class=""><a routerLink="/register">Register</a></li>
+                                <li><a routerLink="/login">Login</a></li>
+                                <li class=""><a routerLink="/register">Register</a></li>
                                 }
                                 <li class=""><a routerLink="/about">About Us</a></li>
                                 <li class=""><a routerLink="/contact">Contact</a></li>
@@ -87,22 +88,25 @@
                         <div class="ht-menu">
                             <ul>
                                 @if(isLoggedIn()) {
-                                    <li class="dropdown-holder">
-                                        <a href="javascript:void(0)" 
-                                           (click)="toggleMyAccountDropdown()" 
-                                           [attr.aria-expanded]="isMyAccountDropdownOpen">
-                                            <span class="fa fa-user"></span> 
-                                            <span>My Account</span>
-                                            <i class="fa fa-chevron-down"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" [class.show]="isMyAccountDropdownOpen">
-                                            <li><a routerLink="/my-account" (click)="isMyAccountDropdownOpen = false">Dashboard</a></li>
-                                            <li><a routerLink="/my-account" [queryParams]="{tab: 'offers'}" (click)="isMyAccountDropdownOpen = false">My Offers</a></li>
-                                            <li><a routerLink="/my-account" [queryParams]="{tab: 'details'}" (click)="isMyAccountDropdownOpen = false">Account Details</a></li>
-                                            <li><a routerLink="/logout" (click)="logout(); isMyAccountDropdownOpen = false">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                } 
+                                <li class="dropdown-holder">
+                                    <a href="javascript:void(0)" (click)="toggleMyAccountDropdown()"
+                                        [attr.aria-expanded]="isMyAccountDropdownOpen">
+                                        <span class="fa fa-user"></span>
+                                        <span>My Account</span>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" [class.show]="isMyAccountDropdownOpen">
+                                        <li><a routerLink="/my-account"
+                                                (click)="isMyAccountDropdownOpen = false">Dashboard</a></li>
+                                        <li><a routerLink="/my-account" [queryParams]="{tab: 'offers'}"
+                                                (click)="isMyAccountDropdownOpen = false">My Offers</a></li>
+                                        <li><a routerLink="/my-account" [queryParams]="{tab: 'details'}"
+                                                (click)="isMyAccountDropdownOpen = false">Account Details</a></li>
+                                        <li><a routerLink="/logout"
+                                                (click)="logout(); isMyAccountDropdownOpen = false">Logout</a></li>
+                                    </ul>
+                                </li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -110,13 +114,10 @@
                 <div class="custom-search_col d-none d-md-block d-lg-none">
                     <div class="hm-form_area">
                         <form (ngSubmit)="onSearch($event)" class="hm-searchbox">
-                            <input type="text" 
-                                   [(ngModel)]="searchTerm" 
-                                   name="searchTerm"
-                                   placeholder="Enter your search key ..."
-                                   (keyup.enter)="onSearch()">
+                            <input type="text" [(ngModel)]="searchTerm" name="searchTerm"
+                                placeholder="Enter your search key ..." (keyup.enter)="onSearch()">
                             <button class="header-search_btn" type="submit"><i
-                                class="ion-ios-search-strong"><span>Search</span></i></button>
+                                    class="ion-ios-search-strong"><span>Search</span></i></button>
                         </form>
                     </div>
                 </div>
@@ -135,12 +136,12 @@
                                 <li class="megamenu-holder "><a href="/catalog">Catalog</a>
                                 </li>
                                 @if(isLoggedIn()) {
-                                    <li><a routerLink="/create">Create Offer</a></li>
-                                    <li><a routerLink="/logout" (click)="logout()">Logout</a></li>
+                                <li><a routerLink="/create">Create Offer</a></li>
+                                <li><a routerLink="/logout" (click)="logout()">Logout</a></li>
                                 } @else {
-                                    <li><a routerLink="/login">Login</a></li>
-                                    <li class=""><a routerLink="/register">Register</a></li>
-                                }                               
+                                <li><a routerLink="/login">Login</a></li>
+                                <li class=""><a routerLink="/register">Register</a></li>
+                                }
                                 <li class=""><a routerLink="/about">About Us</a></li>
                                 <li class=""><a routerLink="/contact">Contact</a></li>
                             </ul>
@@ -150,7 +151,8 @@
                 <div class="col-sm-3 d-block d-lg-none">
                     <div class="header-logo_area header-sticky_logo">
                         <a href="index.html">
-                            <img src="assets/images/menu/logo/1.png" alt="Uren's Logo" width="140" height="40" decoding="async">
+                            <img src="assets/images/menu/logo/1.png" alt="Uren's Logo" width="140" height="40"
+                                decoding="async">
                         </a>
                     </div>
                 </div>
@@ -162,7 +164,7 @@
                                     <i class="ion-navicon"></i>
                                 </a>
                             </li>
-                            
+
                             <li class="contact-us_wrap">
                                 <a href="tel://+123123321345"><i class="ion-android-call"></i>+123 321 345</a>
                             </li>
@@ -172,31 +174,28 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <div class="mobile-menu_wrapper" id="mobileMenu">
         <div class="offcanvas-menu-inner">
             <div class="container">
                 <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
                 <div class="offcanvas-inner_search">
                     <form (ngSubmit)="onSearch($event)" class="inner-searchbox">
-                        <input type="text" 
-                               [(ngModel)]="searchTerm" 
-                               name="searchTerm"
-                               placeholder="Search for item..."
-                               (keyup.enter)="onSearch()">
+                        <input type="text" [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search for item..."
+                            (keyup.enter)="onSearch()">
                         <button class="search_btn" type="submit"><i class="ion-ios-search-strong"></i></button>
                     </form>
                 </div>
                 <nav class="offcanvas-navigation">
                     <ul class="mobile-menu">
                         <li class="menu-item-has-children active"><a href="index.html"><span
-                                class="mm-text">Home</span></a>                           
+                                    class="mm-text">Home</span></a>
                         </li>
                         <li class="menu-item-has-children">
                             <a routerLink="/catalog">
                                 <span class="mm-text">Shop</span>
-                            </a>                           
+                            </a>
                         </li>
                         <li class="menu-item-has-children">
                             <a routerLink="/about">
@@ -207,11 +206,10 @@
                             <a routerLink="/contact">
                                 <span class="mm-text">Contact</span>
                             </a>
-                        </li>     
+                        </li>
                     </ul>
-                </nav>               
+                </nav>
             </div>
         </div>
     </div>
 </header>
-
