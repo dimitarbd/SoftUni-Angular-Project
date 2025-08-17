@@ -80,11 +80,9 @@ export class AuthService {
     updateAccountSuccess(updatedUser: User): void {
         const currentUser = this._currentUser();
         if (currentUser && updatedUser) {
-            // Merge updated data with existing user data to preserve important fields like accessToken
             const mergedUser: User = {
                 ...currentUser,
                 ...updatedUser,
-                // Ensure critical fields are preserved from current user if not in response
                 accessToken: updatedUser.accessToken || currentUser.accessToken
             };
             this._currentUser.set(mergedUser);
@@ -93,7 +91,6 @@ export class AuthService {
             this._currentUser.set(updatedUser);
             localStorage.setItem('currentUser', JSON.stringify(updatedUser));
         }
-        // If updatedUser is null, do nothing to preserve current state
     }
 
 }
