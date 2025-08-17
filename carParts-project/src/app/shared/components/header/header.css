@@ -1,7 +1,7 @@
 /* Hide categories list when closed */
-.category-menu.category-menu-hidden .category-menu-list {
+/* .category-menu.category-menu-hidden .category-menu-list {
   display: none;
-}
+} */
 
 /* Better affordance */
 .category-heading {

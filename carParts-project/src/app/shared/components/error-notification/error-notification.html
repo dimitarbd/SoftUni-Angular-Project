@@ -1,0 +1,6 @@
+@if(error()) {
+  <div class="error-notification">
+    <p>{{ error() }}</p>
+    <button (click)="close()">Close</button>
+  </div>
+}

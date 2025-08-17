@@ -25,7 +25,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         opacity: 1
       })),
       transition('closed <=> open', [
-        animate('900ms ease-in-out')
+        animate('1500ms ease-in-out')
       ])
     ])
   ]
@@ -48,19 +48,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private categoriesSubscription?: Subscription;
 
   toggleCategories(): void {
-    console.log('Toggling categories. Current state:', this.isCategoriesOpen);
+    // console.log('Toggling categories. Current state:', this.isCategoriesOpen);
     this.isCategoriesOpen = !this.isCategoriesOpen;
-    console.log('New state:', this.isCategoriesOpen);
+    // console.log('New state:', this.isCategoriesOpen);
   }
 
   toggleMyAccountDropdown(): void {
     this.isMyAccountDropdownOpen = !this.isMyAccountDropdownOpen;
   }
 
-  logout(): void {
-    this.authService.logout();
+//   logout(): void {
+//     this.authService.logout().subscribe({
+//         next: () => {
+//             this.router.navigate(['/']);
+//         },
+//         error: (err: unknown) => {
+//             console.log('Logout failed', err);
+//         }
+//     });
+// }
+
+logout(): void {
+    this.authService.logout(); // Perform synchronous logout
     this.router.navigate(['/']);
-  }
+}
+
 
   onSearch(event?: Event): void {
     if (event) {
