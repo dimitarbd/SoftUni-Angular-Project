@@ -1,3 +1,15 @@
 /* Product details basic styles placeholder */
 
 
+/* Make delete button 30% wider (use scale, keep label centered and font size intact) */
+.delete-btn-wide {
+    transform: scaleX(1.3);
+    transform-origin: center;
+    display: inline-block;
+}
+
+/* Prevent label from stretching visually */
+.delete-btn-wide .btn-label {
+    display: inline-block;
+    transform: scaleX(0.77); /* ~1 / 1.3 to counter outer scale */
+}
