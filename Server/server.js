@@ -1880,12 +1880,32 @@
             }
         },
         comments: {
-            "0a272c58-b7ea-4e09-a000-7ec988248f66": {
-                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-                content: "Great recipe!",
-                recipeId: "8f414b4f-ab39-4d36-bedb-2ad69da9c830",
-                _createdOn: 1614260681375,
-                _id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
+            "comment-1": {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "partId": "dded749d-5a91-4c10-8211-a3af649c43c0",
+                "text": "Great product! Works perfectly on my car.",
+                "rating": 5,
+                "currentDate": "15/01/25",
+                "_createdOn": 1744224648500,
+                "_id": "comment-1"
+            },
+            "comment-2": {
+                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
+                "partId": "dded749d-5a91-4c10-8211-a3af649c43c0",
+                "text": "Good quality wheels, delivery was fast.",
+                "rating": 4,
+                "currentDate": "14/01/25",
+                "_createdOn": 1744224648501,
+                "_id": "comment-2"
+            },
+            "comment-3": {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "partId": "dba62041-1269-403c-a717-ea7e14c3a9ec",
+                "text": "Very convenient cupholder, fits perfectly.",
+                "rating": 5,
+                "currentDate": "13/01/25",
+                "_createdOn": 1744224648502,
+                "_id": "comment-3"
             }
         },
         records: {

@@ -109,76 +109,107 @@
         <div class="sp-product-tab_nav">
           <div class="product-tab">
             <ul class="nav product-menu">
-              <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a></li>
-              <li><a data-toggle="tab" href="#reviews"><span>Reviews ({{ comments.length }})</span></a></li>
+              <li>
+                <a href="#" [class.active]="activeTab === 'description'" (click)="$event.preventDefault(); selectTab('description')">
+                  <span>Description</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" [class.active]="activeTab === 'reviews'" (click)="$event.preventDefault(); selectTab('reviews')">
+                  <span>Reviews ({{ comments.length }})</span>
+                </a>
+              </li>
             </ul>
           </div>
           <div class="tab-content uren-tab_content">
-            <div id="description" class="tab-pane active show" role="tabpanel">
+            <div id="description" class="tab-pane" [class.active]="activeTab === 'description'" [class.show]="activeTab === 'description'" role="tabpanel">
               <div class="product-description">
                 <span>{{ part.description }}</span>
               </div>
             </div>
-            <div id="reviews" class="tab-pane" role="tabpanel">
+            <div id="reviews" class="tab-pane" [class.active]="activeTab === 'reviews'" [class.show]="activeTab === 'reviews'" role="tabpanel">
               <div class="tab-pane active" id="tab-review">
-                <form class="form-horizontal" (ngSubmit)="submitComment()">
+                <form class="form-horizontal" (ngSubmit)="submitComment()" #reviewForm="ngForm" novalidate>
                   <div id="review">
-                    <table class="table table-striped table-bordered" *ngIf="comments.length; else noComments">
-                      <tbody *ngFor="let comment of comments">
-                        <tr>
-                          <td style="width:50%"><strong>{{ comment.author?.email }}</strong></td>
-                          <td class="text-right">{{ comment.currentDate }}</td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">
-                            <p>{{ comment.text }}</p>
-                            <div class="rating-box d-flex justify-content-between align-items-center">
-                              <ul class="d-flex">
-                                <li *ngFor="let i of stars; let idx = index" [class.silver-color]="isSilver(idx, comment.rating)">
-                                  <i class="ion-android-star"></i>
-                                </li>
-                              </ul>
-                              <div class="comment-actions d-flex" *ngIf="isOwner && isAuthenticated">
-                                <button type="button" class="uren-btn uren-btn_sm uren-btn_dark" (click)="deleteComment(comment._id)">Delete</button>
+                    @if (isLoadingComments) {
+                      <div class="text-center p-4">
+                        <app-ring-spinner 
+                          message="Loading reviews..." 
+                          size="medium"
+                          color="#c0c0c0">
+                        </app-ring-spinner>
+                      </div>
+                    } @else {
+                      <table class="table table-striped table-bordered" *ngIf="comments.length; else noComments">
+                        <tbody *ngFor="let comment of comments">
+                          <tr>
+                            <td style="width:50%"><strong>{{ comment.author?.email || 'Anonymous' }}</strong></td>
+                            <td class="text-right">{{ comment.currentDate }}</td>
+                          </tr>
+                          <tr>
+                            <td colspan="2">
+                              <p>{{ comment.text }}</p>
+                              <div class="rating-box d-flex justify-content-between align-items-center">
+                                <ul class="d-flex">
+                                  <li *ngFor="let i of stars; let idx = index" [class.silver-color]="isSilver(idx, comment.rating)">
+                                    <i class="ion-android-star"></i>
+                                  </li>
+                                </ul>
+                                <div class="comment-actions d-flex" *ngIf="canDeleteComment(comment)">
+                                  <button type="button" class="uren-btn uren-btn_sm uren-btn_dark delete-btn-wide" (click)="deleteComment(comment._id)"><span class="btn-label">Delete</span></button>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <ng-template #noComments>
-                      <table class="table table-striped table-bordered">
-                        <tbody>
-                          <tr><td colspan="2">There are no reviews for this product.</td></tr>
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
-                    </ng-template>
+                      <ng-template #noComments>
+                        <table class="table table-striped table-bordered">
+                          <tbody>
+                            <tr><td colspan="2">There are no reviews for this product.</td></tr>
+                          </tbody>
+                        </table>
+                      </ng-template>
+                    }
                   </div>
                   <div class="review-box" *ngIf="isAuthenticated; else pleaseLogin">
                     <h2>Write a review</h2>
                     <div class="form-group required second-child">
                       <div class="col-sm-12 p-0">
-                        <label class="control-label">Share your opinion</label>
-                        <textarea class="review-textarea" name="text" id="text" [(ngModel)]="text"></textarea>
+                        <label class="control-label">Share your opinion *</label>
+                        <textarea 
+                          class="review-textarea form-control" 
+                          name="text" 
+                          id="text" 
+                          [(ngModel)]="text"
+                          placeholder="Write your review here..."
+                          rows="4">
+                        </textarea>
                       </div>
                     </div>
                     <div class="form-group last-child required">
                       <div class="col-sm-12 p-0">
                         <div class="your-opinion">
-                          <label>Your Rating</label>
+                          <label>Your Rating *</label>
                           <span>
-                            <select class="star-rating" name="rating" id="rating" [(ngModel)]="rating">
-                              <option [ngValue]="1">1</option>
-                              <option [ngValue]="2">2</option>
-                              <option [ngValue]="3">3</option>
-                              <option [ngValue]="4">4</option>
-                              <option [ngValue]="5">5</option>
+                            <select class="star-rating form-control" name="rating" id="rating" [(ngModel)]="rating">
+                              <option [ngValue]="1">⭐ 1 - Poor</option>
+                              <option [ngValue]="2">⭐⭐ 2 - Fair</option>
+                              <option [ngValue]="3">⭐⭐⭐ 3 - Good</option>
+                              <option [ngValue]="4">⭐⭐⭐⭐ 4 - Very Good</option>
+                              <option [ngValue]="5">⭐⭐⭐⭐⭐ 5 - Excellent</option>
                             </select>
                           </span>
+                          
                         </div>
                       </div>
                       <div class="uren-btn-ps_right">
-                        <button class="uren-btn-2">Continue</button>
+                        <button 
+                          type="submit" 
+                          class="uren-btn-2"
+                          [disabled]="isSubmitting">
+                          Submit Review
+                        </button>
                       </div>
                     </div>
                   </div>

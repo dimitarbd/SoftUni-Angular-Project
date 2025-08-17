@@ -23,9 +23,11 @@ export class DetailsComponent {
     comments: any[] = [];
     isLoadingComments = true;
     isLoadingPart = true;
+    isSubmitting = false;
     text = '';
     rating: number = 1;
     stars: number[] = [0, 1, 2, 3, 4];
+    activeTab: 'description' | 'reviews' = 'description';
 
     constructor(
         private route: ActivatedRoute,
@@ -55,9 +57,21 @@ export class DetailsComponent {
         return this.authService.isLoggedIn();
     }
 
+    selectTab(tab: 'description' | 'reviews'): void {
+        this.activeTab = tab;
+        if (tab === 'reviews' && !this.comments.length) {
+            this.loadComments();
+        }
+    }
+
     get isOwner(): boolean {
         const userId = this.authService.getCurrentUserId();
         return !!userId && (this.part as any)?._ownerId === userId;
+    }
+
+    canDeleteComment(comment: any): boolean {
+        const userId = this.authService.getCurrentUserId();
+        return !!userId && (comment._ownerId === userId || this.isOwner);
     }
 
     deletePart(): void {
@@ -74,11 +88,27 @@ export class DetailsComponent {
     }
 
     submitComment(): void {
-        if (!this.isAuthenticated) return;
+        if (!this.isAuthenticated) {
+            return;
+        }
+
+        if (this.isSubmitting) {
+            return;
+        }
+
+        this.isSubmitting = true;
         const currentDate = new Date().toLocaleDateString('en-GB').split('/').map((p, i) => i === 2 ? p.slice(-2) : p).join('/');
-        this.commentsService.create(this.partId, this.text, Number(this.rating), currentDate).subscribe({
-            next: () => { this.text = ''; this.rating = 1; this.loadComments(); },
-            error: () => { }
+        this.commentsService.create(this.partId, (this.text ?? '').trim(), Number(this.rating), currentDate).subscribe({
+            next: () => {
+                this.text = '';
+                this.rating = 1;
+                this.loadComments();
+                this.isSubmitting = false;
+            },
+            error: (error) => {
+                console.error('Error submitting review:', error);
+                this.isSubmitting = false;
+            }
         });
     }
 
