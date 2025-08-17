@@ -1,6 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { User } from '../../models/user.model';
 
 @Injectable({
@@ -50,11 +50,14 @@ export class AuthService {
         localStorage.setItem('accessToken', user.accessToken || '');
     }
 
-    logout(): void {
-        this._currentUser.set(null);
-        this._isLoggedIn.set(false);
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('accessToken');
+    logout(): Observable<void> {
+        return this.httpClient.post<void>(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
+            tap(() => {
+                this._currentUser.set(null);
+                this._isLoggedIn.set(false);
+                localStorage.removeItem('currentUser');
+            })
+        );
     }
 
     getAccessToken(): string | null {
