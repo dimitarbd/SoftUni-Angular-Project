@@ -24,7 +24,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-10 offset-lg-1">
-        <form (ngSubmit)="onSubmit()" class="login-form">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="login-form">
           <div class="login-title">
             <h3>Part Information</h3>
           </div>
@@ -32,13 +32,13 @@
             <div class="col-md-6">
               <div class="input-box">
                 <label for="title" class="mb-1">Part Name <span class="required">*</span></label>
-                <input id="title" name="title" type="text" [(ngModel)]="formData.title" required placeholder="Enter part name" />
+                <input id="title" name="title" type="text" formControlName="title" placeholder="Enter part name" />
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-box">
                 <label for="price" class="mb-1">Price <span class="required">*</span></label>
-                <input id="price" name="price" type="number" [(ngModel)]="formData.price" required placeholder="Enter price" />
+                <input id="price" name="price" type="number" formControlName="price" placeholder="Enter price" />
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@
             <div class="col-md-12">
               <div class="input-box">
                 <label for="description" class="mb-1">Description <span class="required">*</span></label>
-                <textarea id="description" name="description" [(ngModel)]="formData.description" rows="4" required placeholder="Enter detailed description" style="width:100%"></textarea>
+                <textarea id="description" name="description" formControlName="description" rows="4" placeholder="Enter detailed description" style="width:100%"></textarea>
               </div>
             </div>
           </div>
@@ -54,13 +54,13 @@
             <div class="col-md-6">
               <div class="input-box">
                 <label for="imageUrl" class="mb-1">Image URL <span class="required">*</span></label>
-                <input id="imageUrl" name="imageUrl" type="url" [(ngModel)]="formData.imageUrl" required placeholder="http://example.com/image.jpg" />
+                <input id="imageUrl" name="imageUrl" type="url" formControlName="imageUrl" placeholder="http://example.com/image.jpg" />
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-box">
                 <label for="quantity" class="mb-1">Stock Quantity <span class="required">*</span></label>
-                <input id="quantity" name="quantity" type="number" [(ngModel)]="formData.quantity" required placeholder="Enter quantity in stock" />
+                <input id="quantity" name="quantity" type="number" formControlName="quantity" placeholder="Enter quantity in stock" />
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@
             <div class="col-md-12">
               <div class="input-box">
                 <label for="category" class="mb-1">Category <span class="required">*</span></label>
-                <select id="category" name="category" class="nice-select w-100" [(ngModel)]="formData.category" required>
+                <select id="category" name="category" class="nice-select w-100" formControlName="category">
                   <option value="">Select a category</option>
                   <option value="Engine and Drivetrain">Engine and Drivetrain</option>
                   <option value="Suspension and Steering">Suspension and Steering</option>
@@ -91,13 +91,13 @@
             <div class="col-md-6">
               <div class="input-box">
                 <label for="brand" class="mb-1">Brand <span class="required">*</span></label>
-                <input id="brand" name="brand" type="text" [(ngModel)]="formData.brand" required placeholder="Enter brand" />
+                <input id="brand" name="brand" type="text" formControlName="brand" placeholder="Enter brand" />
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-box">
                 <label for="year" class="mb-1">Year <span class="required">*</span></label>
-                <input id="year" name="year" type="number" [(ngModel)]="formData.year" required placeholder="Enter year (e.g., 2022)" />
+                <input id="year" name="year" type="number" formControlName="year" placeholder="Enter year (e.g., 2022)" min="1900" [max]="currentYear" />
               </div>
             </div>
           </div>
@@ -105,7 +105,7 @@
             <div class="col-md-6">
               <div class="input-box">
                 <label for="rating" class="mb-1">Rating <span class="required">*</span></label>
-                <input id="rating" name="rating" type="number" [(ngModel)]="formData.rating" required min="1" max="5" placeholder="Enter rating (between 1 and 5)" />
+                <input id="rating" name="rating" type="number" formControlName="rating" min="1" max="5" placeholder="Enter rating (between 1 and 5)" />
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@
                 <a [routerLink]="['/catalog', partId, 'details']" class="uren-btn uren-btn_dark">
                   <span>Cancel</span>
                 </a>
-                <button type="submit" class="uren-btn" [disabled]="isLoading">
+                <button type="submit" class="uren-btn" [disabled]="isLoading || !isFormReady">
                   <span>Save Changes</span>
                 </button>
               </div>
