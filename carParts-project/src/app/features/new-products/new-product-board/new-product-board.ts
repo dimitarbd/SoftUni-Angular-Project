@@ -24,7 +24,7 @@ export class NewProductBoard implements OnInit, AfterViewInit {
     constructor(private partService: PartService, private destroyRef: DestroyRef) { }
 
     ngOnInit(): void {
-        this.partService.getRecentParts(6).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+        this.partService.getRecentParts(10).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
             next: (parts) => {
                 this.parts = parts;
                 this.createInfiniteLoop();
@@ -38,28 +38,25 @@ export class NewProductBoard implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        // Add scroll listener for infinite effect even on manual scroll
         if (this.productsContainer) {
             this.productsContainer.nativeElement.addEventListener('scroll', () => {
                 clearTimeout(this.scrollTimeout);
                 this.scrollTimeout = setTimeout(() => {
                     this.checkAndRepositionScroll();
-                }, 2000); // Wait longer before repositioning to avoid interrupting user scrolling
+                }, 2000); 
             });
         }
     }
 
     private createInfiniteLoop(): void {
         if (this.parts.length > 0) {
-            // Create a much longer loop for truly seamless infinite scrolling
-            const repeatCount = 20; // Many repetitions to avoid visible repositioning
+            const repeatCount = 20; 
             this.displayParts = [];
             
             for (let i = 0; i < repeatCount; i++) {
                 this.displayParts.push(...this.parts);
             }
             
-            // Set initial scroll position to well into the middle, but only after styles are loaded
             const setInitialPosition = () => {
                 if (!this.productsContainer) return;
                 const container = this.productsContainer.nativeElement;
