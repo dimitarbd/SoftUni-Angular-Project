@@ -12,4 +12,8 @@ export class ErrorService {
         this._error.set(message);
         setTimeout(() => this._error.set(null), 3000);
     }
+
+    clearError(): void {
+        this._error.set(null);
+    }
 }

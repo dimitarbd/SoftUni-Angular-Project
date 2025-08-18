@@ -3,12 +3,20 @@
         <div class="row">
             <div class="col-xl-9 col-lg-8">
                 <div class="main-slider slider-navigation_style-2" style="position: relative;">
-                    <span class="slick-arrow slick-prev" (click)="prevSlide()"><i class="ion-ios-arrow-left"></i></span>
+                    <button class="slick-arrow slick-prev" type="button" aria-label="Previous slide" (click)="prevSlide()">
+                        <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                        </svg>
+                    </button>
                     <app-slider-item *ngFor="let item of items; let i = index"
                         [item]="item" 
                         [active]="i === activeIndex"
                         (categoryNavigate)="navigateToCategory($event)"></app-slider-item>
-                    <span class="slick-arrow slick-next" (click)="nextSlide()"><i class="ion-ios-arrow-right"></i></span>
+                    <button class="slick-arrow slick-next" type="button" aria-label="Next slide" (click)="nextSlide()">
+                        <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                        </svg>
+                    </button>
                     <ul class="slick-dots">
                         <li *ngFor="let item of items; let i = index" (click)="goToSlide(i)" [class.slick-active]="i === activeIndex">
                             <button type="button">{{ i + 1 }}</button>

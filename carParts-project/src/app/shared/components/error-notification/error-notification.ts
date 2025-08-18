@@ -12,4 +12,7 @@ export class ErrorNotification {
     private errorService = inject(ErrorService);
     readonly error = this.errorService.error;
     
+    close(): void {
+        this.errorService.clearError();
+    }
 }
