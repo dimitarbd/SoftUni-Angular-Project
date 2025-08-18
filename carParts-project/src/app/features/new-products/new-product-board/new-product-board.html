@@ -15,11 +15,15 @@
                 } @else {
                     <div class="product-slider uren-slick-slider slider-navigation_style-1 img-hover-effect_area products-wrapper">
                         <!-- Navigation arrows -->
-                        <button type="button" class="slick-prev slider-arrow-left" (click)="scrollLeft()">
-                            <i class="ion-chevron-left"></i>
+                        <button type="button" class="slick-prev slider-arrow-left" aria-label="Previous products" (click)="scrollLeft()">
+                            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                            </svg>
                         </button>
-                        <button type="button" class="slick-next slider-arrow-right" (click)="scrollRight()">
-                            <i class="ion-chevron-right"></i>
+                        <button type="button" class="slick-next slider-arrow-right" aria-label="Next products" (click)="scrollRight()">
+                            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                            </svg>
                         </button>
                         
                         <!-- Products container -->
