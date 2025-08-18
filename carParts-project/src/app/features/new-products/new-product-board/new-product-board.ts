@@ -24,7 +24,7 @@ export class NewProductBoard implements OnInit, AfterViewInit {
     constructor(private partService: PartService, private destroyRef: DestroyRef) { }
 
     ngOnInit(): void {
-        this.partService.getRecentParts().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+        this.partService.getRecentParts(6).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
             next: (parts) => {
                 this.parts = parts;
                 this.createInfiniteLoop();

@@ -51,11 +51,17 @@ export class AuthService {
     }
 
     logout(): Observable<void> {
-        return this.httpClient.post<void>(`${this.apiUrl}/logout`, {}, { withCredentials: true }).pipe(
+        const token = this.getAccessToken();
+        const headers: any = {};
+        if (token) {
+            headers['X-Authorization'] = token;
+        }
+        return this.httpClient.post<void>(`${this.apiUrl}/logout`, {}, { headers }).pipe(
             tap(() => {
                 this._currentUser.set(null);
                 this._isLoggedIn.set(false);
                 localStorage.removeItem('currentUser');
+                localStorage.removeItem('accessToken');
             })
         );
     }

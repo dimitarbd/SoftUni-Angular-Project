@@ -48,17 +48,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private categoriesSubscription?: Subscription;
 
   toggleCategories(): void {
-    this.isCategoriesOpen = !this.isCategoriesOpen;    
+    this.isCategoriesOpen = !this.isCategoriesOpen;
   }
 
   toggleMyAccountDropdown(): void {
     this.isMyAccountDropdownOpen = !this.isMyAccountDropdownOpen;
   }
 
-logout(): void {
-    this.authService.logout(); 
-    this.router.navigate(['/']);
+  logout(): void {
+    this.authService.logout().subscribe({
+        next: () => {
+            this.router.navigate(['/']);
+        },
+        error: (err: unknown) => {
+            console.log('Logout failed', err);
+        }
+    });
 }
+
+// logout(): void {
+//     this.authService.logout(); // Perform synchronous logout
+//     this.router.navigate(['/']);
+// }
 
 
   onSearch(event?: Event): void {

@@ -172,6 +172,8 @@ button {
   background: transparent;
 }
 
+/* --- Remove force show arrows on home main slider (handled locally) --- */
+
 /* ---Uren's Blog Section Default Youtube & Soundcloud Height--- */
 .grid-view_area .embed-responsive:before {
   padding-top: 64.50%;
