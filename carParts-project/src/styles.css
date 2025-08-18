@@ -2442,21 +2442,22 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .price-filter 
           justify-content: center;
 }
 
-.category-menu .category-heading > h2:before {
-  content: "\f394";
-  font-family: 'Ionicons';
-  position: absolute;
-  top: 0;
-  left: 20px;
-  font-size: 40px;
-}
+/* Remove default pseudo before-icon to use inline ion-icon */
+.category-menu .category-heading > h2:before { content: none; }
 
-.category-menu .category-heading > h2:after {
-  content: "\f3d0";
-  font-family: 'Ionicons';
+/* Keep after caret if desired; comment out if not needed */
+.category-menu .category-heading > h2:after { content: none; }
+
+/* Style inline ion-icon */
+.category-menu .category-heading .cate-menu-icon {
   position: absolute;
-  right: 20px;
-  font-size: 25px;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #000;
 }
 
 .category-menu .category-heading > h2 > span {
@@ -6680,6 +6681,7 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .price-filter 
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  font-weight: 400;
 }
 
 .uren-sidebar-catagories_area .uren-sidebar_categories.category-module .module-body > .module-list_item > li > a.active {
