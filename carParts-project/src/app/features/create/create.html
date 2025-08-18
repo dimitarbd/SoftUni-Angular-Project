@@ -161,7 +161,7 @@
                   formControlName="year" 
                   placeholder="Enter year (e.g., 2022)" 
                   min="1900" 
-                  max="2030" />
+                  [max]="currentYear" />
                 @if (yearError) {
                   <p style="color: red">{{ yearErrorMessage }}</p>
                 }

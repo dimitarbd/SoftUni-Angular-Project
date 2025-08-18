@@ -21,6 +21,7 @@ export class CreateComponent {
 
     createForm: FormGroup;
     error = signal<string | null>(null);
+    readonly currentYear = new Date().getFullYear();
 
     constructor() {
         if (!this.authService.isLoggedIn()) {
@@ -35,7 +36,7 @@ export class CreateComponent {
             category: ['', [Validators.required]],
             quantity: ['', [Validators.required, Validators.min(1)]],
             brand: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-            year: ['', [Validators.required, Validators.min(1900), Validators.max(2030)]],
+            year: ['', [Validators.required, Validators.min(1900), Validators.max(this.currentYear)]],
             rating: ['', [Validators.required, Validators.min(1), Validators.max(5)]]
         });
     }
@@ -173,7 +174,7 @@ export class CreateComponent {
             return 'Year must be 1900 or later';
         }
         if (this.year?.errors?.['max'] && (this.year?.touched || this.year?.dirty)) {
-            return 'Year must be 2030 or earlier';
+            return `Year must be ${this.currentYear} or earlier`;
         }
         return '';
     }
