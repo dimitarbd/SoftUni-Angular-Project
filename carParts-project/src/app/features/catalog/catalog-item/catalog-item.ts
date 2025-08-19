@@ -15,10 +15,10 @@ import { RouterLink } from '@angular/router';
 export class CatalogItem {
     @Input() part!: Part;
 
-    get ratingArray(): number[] {
+    get stars(): boolean[] {
         const rawRating = this.part?.rating ?? 0;
-        const numericRating = typeof rawRating === 'string' ? parseInt(rawRating, 10) : Number(rawRating);
+        const numericRating = typeof rawRating === 'string' ? parseFloat(rawRating) : Number(rawRating);
         const safeRating = Number.isFinite(numericRating) ? Math.max(0, Math.min(5, Math.floor(numericRating))) : 0;
-        return Array.from({ length: safeRating }, (_, index) => index);
+        return Array.from({ length: 5 }, (_, i) => i < safeRating);
     }
 }

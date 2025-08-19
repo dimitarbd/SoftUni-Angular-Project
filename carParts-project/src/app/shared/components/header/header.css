@@ -18,6 +18,11 @@
   justify-content: flex-end;
 }
 
+/* Ensure header sticks to very top without gaps */
+header.header-main_area {
+  margin-top: 0 !important;
+}
+
 /* My Account Dropdown Styles */
 .ht-menu .dropdown-holder {
   position: relative;

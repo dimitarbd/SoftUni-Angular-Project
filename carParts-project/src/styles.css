@@ -59,6 +59,8 @@ body {
   color: #999999;
   font-size: 14px;
   line-height: 24px;
+  margin: 0;
+  padding: 0;
 }
 
 h1,
@@ -3276,6 +3278,18 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .price-filter 
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
   border-left: 1px solid #e5e5e5;
+}
+
+/* Catalog grid spacing to match reference */
+.shop-product-wrap.row {
+  margin-left: -12px;
+  margin-right: -12px;
+  row-gap: 24px;
+}
+
+.shop-product-wrap.row > [class*="col-"] {
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 /* ---Uren's Special Product--- */
@@ -6983,9 +6997,21 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .price-filter 
   border: 0;
 }
 
+/* Match reference spacing between product cards */
+.shop-product-wrap.grid > [class*="col-"] {
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-bottom: 24px;
+}
+
+.shop-product-wrap.grid {
+  margin-left: -12px;
+  margin-right: -12px;
+}
+
 .shop-product-wrap.grid .product-slide_item .inner-slide .single-product {
   border: 1px solid #e5e5e5;
-  margin-top: 30px;
+  margin-top: 24px;
 }
 
 .shop-product-wrap.grid .product-slide_item .inner-slide .single-product .product-img {

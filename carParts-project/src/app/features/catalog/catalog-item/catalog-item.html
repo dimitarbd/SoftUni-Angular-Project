@@ -10,8 +10,8 @@
                 <div class="product-desc_info">
                     <div class="rating-box">
                         <ul>
-                            @for (i of ratingArray; track i) {
-                                <li><i aria-hidden="true">★</i></li>
+                            @for (filled of stars; track $index) {
+                                <li [class.silver-color]="!filled"><i aria-hidden="true">★</i></li>
                             }
                         </ul>
                     </div>
