@@ -66,12 +66,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
 }
 
-// logout(): void {
-//     this.authService.logout(); // Perform synchronous logout
-//     this.router.navigate(['/']);
-// }
-
-
   onSearch(event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -82,6 +76,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.router.navigate(['/catalog'], { 
         queryParams: { search: this.searchTerm.trim() } 
       });
+      this.searchTerm = '';
     }
   }
 
