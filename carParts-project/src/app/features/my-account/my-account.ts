@@ -31,7 +31,7 @@ export class MyAccountComponent {
   updateError = signal<string | null>(null);
   updateSuccess = signal<string | null>(null);
   updating = signal<boolean>(false);
-  activeTab = signal<string>('dashboard'); 
+  activeTab = signal<string>('profile'); 
 
   constructor() {
     const userId = this.auth.getCurrentUserId();

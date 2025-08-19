@@ -10,7 +10,6 @@ bootstrapApplication(AppComponent, {
     provideAnimations()
   ]
 })
-  .then(() => console.log('Application bootstrapped successfully'))
   .catch((err) => console.error(err));
 
   

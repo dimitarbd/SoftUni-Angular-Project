@@ -8343,11 +8343,11 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .price-filter 
   padding: 30px;
 }
 
-.myaccount-dashboard p {
+.myaccount-profile p {
   margin-bottom: 20px;
 }
 
-.myaccount-dashboard p:last-child {
+.myaccount-profile p:last-child {
   margin-bottom: 0;
 }
 

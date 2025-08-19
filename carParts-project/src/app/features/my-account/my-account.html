@@ -18,9 +18,9 @@
           <ul class="nav myaccount-tab-trigger" role="tablist">
             <li class="nav-item">
               <a class="nav-link" 
-                 [class.active]="activeTab() === 'dashboard'"
-                 (click)="setActiveTab('dashboard')" 
-                 href="javascript:void(0)">Dashboard</a>
+                 [class.active]="activeTab() === 'profile'"
+                 (click)="setActiveTab('profile')" 
+                 href="javascript:void(0)">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" 
@@ -38,9 +38,9 @@
         </div>
         <div class="col-lg-9">
           <div class="tab-content myaccount-tab-content" style="width: 75%; margin: 0;">
-            @if (activeTab() === 'dashboard') {
-              <div id="account-dashboard" class="tab-pane active show">
-                <div class="myaccount-dashboard" style="text-align: center;">
+            @if (activeTab() === 'profile') {
+              <div id="account-profile" class="tab-pane active show">
+                <div class="myaccount-profile" style="text-align: center;">
                   <img src="https://media.istockphoto.com/id/1130884625/vector/user-member-vector-icon-for-ui-user-interface-or-profile-face-avatar-app-in-circle-design.jpg?s=612x612&w=0&k=20&c=1ky-gNHiS2iyLsUPQkxAtPBWH1BZt0PKBB1WBtxQJRE=" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px;">
                   <h3 style="margin-bottom: 1em;">Profile Information</h3>
                   <div class="profile-info">
