@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { CatalogItem } from '../catalog-item/catalog-item';
 import { Part } from '../../../models/part.model';
 import { PartService } from '../../../core/services/part.service';
@@ -63,31 +63,25 @@ export class CatalogBoard implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        // Subscribe to route query parameters for search and category
         this.routeSubscription = this.route.queryParams.subscribe(params => {
             const searchTerm = params['search'] || '';
             const categoryParam = params['category'] || '';
             
-            // Handle search parameter
             if (searchTerm) {
                 this.currentSearchTerm = searchTerm;
                 this.searchService.setSearchTerm(searchTerm);
-                // Clear category filter when searching
                 this.selectedCategory = null;
                 this.categoryFilterService.clearCategory();
             } else {
                 this.currentSearchTerm = '';
             }
             
-            // Handle category parameter
             if (categoryParam && !searchTerm) {
                 this.selectedCategory = categoryParam;
                 this.categoryFilterService.setCategory(categoryParam);
-                // Clear search when filtering by category
                 this.currentSearchTerm = '';
                 this.searchService.clearSearchTerm();
             } else if (!categoryParam && !searchTerm) {
-                // Clear both filters if no parameters
                 this.selectedCategory = null;
                 this.currentSearchTerm = '';
                 this.categoryFilterService.clearCategory();
@@ -98,10 +92,8 @@ export class CatalogBoard implements OnInit, OnDestroy {
             this.applyFilter();
         });
 
-        // Subscribe to category changes from the slider
         this.categorySubscription = this.categoryFilterService.category$.subscribe(category => {
             this.selectedCategory = category;
-            // Clear search when filtering by category
             if (category) {
                 this.currentSearchTerm = '';
                 this.searchService.clearSearchTerm();
@@ -110,11 +102,9 @@ export class CatalogBoard implements OnInit, OnDestroy {
             this.applyFilter();
         });
 
-        // Subscribe to search term changes
         this.searchSubscription = this.searchService.searchTerm$.subscribe(searchTerm => {
             if (searchTerm && searchTerm !== this.currentSearchTerm) {
                 this.currentSearchTerm = searchTerm;
-                // Clear category filter when searching
                 this.selectedCategory = null;
                 this.categoryFilterService.clearCategory();
                 this.currentPage = 1;
@@ -158,7 +148,6 @@ export class CatalogBoard implements OnInit, OnDestroy {
 
     selectCategory(category: string | null): void {
         this.categoryFilterService.setCategory(category);
-        // Update URL with category parameter
         if (category) {
             this.router.navigate(['/catalog'], { 
                 queryParams: { category: category },
@@ -189,7 +178,6 @@ export class CatalogBoard implements OnInit, OnDestroy {
     applyFilter(): void {
         let results = this.allParts.slice();
 
-        // Apply search filter first
         if (this.currentSearchTerm.trim()) {
             const searchTerm = this.currentSearchTerm.toLowerCase().trim();
             results = results.filter(part => 
@@ -200,14 +188,12 @@ export class CatalogBoard implements OnInit, OnDestroy {
             );
         }
 
-        // Then apply category filter
         if (this.selectedCategory) {
             results = results.filter(p => (p.category || '').toString() === this.selectedCategory);
         }
 
         this.filteredParts = results;
 
-        // Ensure current page stays within bounds when data changes
         if (this.currentPage > this.totalPages) {
             this.currentPage = this.totalPages;
         }

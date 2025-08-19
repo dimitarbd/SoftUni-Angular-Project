@@ -40,7 +40,7 @@
             <div class="rating-box">
               <ul>
                 <li *ngFor="let i of stars; let idx = index" [class.silver-color]="isSilver(idx, part.rating)">
-                  <i class="ion-android-star"></i>
+                  <i aria-hidden="true">★</i>
                 </li>
               </ul>
             </div>
@@ -152,7 +152,7 @@
                               <div class="rating-box d-flex justify-content-between align-items-center">
                                 <ul class="d-flex">
                                   <li *ngFor="let i of stars; let idx = index" [class.silver-color]="isSilver(idx, comment.rating)">
-                                    <i class="ion-android-star"></i>
+                                    <i aria-hidden="true">★</i>
                                   </li>
                                 </ul>
                                 <div class="comment-actions d-flex" *ngIf="canDeleteComment(comment)">

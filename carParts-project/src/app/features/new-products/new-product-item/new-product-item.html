@@ -19,9 +19,9 @@
                 <div class="product-desc_info">
                     <div class="rating-box">
                         <ul>
-                            <li [class.silver-color]="i >= +part.rating" *ngFor="let star of [1,2,3,4,5]; let i = index">
-                                <i class="ion-android-star"></i>
-                            </li>
+                            @for (filled of stars; track $index) {
+                                <li [class.silver-color]="!filled"><i aria-hidden="true">★</i></li>
+                            }
                         </ul>
                     </div>
                     <h6><a class="product-name" [routerLink]="['/catalog', part._id, 'details']">{{ part.title }}</a></h6>
