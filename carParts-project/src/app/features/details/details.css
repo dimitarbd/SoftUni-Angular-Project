@@ -13,3 +13,8 @@
     display: inline-block;
     transform: scaleX(0.77); /* ~1 / 1.3 to counter outer scale */
 }
+
+/* Add vertical spacing between rating selector and submit button */
+.review-box .uren-btn-ps_right {
+    margin-top: 2em;
+}
