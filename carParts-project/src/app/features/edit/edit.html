@@ -32,13 +32,23 @@
             <div class="col-md-6">
               <div class="input-box">
                 <label for="title" class="mb-1">Part Name <span class="required">*</span></label>
-                <input id="title" name="title" type="text" formControlName="title" placeholder="Enter part name" />
+                <input 
+                  [class.input-error]="titleError"
+                  id="title" name="title" type="text" formControlName="title" placeholder="Enter part name" />
+                @if (titleError) {
+                  <p style="color: red">{{ titleErrorMessage }}</p>
+                }
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-box">
                 <label for="price" class="mb-1">Price <span class="required">*</span></label>
-                <input id="price" name="price" type="number" formControlName="price" placeholder="Enter price" />
+                <input 
+                  [class.input-error]="priceError"
+                  id="price" name="price" type="number" formControlName="price" placeholder="Enter price" step="0.01" />
+                @if (priceError) {
+                  <p style="color: red">{{ priceErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -46,7 +56,12 @@
             <div class="col-md-12">
               <div class="input-box">
                 <label for="description" class="mb-1">Description <span class="required">*</span></label>
-                <textarea id="description" name="description" formControlName="description" rows="4" placeholder="Enter detailed description" style="width:100%"></textarea>
+                <textarea 
+                  [class.input-error]="descriptionError"
+                  id="description" name="description" formControlName="description" rows="4" placeholder="Enter detailed description" style="width:100%"></textarea>
+                @if (descriptionError) {
+                  <p style="color: red">{{ descriptionErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -54,13 +69,23 @@
             <div class="col-md-6">
               <div class="input-box">
                 <label for="imageUrl" class="mb-1">Image URL <span class="required">*</span></label>
-                <input id="imageUrl" name="imageUrl" type="url" formControlName="imageUrl" placeholder="http://example.com/image.jpg" />
+                <input 
+                  [class.input-error]="imageUrlError"
+                  id="imageUrl" name="imageUrl" type="url" formControlName="imageUrl" placeholder="https://example.com/image.jpg" />
+                @if (imageUrlError) {
+                  <p style="color: red">{{ imageUrlErrorMessage }}</p>
+                }
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-box">
                 <label for="quantity" class="mb-1">Stock Quantity <span class="required">*</span></label>
-                <input id="quantity" name="quantity" type="number" formControlName="quantity" placeholder="Enter quantity in stock" />
+                <input 
+                  [class.input-error]="quantityError"
+                  id="quantity" name="quantity" type="number" formControlName="quantity" placeholder="Enter quantity in stock" min="1" />
+                @if (quantityError) {
+                  <p style="color: red">{{ quantityErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -68,7 +93,9 @@
             <div class="col-md-12">
               <div class="input-box">
                 <label for="category" class="mb-1">Category <span class="required">*</span></label>
-                <select id="category" name="category" class="nice-select w-100" formControlName="category">
+                <select 
+                  [class.input-error]="categoryError"
+                  id="category" name="category" class="nice-select w-100" formControlName="category">
                   <option value="">Select a category</option>
                   <option value="Engine and Drivetrain">Engine and Drivetrain</option>
                   <option value="Suspension and Steering">Suspension and Steering</option>
@@ -81,6 +108,9 @@
                   <option value="Wheels and Tires">Wheels and Tires</option>
                   <option value="Fuel System">Fuel System</option>
                 </select>
+                @if (categoryError) {
+                  <p style="color: red">{{ categoryErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -91,13 +121,23 @@
             <div class="col-md-6">
               <div class="input-box">
                 <label for="brand" class="mb-1">Brand <span class="required">*</span></label>
-                <input id="brand" name="brand" type="text" formControlName="brand" placeholder="Enter brand" />
+                <input 
+                  [class.input-error]="brandError"
+                  id="brand" name="brand" type="text" formControlName="brand" placeholder="Enter brand name" />
+                @if (brandError) {
+                  <p style="color: red">{{ brandErrorMessage }}</p>
+                }
               </div>
             </div>
             <div class="col-md-6">
               <div class="input-box">
                 <label for="year" class="mb-1">Year <span class="required">*</span></label>
-                <input id="year" name="year" type="number" formControlName="year" placeholder="Enter year (e.g., 2022)" min="1900" [max]="currentYear" />
+                <input 
+                  [class.input-error]="yearError"
+                  id="year" name="year" type="number" formControlName="year" placeholder="Enter year (e.g., 2022)" min="1900" [max]="currentYear" />
+                @if (yearError) {
+                  <p style="color: red">{{ yearErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
@@ -105,7 +145,12 @@
             <div class="col-md-6">
               <div class="input-box">
                 <label for="rating" class="mb-1">Rating <span class="required">*</span></label>
-                <input id="rating" name="rating" type="number" formControlName="rating" min="1" max="5" placeholder="Enter rating (between 1 and 5)" />
+                <input 
+                  [class.input-error]="ratingError"
+                  id="rating" name="rating" type="number" formControlName="rating" min="1" max="5" step="0.1" placeholder="Enter rating (1-5)" />
+                @if (ratingError) {
+                  <p style="color: red">{{ ratingErrorMessage }}</p>
+                }
               </div>
             </div>
           </div>
