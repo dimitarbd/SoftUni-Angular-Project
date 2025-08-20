@@ -23,6 +23,18 @@ header.header-main_area {
   margin-top: 0 !important;
 }
 
+/* Spinner inside logout link */
+.main-nav a[aria-busy="true"], .dropdown-menu a[aria-busy="true"] {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.main-nav a[aria-busy="true"] app-loading-spinner,
+.dropdown-menu a[aria-busy="true"] app-loading-spinner {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 /* My Account Dropdown Styles */
 .ht-menu .dropdown-holder {
   position: relative;

@@ -2,16 +2,17 @@ import { Component, inject, OnInit, OnDestroy, HostListener } from '@angular/cor
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { SearchService } from '../../../core/services/search.service';
 import { CategoryFilterService } from '../../../core/services/category-filter.service';
 import { PartService } from '../../../core/services/part.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { LoadingSpinnerComponent } from '../../components/loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-header',
-  imports: [NgClass, RouterLink, FormsModule],
+  imports: [NgClass, RouterLink, FormsModule, LoadingSpinnerComponent],
   templateUrl: './header.html',
   styleUrl: './header.css',
   animations: [
@@ -46,6 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     isMyAccountDropdownOpen = false;
     categories: string[] = [];
     private categoriesSubscription?: Subscription;
+    isLoggingOut = false;
 
   toggleCategories(): void {
     this.isCategoriesOpen = !this.isCategoriesOpen;
@@ -56,15 +58,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.authService.logout().subscribe({
+    if (this.isLoggingOut) return;
+    this.isLoggingOut = true;
+    this.authService.logout()
+      .pipe(finalize(() => this.isLoggingOut = false))
+      .subscribe({
         next: () => {
-            this.router.navigate(['/']);
+          this.router.navigate(['/']);
         },
         error: (err: unknown) => {
-            console.log('Logout failed', err);
+          console.log('Logout failed', err);
         }
-    });
-}
+      });
+  }
 
   onSearch(event?: Event): void {
     if (event) {

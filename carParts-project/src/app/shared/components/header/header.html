@@ -77,7 +77,15 @@
                                 </li>
                                 @if(isLoggedIn()) {
                                 <li><a routerLink="/create">Create Offer</a></li>
-                                <li><a routerLink="/logout" (click)="logout()">Logout</a></li>
+                                <li>
+                                    <a href="javascript:void(0)" (click)="logout()" [attr.aria-busy]="isLoggingOut">
+                                        @if(isLoggingOut) {
+                                            <app-loading-spinner size="small" [center]="false" color="#ffffff"></app-loading-spinner>
+                                        } @else {
+                                            Logout
+                                        }
+                                    </a>
+                                </li>
                                 } @else {
                                 <li><a routerLink="/login">Login</a></li>
                                 <li class=""><a routerLink="/register">Register</a></li>
@@ -107,8 +115,15 @@
                                                 (click)="isMyAccountDropdownOpen = false">My Offers</a></li>
                                         <li><a routerLink="/my-account" [queryParams]="{tab: 'details'}"
                                                 (click)="isMyAccountDropdownOpen = false">Account Details</a></li>
-                                        <li><a routerLink="/logout"
-                                                (click)="logout(); isMyAccountDropdownOpen = false">Logout</a></li>
+                                        <li>
+                                            <a href="javascript:void(0)"
+                                               (click)="logout(); isMyAccountDropdownOpen = false"
+                                               [attr.aria-busy]="isLoggingOut">
+                                               @if(isLoggingOut) {
+                                                 <app-loading-spinner size="small" [center]="false" color="#ffffff"></app-loading-spinner>
+                                               } @else { Logout }
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                                 }
@@ -142,7 +157,13 @@
                                 </li>
                                 @if(isLoggedIn()) {
                                 <li><a routerLink="/create">Create Offer</a></li>
-                                <li><a routerLink="/logout" (click)="logout()">Logout</a></li>
+                                <li>
+                                    <a href="javascript:void(0)" (click)="logout()" [attr.aria-busy]="isLoggingOut">
+                                        @if(isLoggingOut) {
+                                            <app-loading-spinner size="small" [center]="false" color="#ffffff"></app-loading-spinner>
+                                        } @else { Logout }
+                                    </a>
+                                </li>
                                 } @else {
                                 <li><a routerLink="/login">Login</a></li>
                                 <li class=""><a routerLink="/register">Register</a></li>

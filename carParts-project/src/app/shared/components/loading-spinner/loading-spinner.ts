@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <div class="spinner-container" [ngClass]="{'center': center}">
-      <div class="spinner" [ngClass]="size">
+      <div class="spinner" [ngClass]="size" [style.--dot-color]="color">
         <div class="bounce1"></div>
         <div class="bounce2"></div>
         <div class="bounce3"></div>
@@ -51,7 +51,7 @@ import { CommonModule } from '@angular/common';
     .spinner > div {
       width: 18px;
       height: 18px;
-      background-color: #fe5c24;
+      background-color: var(--dot-color, #ffffff);
       border-radius: 100%;
       display: inline-block;
       animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -95,4 +95,5 @@ export class LoadingSpinnerComponent {
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
   @Input() message: string = '';
   @Input() center: boolean = true;
+  @Input() color: string = '#ffffff';
 }
