@@ -1,0 +1,38 @@
+<div class="uren-product_area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title_area">
+                    <span>Last 10 Ads Added</span>
+                    <h3>New Arrivals Products</h3>
+                </div>
+                @if (isLoading) {
+                    <app-ring-spinner 
+                        message="Loading new arrivals..." 
+                        size="medium"
+                        color="#c0c0c0">
+                    </app-ring-spinner>
+                } @else {
+                    <div class="product-slider uren-slick-slider slider-navigation_style-1 img-hover-effect_area products-wrapper">
+                        <!-- Navigation arrows -->
+                        <button type="button" class="slick-prev slider-arrow-left" aria-label="Previous products" (click)="scrollLeft()">
+                            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                            </svg>
+                        </button>
+                        <button type="button" class="slick-next slider-arrow-right" aria-label="Next products" (click)="scrollRight()">
+                            <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                            </svg>
+                        </button>
+                        
+                        <!-- Products container -->
+                        <div #productsContainer class="products-row">
+                            <app-new-product-item *ngFor="let part of displayParts; trackBy: trackByPartId" [part]="part"></app-new-product-item>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

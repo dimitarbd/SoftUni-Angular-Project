@@ -1,0 +1,35 @@
+<div class="product-slide_item">
+    <div class="inner-slide">
+        <div class="single-product">
+            <div class="product-img">
+                <a [routerLink]="['/catalog', part._id, 'details']">
+                    <img class="primary-img" 
+                         [src]="part.imageUrl" 
+                         [alt]="part.title"
+                         loading="lazy"
+                         width="300"
+                         height="250"
+                         decoding="async">                   
+                </a>
+                <div class="sticker">
+                    <span class="sticker">New</span>
+                </div>                
+            </div>
+            <div class="product-content">
+                <div class="product-desc_info">
+                    <div class="rating-box">
+                        <ul>
+                            @for (filled of stars; track $index) {
+                                <li [class.silver-color]="!filled"><i aria-hidden="true">★</i></li>
+                            }
+                        </ul>
+                    </div>
+                    <h6><a class="product-name" [routerLink]="['/catalog', part._id, 'details']">{{ part.title }}</a></h6>
+                    <div class="price-box">
+                        <span class="new-price">${{ part.price }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

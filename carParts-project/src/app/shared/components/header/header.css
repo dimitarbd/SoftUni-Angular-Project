@@ -1,0 +1,113 @@
+/* Hide categories list when closed */
+/* .category-menu.category-menu-hidden .category-menu-list {
+  display: none;
+} */
+
+/* Better affordance */
+.category-heading {
+  cursor: pointer;
+}
+
+/* ensure open state shows it (in case global CSS sets display) */
+.category-menu.category-menu-open .category-menu-list {
+  display: block;
+}
+
+/* Right align header right list */
+.header-right_area > ul.align-right {
+  justify-content: flex-end;
+}
+
+/* Ensure header sticks to very top without gaps */
+header.header-main_area {
+  margin-top: 0 !important;
+}
+
+/* Spinner inside logout link */
+.main-nav a[aria-busy="true"], .dropdown-menu a[aria-busy="true"] {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.main-nav a[aria-busy="true"] app-loading-spinner,
+.dropdown-menu a[aria-busy="true"] app-loading-spinner {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* My Account Dropdown Styles */
+.ht-menu .dropdown-holder {
+  position: relative;
+}
+
+.ht-menu .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ht-menu .dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.ht-menu .dropdown-menu li {
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.ht-menu .dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.ht-menu .dropdown-menu li a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 15.4px; /* ~10% larger */
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.ht-menu .dropdown-menu li a:hover {
+  background: #f8f9fa;
+  color: #007bff;
+}
+
+/* Dropdown arrow rotation */
+.ht-menu .dropdown-holder > a i.fa-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+.ht-menu .dropdown-holder > a[aria-expanded="true"] i.fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+.category-menu-list {
+  overflow: hidden;
+}
+
+/* Increase desktop main navigation font size to match reference site */
+.custom-menu_col .main-nav > ul > li > a {
+  font-size: 16px;
+}
+
+/* Sticky header nav as well */
+.header-top_area .main-nav > ul > li > a {
+  font-size: 16px;
+}
+

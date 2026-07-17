@@ -1,0 +1,55 @@
+:host {
+    display: block;
+    outline: none;
+}
+
+.product-slide_item {
+    display: block;
+    width: 100%;
+    outline: none;
+}
+
+.single-product {
+    margin-bottom: 30px;
+    border-right: 1px solid #e5e5e5;
+    padding: 30px 15px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Override the global hover effect that hides product content */
+.product-slide_item .inner-slide .single-product:hover > .product-content {
+    opacity: 1 !important;
+}
+
+/* Keep the add-actions visible on hover but don't hide content */
+.product-slide_item .inner-slide .single-product:hover > .product-img .add-actions {
+    opacity: 1;
+}
+
+/* Image optimization for performance */
+.product-img img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.primary-img,
+.secondary-img {
+    display: block;
+    width: 100% !important;
+    height: 250px !important;
+    object-fit: cover;
+    object-position: center;
+}

@@ -1,0 +1,7 @@
+@if(error()) {
+  <div class="error-notification" role="alert" aria-live="assertive">
+    <span class="error-icon" aria-hidden="true">!</span>
+    <p class="error-text">{{ error() }}</p>
+    <button class="error-close" type="button" (click)="close()" aria-label="Close">×</button>
+  </div>
+}

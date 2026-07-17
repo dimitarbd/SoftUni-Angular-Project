@@ -1,0 +1,111 @@
+/* Products wrapper with arrows */
+.products-wrapper {
+    position: relative;
+}
+
+/* Products row container */
+.products-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 0;
+    scroll-behavior: smooth;
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.products-row::-webkit-scrollbar {
+    display: none;
+}
+
+.products-row app-new-product-item {
+    flex: 0 0 calc(100% / 6);
+    min-width: 0;
+    max-width: none;
+}
+
+/* Navigation arrows */
+.slider-arrow-left,
+.slider-arrow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.45);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    opacity: 0;
+    visibility: hidden;
+    transition: background 0.2s ease-in, opacity 0.2s ease-in;
+    outline: none;
+}
+
+.slider-arrow-left {
+    left: 20px;
+}
+
+.slider-arrow-right {
+    right: 20px;
+}
+
+.products-wrapper:hover .slider-arrow-left,
+.products-wrapper:hover .slider-arrow-right {
+    opacity: 1;
+    visibility: visible;
+}
+
+.slider-arrow-left:hover,
+.slider-arrow-right:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+/* Inline SVG arrow icon styling */
+.products-wrapper .arrow-icon {
+    width: 28px;
+    height: 28px;
+    stroke: rgba(255, 255, 255, 0.9);
+    stroke-width: 2.25;
+    fill: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1501px) {
+    .products-row app-new-product-item { flex: 0 0 calc(100% / 4); }
+}
+
+@media (max-width: 1200px) {
+    .products-row app-new-product-item { flex: 0 0 calc(100% / 3); }
+}
+
+@media (max-width: 992px) {
+    .products-row app-new-product-item { flex: 0 0 calc(100% / 2); }
+}
+
+@media (max-width: 767px) {
+    .products-row app-new-product-item {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    
+    .products-row {
+        flex-wrap: wrap;
+        overflow-x: visible;
+    }
+}
+
+/* Hide arrows on small screens */
+@media (max-width: 767px) {
+    .slider-arrow-left,
+    .slider-arrow-right {
+        display: none;
+    }
+}

@@ -1,0 +1,79 @@
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <h2>Other</h2>
+            <ul>
+                <li><a routerLink="/">Home</a></li>
+                <li class="active">Login & Register</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="uren-login-register_area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="login-form">
+                        <h4 class="login-title">Login</h4>
+                        <div class="row">
+                            <div class="col-md-12 col-12">
+                                <label>Email Address*</label>
+
+                                <input 
+                                [class.input-error]="emailError"
+                                type="email" 
+                                id="email" 
+                                name="email"
+                                placeholder="Email Address"
+                                formControlName="email"/>
+                            </div>
+                            @if (emailError) {
+                            <p class="col-12" style="color: red">{{ emailErrorMessage }}</p>
+                            }
+
+                            <div class="col-12 mb--20">
+                                <label>Password</label>
+
+                                <input 
+                                [class.input-error]="passwordError"
+                                type="password" 
+                                id="password" 
+                                name="password"
+                                placeholder="Password"
+                                formControlName="password"/>
+                            </div>
+                            @if (passwordError) {
+                            <p class="col-12" style="color: red">{{ passwordErrorMessage }}</p>
+                            }
+                            <br>
+                            <div class="col-md-8">
+                                <div class="check-box">
+                                    <input type="checkbox" id="remember_me" 
+                                        formControlName="rememberMe" />
+                                    <label for="remember_me">Remember me</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="forgotton-password_info">
+                                    <a routerLink="/register">Don't have an account?</a>
+                                </div>
+                            </div>
+
+                            @if (error()) {
+                            <div class="col-12">
+                                <p style="color: red">{{ error() }}</p>
+                            </div>
+                            }
+
+                            <div class="col-md-12">
+                                <button class="uren-login_btn" [disabled]="!isFormReady">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
