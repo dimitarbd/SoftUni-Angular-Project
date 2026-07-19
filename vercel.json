@@ -2,8 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "carParts-project/package.json",
-      "use": "@vercel/static",
+      "src": "package.json",
+      "use": "@vercel/static-build",
       "config": {
         "distDir": "carParts-project/dist/car-parts-project/browser"
       }
