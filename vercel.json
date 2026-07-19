@@ -2,26 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "carParts-project/package.json",
       "use": "@vercel/static",
       "config": {
-        "distDir": "dist/car-parts-project/browser"
+        "distDir": "carParts-project/dist/car-parts-project/browser"
       }
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
-    },
-    {
-      "src": "/",
-      "dest": "/carParts-project/dist/car-parts-project/browser/index.html"
-    },
     {
       "src": "/(.*)",
       "dest": "/carParts-project/dist/car-parts-project/browser/index.html"
