@@ -19,6 +19,10 @@
       "dest": "/api/index.js"
     },
     {
+      "src": "/",
+      "dest": "/carParts-project/dist/car-parts-project/browser/index.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/carParts-project/dist/car-parts-project/browser/index.html"
     }
