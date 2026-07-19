@@ -11,6 +11,10 @@
   ],
   "routes": [
     {
+      "src": "/assets/(.*)",
+      "dest": "/carParts-project/dist/car-parts-project/browser/assets/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/carParts-project/dist/car-parts-project/browser/index.html"
     }

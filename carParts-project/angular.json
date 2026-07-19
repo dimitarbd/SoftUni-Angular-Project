@@ -31,6 +31,11 @@
               },
               {
                 "glob": "**/*",
+                "input": "../public/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*",
                 "input": "../Resources/uren/assets",
                 "output": "assets"
               }
@@ -97,6 +102,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "../public/assets",
+                "output": "assets"
               }
             ],
             "styles": [
