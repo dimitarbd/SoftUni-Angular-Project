@@ -19,8 +19,12 @@
       "dest": "/api/index.js"
     },
     {
-      "src": "/(.*)",
+      "src": "/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|json|woff|woff2|ttf|eot|webp))",
       "dest": "/carParts-project/dist/car-parts-project/browser/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/carParts-project/dist/car-parts-project/browser/index.html"
     }
   ]
 }
