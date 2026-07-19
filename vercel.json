@@ -7,9 +7,17 @@
       "config": {
         "distDir": "carParts-project/dist/car-parts-project/browser"
       }
+    },
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.js"
+    },
     {
       "src": "/assets/(.*)",
       "dest": "/carParts-project/dist/car-parts-project/browser/assets/$1"
