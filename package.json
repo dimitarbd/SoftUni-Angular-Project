@@ -1,0 +1,10 @@
+{
+  "name": "carparts-vercel-root",
+  "private": true,
+  "scripts": {
+    "build": "cd carParts-project && npm ci && npm run build"
+  },
+  "devDependencies": {
+    "express": "^4.18.2"
+  }
+}

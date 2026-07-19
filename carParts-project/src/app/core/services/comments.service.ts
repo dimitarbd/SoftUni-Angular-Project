@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
     providedIn: 'root'
 })
 export class CommentsService {
-    private readonly apiBase = (environment.apiBaseUrl || 'https://carparts-api-dimitarbd84.azurewebsites.net').replace(/\/$/, '');
+    private readonly apiBase = (environment.apiBaseUrl || '/api').replace(/\/$/, '');
     private apiUrl = `${this.apiBase}/data/comments`;
 
     constructor(private httpClient: HttpClient, private authService: AuthService) {}

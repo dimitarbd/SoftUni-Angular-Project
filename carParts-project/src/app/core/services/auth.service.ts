@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 export class AuthService {
     private _isLoggedIn = signal<boolean>(false);
     private _currentUser = signal<User | null>(null);
-    private readonly apiBase = (environment.apiBaseUrl || 'https://carparts-api-dimitarbd84.azurewebsites.net').replace(/\/$/, '');
+    private readonly apiBase = (environment.apiBaseUrl || '/api').replace(/\/$/, '');
     private apiUrl = `${this.apiBase}/users`;
 
     public isLoggedInSignal = this._isLoggedIn.asReadonly();
