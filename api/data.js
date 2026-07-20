@@ -98,7 +98,7 @@ const parts = [
     price: '450',
     year: '2023',
     quantity: '15',
-    imageUrl: 'https://www.compbrake.com/wp-content/uploads/2023/05/CMB-RTSPC-0815CSC-COMPBRAKE-Performance-Clutch-%E2%80%93-Ford-Fiesta-MK8-ST200-1.5L-%E2%80%93-PADDLE-CLUTCH.jpg',
+    imageUrl: '/images/product/large-size/5.jpg',
     rating: '4',
     description: 'High-performance clutch kit designed for sports cars and high-performance vehicles.',
     _createdOn: 1744224648453
@@ -111,7 +111,7 @@ const parts = [
     price: '280',
     year: '2023',
     quantity: '12',
-    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoXuIjaLSFMGR7eWS-n4cky5PPvdgSnK0OHVF6k2MvPwRzP7d4W6x-GAqtBkg2ICsykKg&usqp=CAU',
+    imageUrl: '/images/product/large-size/4.jpg',
     rating: '4',
     description: 'High-performance electric water pump with variable speed control.',
     _createdOn: 1744224648461
@@ -124,7 +124,7 @@ const parts = [
     price: '1200',
     year: '2023',
     quantity: '8',
-    imageUrl: 'https://m.media-amazon.com/images/I/61jvguz8kQL._AC_UF1000,1000_QL80_.jpg',
+    imageUrl: '/images/product/large-size/3.jpg',
     rating: '5',
     description: 'Adjustable coilover suspension kit with height and damping adjustment.',
     _createdOn: 1744224648454
@@ -137,7 +137,7 @@ const parts = [
     price: '180',
     year: '2023',
     quantity: '12',
-    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZKpo5Krw5Nv0RiE7xdAXAdQlhfJVntp7QDjPxo2UtisSsCOlEnIYss-1z3YXw_cZkCZw&usqp=CAU',
+    imageUrl: '/images/product/large-size/2.jpg',
     rating: '4',
     description: 'OEM-quality power steering pump with improved efficiency and durability.',
     _createdOn: 1744224648455
@@ -150,7 +150,7 @@ const parts = [
     price: '150',
     year: '2023',
     quantity: '15',
-    imageUrl: 'https://www.minispares.com/media/catalog/product/cache/7bfb6bc9cef7d249596faba93ce80729/g/x/gxe1005.jpg',
+    imageUrl: '/images/product/large-size/1.jpg',
     rating: '4',
     description: 'High-torque starter motor with improved cold-start performance.',
     _createdOn: 1744224648457
@@ -163,7 +163,7 @@ const parts = [
     price: '1200',
     year: '2023',
     quantity: '6',
-    imageUrl: 'https://flat6motorsports.com/cdn/shop/products/Soul-Performance-Products-Porsche-718-GT4-Valved-Exhaust-Product-Combined-510x340.jpg?v=1605110002',
+    imageUrl: '/images/product/large-size/10.jpg',
     rating: '5',
     description: 'Full stainless steel exhaust system with improved flow and sound.',
     _createdOn: 1744224648458
@@ -176,7 +176,7 @@ const parts = [
     price: '350',
     year: '2023',
     quantity: '20',
-    imageUrl: 'https://static.summitracing.com/global/images/prod/large/mpe-99005hm.jpg',
+    imageUrl: '/images/product/large-size/9.jpg',
     rating: '4',
     description: 'Performance catalytic converter with improved flow characteristics.',
     _createdOn: 1744224648459
@@ -189,7 +189,7 @@ const parts = [
     price: '400',
     year: '2023',
     quantity: '8',
-    imageUrl: 'https://cdn11.bigcommerce.com/s-9x01qfh1f5/images/stencil/1580x1580/products/4620/6560/1445883389-csf-radiator__47870.1532358823.jpg?c=2',
+    imageUrl: '/images/product/large-size/8.jpg',
     rating: '5',
     description: 'High-capacity aluminum radiator with improved cooling efficiency.',
     _createdOn: 1744224648460
@@ -215,7 +215,7 @@ const parts = [
     price: '800',
     year: '2023',
     quantity: '5',
-    imageUrl: 'https://cvrbonized.com/cdn/shop/files/Screenshot2023-06-24200454.png?v=1689165803',
+    imageUrl: '/images/product/large-size/7.jpg',
     rating: '5',
     description: 'Lightweight carbon fiber front bumper with aggressive styling.',
     _createdOn: 1744224648462
@@ -228,7 +228,7 @@ const parts = [
     price: '600',
     year: '2023',
     quantity: '10',
-    imageUrl: 'https://www.europaparts.com/media/catalog/product/cache/abf26066ecd46d435ee2486b4a5aee03/5/6/561941773a.jpg',
+    imageUrl: '/images/product/large-size/6.jpg',
     rating: '4',
     description: 'Modern LED headlight assembly with improved visibility and styling.',
     _createdOn: 1744224648463
@@ -241,7 +241,7 @@ const parts = [
     price: '900',
     year: '2023',
     quantity: '6',
-    imageUrl: 'https://getnrg.com/cdn/shop/products/FRP-304RD-NRG-02-780x700.jpg?v=1679077860',
+    imageUrl: '/images/product/large-size/8.jpg',
     rating: '5',
     description: 'High-performance bucket seats with improved support and comfort.',
     _createdOn: 1744224648464
